@@ -3,6 +3,7 @@
 // Définir les routes de l'application
 $routes = [
     URL . '/' => ['HomeController', 'index'],
-    URL . '/test' => ['TestController', 'test'],
+    URL . '/connexion' => ['ConnexionController', 'index'],
+    URL . '/home' => ['HomeConnectedController', 'index'],
     // Ajoutez d'autres routes selon vos besoins
 ];
