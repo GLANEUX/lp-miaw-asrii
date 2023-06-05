@@ -34,14 +34,12 @@
           <a class="nav-link" href="<?= URL ?>">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-3" href="#">Formation</a>
+          <a class="nav-link mx-3"href="<?= URL ?>/formations">Formation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Espace Entreprise</a>
+          <a class="nav-link" href="<?= URL ?>/entreprises">Espace Entreprise</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Campus</a>
-        </li>
+        
       </ul>
     </div>
     <div class="ml-auto w-25 mx-5">
