@@ -3,7 +3,10 @@ class HomeController {
     public function index() {
         // Charger les données nécessaires pour la vue
         $data = [
-            'title' => 'Page d\'accueil'
+            'title' => 'Page d\'accueil',
+            'style' => [
+                'style.css'
+            ]
         ];
 
         // Inclure le fichier d'en-tête
