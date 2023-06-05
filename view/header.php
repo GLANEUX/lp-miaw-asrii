@@ -45,10 +45,17 @@
     <div class="ml-auto w-25 mx-5">
     <ul class="navbar-nav justify-content-end">
         <li class="nav-item active ">
-        <a href="<?= URL ?>/connexion" class="nav-link">Connexion</a>
+        <?php 
+            if (isset($_SESSION['is_logged_in']) && isset($_SESSION['level']) && $_SESSION['is_logged_in'] == true && $_SESSION['level'] !== null) { ?>
+                <a href="deconnexion" class="nav-link"> Déconnexion </a>
+            <?php } else { ?>
+                <a href="connexion" class="nav-link"> Connexion </a>
+            <?php } 
+        ?>
         </li>
     </ul>
       
     </div>
   </nav>
 </header>
+
