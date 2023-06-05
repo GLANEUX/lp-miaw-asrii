@@ -22,7 +22,7 @@
 <body>
 
     <!-- Nav-bar -->
-    <header>
+    <header class="sticky-top">
   <nav class="navbar navbar-expand-md navbar-dark bg-custom-black justify-content-between">
     <a class="navbar-brand w-25" href="<?= URL ?>"><img class="logo" src="public/img/ASRII_TXT-V.png" alt="Logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
