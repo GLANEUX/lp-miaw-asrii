@@ -20,7 +20,14 @@ class ConnexionController {
     }
 
     private function showLoginForm($error = '') {
+        // Inclure le fichier d'en-tête
+        require 'view/header.php';
+
+        // Afficher la vue
         require 'view/connexion.php';
+
+        // Inclure le fichier de pied de page
+        require 'view/footer.php';
     }
 
     private function login($emailOrUsername, $password) {

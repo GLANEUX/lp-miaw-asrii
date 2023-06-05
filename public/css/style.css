@@ -1,0 +1,12 @@
+/* Header */
+.logo{
+    max-width: 35%;
+}
+
+ /* Couleurs personnalisées */
+ .bg-custom-black {
+    background-color: #101820; /* Remplacez par votre couleur personnalisée */
+  }
+  .bg-custom-purple {
+    background-color: #9678D3; /* Remplacez par votre couleur personnalisée */
+  }
