@@ -11,7 +11,7 @@
         <!-- Custom -->
         <?php if (isset($data['style'])) {
             foreach ($data['style'] as $style) { ?>
-                <link rel="stylesheet" type="text/css" href="../public/css/<?= $style ?>" />
+                <link rel="stylesheet" type="text/css" href="<?=URL?>/public/css/<?= $style ?>" />
             <?php } 
         } ?>
 
@@ -19,3 +19,10 @@
         
     </head>
     <body>
+        <?php 
+            if (isset($_SESSION['is_logged_in']) && isset($_SESSION['level']) && $_SESSION['is_logged_in'] == true && $_SESSION['level'] !== null) { ?>
+                <a href="deconnexion"> Déconnexion </a>
+            <?php } else { ?>
+                <a href="connexion"> Connexion </a>
+            <?php } 
+        ?>
