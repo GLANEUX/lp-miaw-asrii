@@ -1,3 +1,4 @@
+
 <?php
 
 // Configurer l'index du serveur
@@ -9,11 +10,3 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 define('DB_NAME', 'test');
 define('DB_PORT', 3306);
-.htaccess :
-
-RewriteEngine On
-RewriteBase /lp-miaw-asrii/
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)/?$ index.php?url=$1 [QSA,L]
