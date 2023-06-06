@@ -1,11 +1,13 @@
 <?php
 class EntreprisesController {
     public function index() {
+        session_start();
         // Charger les données nécessaires pour la vue
         $data = [
             'title' => 'Entreprises',
             'style' => [
-                'style.css'
+                'header.css',
+                'footer.css'
             ]
         ];
 

@@ -1,11 +1,13 @@
 <?php
 class CampusController {
     public function index() {
+        session_start();
         // Charger les données nécessaires pour la vue
         $data = [
             'title' => 'Campus',
             'style' => [
-                'style.css'
+                'header.css',
+                'footer.css'
             ]
         ];
 
