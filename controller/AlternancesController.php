@@ -2,7 +2,7 @@
 
 require_once 'model\SqlModel.php';
 
-class ProjetsController {
+class AlternancesController {
     public function index() {
 
         session_start();
@@ -20,11 +20,11 @@ class ProjetsController {
 
             // Charger les données nécessaires pour la vue
             $data = [
-                'title' => 'Projets Tuteurés',
+                'title' => 'Alternances',
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'projets.css',
+                    'alternances.css',
                 ],
                 'script' => [
                     'script.js'
@@ -35,7 +35,7 @@ class ProjetsController {
             require 'view/header.php';
 
             // Afficher la vue avec les données
-            require 'view/projets.php';
+            require 'view/alternances.php';
 
             // Inclure le fichier de pied de page
             require 'view/footer.php';
@@ -52,7 +52,7 @@ class ProjetsController {
             )
         ) {
 
-            header('Location: ' . URL .'/projets/list');
+            header('Location: ' . URL .'/offres');
         } 
         
         else {
@@ -83,38 +83,38 @@ class ProjetsController {
         ) {
 
             $sqlModel = new SqlModel();
-            // Récupérer les données des projets depuis la base de données
-            $projets = $sqlModel->getTableData('projets');
+            // Récupérer les données des alternances depuis la base de données
+            $alternances = $sqlModel->getTableData('alternance');
         
-            $proj = [];
+            $alter = [];
         
-            foreach ($projets as $projet) {
-                $proj[] = [
-                    'id' => $projet['id'],
-                    'titre' => $projet['titre'],
-                    'description' => $projet['description']
+            foreach ($alternances as $alternance) {
+                $alter[] = [
+                    'id' => $alternance['id'],
+                    'poste' => $alternance['poste'],
+                    'entreprise' => $alternance['entreprise']
                 ];
             }
 
             // Charger les données nécessaires pour la vue
             $data = [
-                'title' => 'Liste - Projets Tuteurés',
+                'title' => 'Liste - Offres d\'alternance',
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'projetsList.css',
+                    'alternancesList.css',
                 ],
                 'script' => [
                     'script.js'
                 ],
-                'projets' => $proj,
+                'alternances' => $alter,
             ];
         
             // Inclure le fichier d'en-tête
             require 'view/header.php';
             
             // Afficher la vue avec les données
-            require 'view/projetsList.php';
+            require 'view/alternancesList.php';
         
             // Inclure le fichier de pied de page
             require 'view/footer.php';
@@ -126,38 +126,38 @@ class ProjetsController {
             isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
         ) {
             $sqlModel = new SqlModel();
-            // Récupérer les données des projets depuis la base de données
-            $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = ' . $_SESSION['userid']);
+            // Récupérer les données des alternances depuis la base de données
+            $alternances = $sqlModel->selectRequest('* FROM alternance WHERE user_id = ' . $_SESSION['userid']);
         
-            $proj = [];
+            $alter = [];
         
-            foreach ($projets as $projet) {
-                $proj[] = [
-                    'id' => $projet['id'],
-                    'titre' => $projet['titre'],
-                    'description' => $projet['description']
+            foreach ($alternances as $alternance) {
+                $alter[] = [
+                    'id' => $alternance['id'],
+                    'poste' => $alternance['poste'],
+                    'entreprise' => $alternance['entreprise']
                 ];
             }
 
             // Charger les données nécessaires pour la vue
             $data = [
-                'title' => 'Liste - Projets Tuteurés',
+                'title' => 'Liste - Offres d\'alternance',
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'projets.css',
+                    'alternances.css',
                 ],
                 'script' => [
                     'script.js'
                 ],
-                'projets' => $proj,
+                'alternances' => $alter,
             ];
         
             // Inclure le fichier d'en-tête
             require 'view/header.php';
             
             // Afficher la vue avec les données
-            require 'view/projetsList.php';
+            require 'view/alternancesList.php';
         
             // Inclure le fichier de pied de page
             require 'view/footer.php';
@@ -188,47 +188,47 @@ class ProjetsController {
             ) {
 
                 $sqlModel = new SqlModel();
-                // Récupérer les données des projets depuis la base de données
+                // Récupérer les données des alternances depuis la base de données
                 if ($_SESSION['level'] == 'entreprise'){
-                    $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = \'' . $_SESSION['userid'] . '\' AND id = \'' . $_GET['id'] .'\'');
+                    $alternances = $sqlModel->selectRequest('* FROM alternance WHERE user_id = \'' . $_SESSION['userid'] . '\' AND id = \'' . $_GET['id'] .'\'');
                 } elseif ($_SESSION['level'] == 'admin'){
-                    $projets = $sqlModel->selectRequest('* FROM projets WHERE id = ' . $_GET['id']);
-                } else { $projet = null; }
+                    $alternances = $sqlModel->selectRequest('* FROM alternance WHERE id = ' . $_GET['id']);
+                } else { $alternances = null; }
 
-                if ($projets[0]) {
+                if ($alternances[0]) {
 
-                    $proj = [
-                        'id' => $projets[0]['id'],
-                        'titre' => $projets[0]['titre'],
-                        'description' => $projets[0]['description']
+                    $alter = [
+                        'id' => $alternances[0]['id'],
+                        'poste' => $alternances[0]['poste'],
+                        'entreprise' => $alternances[0]['entreprise']
                     ];
 
                     // Charger les données nécessaires pour la vue
                     $data = [
-                        'title' => $proj['titre'] . '- Modification',
+                        'title' => $alter['poste'] . $alter['entreprise'] . '- Modification',
                         'style' => [
                             'header.css',
                             'footer.css',
-                            'projetsModification.css',
+                            'alternancesModification.css',
                         ],
                         'script' => [
                             'script.js'
                         ],
-                        'projets' => $proj,
+                        'alternances' => $alter,
                     ];
                 
                     // Inclure le fichier d'en-tête
                     require 'view/header.php';
                     
                     // Afficher la vue avec les données
-                    require 'view/projetsModification.php';
+                    require 'view/alternancesModification.php';
                 
                     // Inclure le fichier de pied de page
                     require 'view/footer.php';
 
                 }
                 else {
-                    header('Location: ' . URL .'/projets/list');
+                    header('Location: ' . URL .'/offres');
                     exit;
                 }
             }
@@ -241,7 +241,7 @@ class ProjetsController {
                     isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
                 )
             ) {
-                header('Location: ' . URL .'/projets/list');
+                header('Location: ' . URL .'/offres');
                 exit;
             }
 
@@ -264,10 +264,10 @@ class ProjetsController {
             ) {
 
                 $sqlModel = new SqlModel();
-                // Récupérer les données des projets depuis la base de données
-                $projets = $sqlModel->updateRequest('projets SET titre = \'' . $_POST['titre'] . '\', description = \'' . $_POST['description'] . '\' WHERE id =' . $_POST['id']);
+                // Récupérer les données des alternances depuis la base de données
+                $alternances = $sqlModel->updateRequest('alternance SET poste = \'' . $_POST['poste'] . '\', entreprise = \'' . $_POST['entreprise'] . '\' WHERE id =' . $_POST['id']);
 
-                header('Location: ' . URL .'/projets/list');
+                header('Location: ' . URL .'/offres');
                 exit;
                 
             }
@@ -280,7 +280,7 @@ class ProjetsController {
                     isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
                 )
             ) {
-                header('Location: ' . URL .'/projets/list');
+                header('Location: ' . URL .'/offres');
                 exit;
             }
 
@@ -293,7 +293,7 @@ class ProjetsController {
         }
 
         else {
-            header('Location: ' . URL .'/projets/list');
+            header('Location: ' . URL .'/offres');
             exit;
         }
 
@@ -303,7 +303,7 @@ class ProjetsController {
         
         session_start();
 
-        if (isset($_POST['titre']) && isset($_POST['description']) && $_POST['titre'] && $_POST['description']) {
+        if (isset($_POST['poste']) && isset($_POST['entreprise']) && $_POST['poste'] && $_POST['entreprise']) {
 
             if (
                 (
@@ -316,10 +316,10 @@ class ProjetsController {
             ) {
 
                 $sqlModel = new SqlModel();
-                // Récupérer les données des projets depuis la base de données
-                $projets = $sqlModel->addProjetRequest($_SESSION['userid'] . ', \''  . $_POST['titre'] . '\', \'' . $_POST['description'] . '\'');
+                // Récupérer les données des alternances depuis la base de données
+                $alternances = $sqlModel->addAlternanceRequest($_SESSION['userid'] . ', \''  . $_POST['poste'] . '\', \'' . $_POST['entreprise'] . '\'');
 
-                header('Location: ' . URL .'/projets');
+                header('Location: ' . URL .'/alternances');
                 exit;
                 
             }
@@ -332,7 +332,7 @@ class ProjetsController {
                     isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
                 )
             ) {
-                header('Location: ' . URL .'/projets/list');
+                header('Location: ' . URL .'/offres');
                 exit;
             }
 
@@ -358,11 +358,11 @@ class ProjetsController {
 
                 // Charger les données nécessaires pour la vue
                 $data = [
-                    'title' => 'Ajouter - Projet tuteuré',
+                    'title' => 'Ajouter - Offre d\'alternance',
                     'style' => [
                         'header.css',
                         'footer.css',
-                        'projetsAjout.css',
+                        'alternancesAjout.css',
                     ],
                     'script' => [
                         'script.js'
@@ -373,7 +373,7 @@ class ProjetsController {
                 require 'view/header.php';
                 
                 // Afficher la vue avec les données
-                require 'view/projetsAjout.php';
+                require 'view/alternancesAjout.php';
             
                 // Inclure le fichier de pied de page
                 require 'view/footer.php';
@@ -388,7 +388,7 @@ class ProjetsController {
                     isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
                 )
             ) {
-                header('Location: ' . URL .'/projets/list');
+                header('Location: ' . URL .'/offres');
                 exit;
             }
 

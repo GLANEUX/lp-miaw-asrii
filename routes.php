@@ -13,5 +13,9 @@ $routes = [
     URL . '/formations' => ['FormationsController', 'index'],
     URL . '/entreprises' => ['EntreprisesController', 'index'],
     URL . '/campus' => ['CampusController', 'index'],
+    URL . '/alternances' => ['AlternancesController', 'index'],
+    URL . '/offres' => ['AlternancesController', 'list'],
+    URL . '/offres/add' => ['AlternancesController', 'ajouter'],
+    URL . '/offres/edit' => ['AlternancesController', 'modifier'],
     // Ajoutez d'autres routes selon vos besoins
 ];
