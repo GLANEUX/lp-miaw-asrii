@@ -9,6 +9,7 @@
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="public/css/style.css" />
@@ -16,7 +17,7 @@
     <title>
         <?php echo $data['title']; ?>
     </title>
-
+    
 </head>
 
 <body>
