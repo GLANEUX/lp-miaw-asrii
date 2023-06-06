@@ -85,3 +85,8 @@
   color: #9678D3;
 }
 /* FIN HEADER */
+  .text-uppercase{
+    color:white;
+    padding-top: 4%;
+  }
+  .row{width:100%}
