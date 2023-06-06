@@ -6,14 +6,14 @@
   </div>
 </section>
 <div class="container py-5 d-flex">
-    <!-- Main content py-3 px-4 rounded-->
+    <!-- Main content -->
     <div class="main-content col lg-9">
         <ul class="nav nav-pills flex-column flex-sm-row" id="myTabs">
             <li class="nav-item mx-5">
-                <a class="flex-sm-fill text-sm-center nav-link active py-3 px-4" id="presentation-tab" data-toggle="tab" href="#presentation">Présentation</a>
+                <a class="flex-sm-fill text-sm-center nav-link-formation active py-3 px-4 rounded" id="presentation-tab" data-toggle="tab" href="#presentation">Présentation</a>
             </li>
             <li class="nav-item mx-5">
-                <a class="flex-sm-fill text-sm-center nav-link py-3 px-4" id="enseignement-tab" data-toggle="tab" href="#enseignement">Enseignement</a>
+                <a class="flex-sm-fill text-sm-center nav-link-formation py-3 px-4 rounded" id="enseignement-tab" data-toggle="tab" href="#enseignement">Enseignement</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
