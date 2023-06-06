@@ -52,14 +52,17 @@
   <div class="container py-3">
     <div class="row">
 
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <h2 class="text-white txt-font">ENTREPRISE</h2>
         <p class="text-white">Texte de description de l'entreprise.</p>
       </div>
 
-      <div class="col-lg-6 d-flex align-items-center justify-content-end">
-        <a href="#" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Click to Action</a>
-      </div>
+      <div class="col-lg-4 align-items-center justify-content-end">
+      <h2 class="text-white text-center txt-font">ENTREPRISE</h2>
+        <p class="text-white text-center">Texte de description de l'entreprise.</p>
+        <div class="text-center py-5">
+      <a href="#" class="bg-custom-purple txt-color-black button-font py-3 px-4 rounded">Connexion</a>
+    </div>      </div>
 
     </div>
   </div>
