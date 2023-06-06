@@ -116,7 +116,7 @@ class HomeConnectedController {
         
         else {
             // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-            header('Location: connexion');
+            header('Location: ' . URL .'/connexion');
             exit;
         }
 
