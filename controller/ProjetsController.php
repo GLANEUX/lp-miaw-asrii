@@ -22,7 +22,9 @@ class ProjetsController {
             $data = [
                 'title' => 'Projets Tuteurés',
                 'style' => [
-                    'style.css'
+                    'header.css',
+                    'footer.css',
+                    'projets.css',
                 ],
                 'script' => [
                     'script.js'
@@ -98,7 +100,9 @@ class ProjetsController {
             $data = [
                 'title' => 'Liste - Projets Tuteurés',
                 'style' => [
-                    'style.css'
+                    'header.css',
+                    'footer.css',
+                    'projetsList.css',
                 ],
                 'script' => [
                     'script.js'
@@ -139,7 +143,9 @@ class ProjetsController {
             $data = [
                 'title' => 'Liste - Projets Tuteurés',
                 'style' => [
-                    'style.css'
+                    'header.css',
+                    'footer.css',
+                    'projets.css',
                 ],
                 'script' => [
                     'script.js'
@@ -201,7 +207,9 @@ class ProjetsController {
                     $data = [
                         'title' => $proj['titre'] . '- Modification',
                         'style' => [
-                            'style.css'
+                            'header.css',
+                            'footer.css',
+                            'projetsModification.css',
                         ],
                         'script' => [
                             'script.js'
@@ -352,7 +360,9 @@ class ProjetsController {
                 $data = [
                     'title' => 'Ajouter - Projet tuteuré',
                     'style' => [
-                        'style.css'
+                        'header.css',
+                        'footer.css',
+                        'projetsAjout.css',
                     ],
                     'script' => [
                         'script.js'
