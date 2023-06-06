@@ -53,6 +53,7 @@ class AlternancesController {
         ) {
 
             header('Location: ' . URL .'/offres');
+            exit;
         } 
         
         else {

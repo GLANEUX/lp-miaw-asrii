@@ -8,6 +8,7 @@ class ConnexionController {
         session_start();
         if (isset($_SESSION['is_logged_in'])) {
             header('Location: ' . URL .'/home');
+            exit;
         } else {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $emailOrUsername = $_POST['email_or_username'];
