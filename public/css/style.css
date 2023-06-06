@@ -80,10 +80,12 @@
   font-size: x-large;
   font-weight: 600;
   text-decoration: none;
+  text-decoration: none;
 }
 
 .button-font:hover{
   color: #9678D3;
+  background-color: transparent;
   background-color: transparent;
 }
 /* FIN HEADER */
