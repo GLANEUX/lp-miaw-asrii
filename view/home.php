@@ -78,7 +78,12 @@
     <h2 class="txt-font text-center py-1">ETUDIANT - ENSEIGNANT - ENTREPRISE</h2>
     <h3 class="text-center">Connectez-vous à votre espace dédié</h3>
     <div class="text-center py-5">
-      <a href="#" class="bg-custom-purple txt-color-black button-font py-3 px-4 rounded">Connexion</a>
-    </div>
+    <?php 
+            if (isset($_SESSION['is_logged_in']) && isset($_SESSION['level']) && $_SESSION['is_logged_in'] == true && $_SESSION['level'] !== null) { ?>
+                <a href="deconnexion" class="bg-custom-purple txt-color-black button-font py-3 px-4 rounded"> Déconnexion </a>
+            <?php } else { ?>
+                <a href="connexion" class="bg-custom-purple txt-color-black button-font py-3 px-4 rounded"> Connexion </a>
+            <?php } 
+        ?>    </div>
   </div>
 </section>

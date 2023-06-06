@@ -28,23 +28,23 @@
     <!-- Nav-bar -->
     <header class="sticky-top">
   <nav class="navbar navbar-expand-md navbar-dark bg-custom-black justify-content-between">
-    <a class="navbar-brand w-25" href="<?= URL ?>"><img class="logo" src="public/img/ASRII_TXT-V.png" alt="Logo"></a>
+    <a class="navbar-brand w-25" href="<?= URL ?>"><img class="logo" src="public/img/ASRII_LOGO-TXT-V.png" alt="Logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse w-50 justify-content-center" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="<?= URL ?>">Accueil</a>
+          <a class="nav-link" href="<?= URL ?>">ACCUEIL</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-3"href="<?= URL ?>/formations">Formation</a>
+          <a class="nav-link mx-3"href="<?= URL ?>/formations">FORMATION</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-3"href="<?= URL ?>/campus">Campus</a>
+          <a class="nav-link mx-3"href="<?= URL ?>/campus">CAMPUS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= URL ?>/entreprises">Espace Entreprise</a>
+          <a class="nav-link" href="<?= URL ?>/entreprises">ESPACE ENTREPRISE</a>
         </li>
         
       </ul>

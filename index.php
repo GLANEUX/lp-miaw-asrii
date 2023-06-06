@@ -1,7 +1,7 @@
 <?php
 
 // Inclure le fichier de configuration
-require_once 'config.php';
+require_once 'conf.php';
 
 // Récupérer l'URL demandée
 $requestUrl = rtrim($_SERVER['REQUEST_URI'], '/');
