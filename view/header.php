@@ -37,6 +37,9 @@
           <a class="nav-link mx-3"href="<?= URL ?>/formations">Formation</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link mx-3"href="<?= URL ?>/campus">Campus</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="<?= URL ?>/entreprises">Espace Entreprise</a>
         </li>
         
