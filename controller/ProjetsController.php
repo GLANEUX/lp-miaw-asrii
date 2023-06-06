@@ -169,81 +169,121 @@ class ProjetsController {
 
         session_start();
 
-        if (
-            (
-                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
-            ) || (
-                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
-            )
-        ) {
+        if (isset($_GET['id']) && $_GET['id']) {
 
-            $sqlModel = new SqlModel();
-            // Récupérer les données des projets depuis la base de données
-            $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = ' . $_SESSION['userid'] . 'AND id = ' . $_GET['id']);
-        
-                    'id' => $projet['id'],
-                    'titre' => $projet['titre'],
-                    'description' => $projet['description']
-                ];
+            if (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                )
+            ) {
+
+                $sqlModel = new SqlModel();
+                // Récupérer les données des projets depuis la base de données
+                if ($_SESSION['level'] == 'entreprise'){
+                    $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = ' . $_SESSION['userid'] . 'AND id = ' . $_GET['id']);
+                } elseif ($_SESSION['level'] == 'admin'){
+                    $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = ' . $_SESSION['userid']);
+                } else { $projet = null; }
+
+                if ($projets[0]) {
+
+                    $proj = [
+                        'id' => $projets[0]['id'],
+                        'titre' => $projets[0]['titre'],
+                        'description' => $projets[0]['description']
+                    ];
+
+                    // Charger les données nécessaires pour la vue
+                    $data = [
+                        'title' => $proj['titre'] . '- Modification',
+                        'style' => [
+                            'style.css'
+                        ],
+                        'script' => [
+                            'script.js'
+                        ],
+                        'projets' => $proj,
+                    ];
+                
+                    // Inclure le fichier d'en-tête
+                    require 'view/header.php';
+                    
+                    // Afficher la vue avec les données
+                    require 'view/projetsModification.php';
+                
+                    // Inclure le fichier de pied de page
+                    require 'view/footer.php';
+
+                }
+                else {
+                    header('Location: ' . URL .'/projets/list');
+                    exit;
+                }
+            }
+            elseif (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+                )
+            ) {
+                header('Location: ' . URL .'/projets/list');
+                exit;
             }
 
-            // Charger les données nécessaires pour la vue
-            $data = [
-                'title' => 'Liste - Projets Tuteurés',
-                'style' => [
-                    'style.css'
-                ],
-                'script' => [
-                    'script.js'
-                ],
-                'projets' => $proj,
-            ];
-        
-            // Inclure le fichier d'en-tête
-            require 'view/header.php';
-            
-            // Afficher la vue avec les données
-            require 'view/projetsList.php';
-        
-            // Inclure le fichier de pied de page
-            require 'view/footer.php';
+            else {
+                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+                header('Location: ' . URL .'/connexion');
+                exit;
+            }
+
+        } elseif (isset($_POST['id']) && $_POST['id']) {
+
+            if (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                )
+            ) {
+
+                $sqlModel = new SqlModel();
+                // Récupérer les données des projets depuis la base de données
+                $projets = $sqlModel->updateRequest('projets SET titre = ' . $_POST['titre'] . ', description = ' . $_POST['description'] . ' WHERE id =' . $_POST['id']);
+
+                header('Location: ' . URL .'/projets/list');
+                exit;
+                
+            }
+            elseif (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+                )
+            ) {
+                header('Location: ' . URL .'/projets/list');
+                exit;
+            }
+
+            else {
+                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+                header('Location: ' . URL .'/connexion');
+                exit;
+            }
 
         }
-        elseif (
-            (
-                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
-            ) || (
-                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
-            )
-        ) {
-            header('Location: ' . URL .'/projets/list');
-            exit;
-        }
 
-        else {
-            // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-            header('Location: ' . URL .'/connexion');
-            exit;
-        }
-
-
-        // Vérifier si un formulaire de modification a été soumis
-        if (isset($_GET['id'])) {
-            $nom = $_POST['nom'];
-            $description = $_POST['description'];
-
-            // Effectuer les opérations de mise à jour dans la base de données
-            // ...
-            echo "Projet $id modifié avec succès.";
-        } else {
-            // Afficher le formulaire de modification
-            echo "Formulaire de modification du projet $id";
-            // ...
-        }
     }
 
     public function modification($id) {
