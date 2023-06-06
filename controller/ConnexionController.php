@@ -7,7 +7,7 @@ class ConnexionController {
     public function index() {
         session_start();
         if (isset($_SESSION['is_logged_in'])) {
-            header('Location: home');
+            header('Location: ' . URL .'/home');
         } else {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $emailOrUsername = $_POST['email_or_username'];
@@ -54,9 +54,10 @@ class ConnexionController {
 
         // Rediriger l'utilisateur vers une page sécurisée après la connexion réussie
         $_SESSION['is_logged_in'] = true;
+        $_SESSION['userid'] = $user->getId();
         $_SESSION['username'] = $user->getUsername();
         $_SESSION['level'] = $user->getLevel();
-        header('Location: home');
+        header('Location: ' . URL .'/home');
         exit;
     }
 }
