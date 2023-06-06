@@ -15,6 +15,22 @@
     color:#101820
   }
 
+    /* Styles personnalisés pour la justification du texte */
+    .text-justify {
+      text-align: justify;
+    }
+  
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+      color: #101820 !important;
+      background-color: #9678D3 !important;
+      font-family: "Roboto Condensed", sans-serif !important;
+      font-size: x-large !important;
+      font-weight: 600 !important;
+      text-decoration: none !important;
+      text-decoration: none !important;
+    }
+  
+
 /* Home BANNER */
 
 .banner{
