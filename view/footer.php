@@ -4,7 +4,7 @@
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
+            
             <head>
 
     <!-- Bootstrap -->
@@ -15,7 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="public/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../public/css/style.css" />
 
     <?php if (isset($data['script'])) {
                 foreach ($data['script'] as $script) { ?>
@@ -36,7 +36,7 @@
 
 
   <!-- Footer LIENS -->
-  <div class="container text-center text-md-left" style="background: #101820;">
+  <div style="background: #101820;text-align:center">
 
     <!-- Grid row -->
     <div class="row">
@@ -45,7 +45,7 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;"></h5>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;"></h3>
 
         <ul class="list-unstyled">
           <img style="max-width:45%" src="public/img/ASRII_LOGO-FULL-2.png">
@@ -61,7 +61,7 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;">LIENS</h5>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;padding-top:12%">LIENS</h3>
 
         <ul class="list-unstyled">
           <li>
@@ -87,7 +87,7 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;">LIENS</h5>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white; padding-top:12%">LIENS</h3>
 
         <ul class="list-unstyled">
           <li>
@@ -113,7 +113,7 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;">LIENS</h5>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white; padding-top:12%">LIENS</h3>
 
         <ul class="list-unstyled">
           <li>
