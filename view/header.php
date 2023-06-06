@@ -12,8 +12,11 @@
     
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="public/css/style.css" />
-
+    <?php if (isset($data['style'])) {
+            foreach ($data['style'] as $style) { ?>
+                <link rel="stylesheet" type="text/css" href="<?=URL?>/public/css/<?= $style ?>" />
+            <?php } 
+        } ?>
     <title>
         <?php echo $data['title']; ?>
     </title>

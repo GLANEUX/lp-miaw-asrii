@@ -1,11 +1,15 @@
 <?php
 class HomeController {
     public function index() {
+        session_start();
         // Charger les données nécessaires pour la vue
         $data = [
             'title' => 'Page d\'accueil',
             'style' => [
-                'style.css'
+                'header.css',
+                'footer.css',
+                'banner.css',
+                'home.css'
             ]
         ];
 

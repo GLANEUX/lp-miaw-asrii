@@ -1,12 +1,15 @@
 <?php
 class FormationsController {
     public function index() {
+        session_start();
         // Charger les données nécessaires pour la vue
         $data = [
             'title' => 'Formations',
             'style' => [
-                'style.css'
-            ]
+            'header.css',
+            'footer.css',
+            'banner.css',
+            'formation.css'],
         ];
 
         // Inclure le fichier d'en-tête

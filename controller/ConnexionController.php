@@ -20,6 +20,17 @@ class ConnexionController {
     }
 
     private function showLoginForm($error = '') {
+
+         // Charger les données nécessaires pour la vue
+         $data = [
+            'title' => 'Connexion',
+            'style' => [
+            'header.css',
+            'footer.css',
+            'connexion.css'],
+        ];
+
+
         // Inclure le fichier d'en-tête
         require 'view/header.php';
 
