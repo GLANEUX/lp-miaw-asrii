@@ -1,4 +1,4 @@
-<section class="banner background-image" style="background-image: url('public/img/test.png')">
+<section class="banner background-image" style="background-image: url('<?= URL ?>/public/img/Banner-formation.jpg')">
   <div class="banner-overlay " ></div>
   <div class="banner-content" >
     <h1 class="">ASRII</h1>
@@ -17,6 +17,7 @@
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
+            <!-- presentation -->
             <div class="tab-pane fade show active p-5" id="presentation">
                 <h4 class="">Pour y accéder</h4>
                 <p class="text-justify">Le BUT Gestion des Entreprises et des Administrations (GEA) se prépare dans un Institut Universitaire de Technologie (IUT), 
@@ -53,9 +54,32 @@
                     <li class="text-justify">Intégrer des solutions de sécurité des applications et des données.</li>
                 </ul>
             </div>
+            <!-- enseignement -->
             <div class="tab-pane fade p-5" id="enseignement">
-                <h1>Enseignement</h1>
-                <p>Contenu de la section 2.</p>
+                <h4>Semestre 1</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Enseignement</th>
+                                <th>ECTS</th>
+                                <th>TP/TD</th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th>UE11 Connaissance de l'entreprise</th>
+                                <th>6</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
