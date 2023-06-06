@@ -16,12 +16,26 @@
   .nav-link-formation {
     display: block;
     padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-family: "Roboto Condensed", sans-serif !important;
     font-size: x-large !important;
     font-weight: 600 !important;
-    color: var(--bs-nav-link-color);
+    color: #ffffff !important;
     text-decoration: none;
     background: 0 0;
     border: 0;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
     background-color: #101820 !important;
+  }
+
+  .titre-sidebar{
+    font-family: "Roboto Condensed", sans-serif !important;
+    font-size: x-large !important;
+    font-weight: 600 !important;
+  }
+
+  .button{
+    background-color: #9678D3 !important; 
+    font-size: x-large !important;
+    font-weight: 600 !important;
+    color: #ffffff !important; 
   }

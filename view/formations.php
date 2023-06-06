@@ -10,10 +10,10 @@
     <div class="main-content col lg-9">
         <ul class="nav nav-pills flex-column flex-sm-row" id="myTabs">
             <li class="nav-item mx-5">
-                <a class="flex-sm-fill text-sm-center nav-link-formation active py-3 px-4 rounded" id="presentation-tab" data-toggle="tab" href="#presentation">Présentation</a>
+                <a class="flex-sm-fill text-sm-center nav-link-formation active py-3 px-4 rounded text-uppercase" id="presentation-tab" data-toggle="tab" href="#presentation">Présentation</a>
             </li>
             <li class="nav-item mx-5">
-                <a class="flex-sm-fill text-sm-center nav-link-formation py-3 px-4 rounded" id="enseignement-tab" data-toggle="tab" href="#enseignement">Enseignement</a>
+                <a class="flex-sm-fill text-sm-center nav-link-formation py-3 px-4 rounded text-uppercase" id="enseignement-tab" data-toggle="tab" href="#enseignement">Enseignement</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -61,8 +61,12 @@
     </div>
     <!-- sidebar -->
     <div class="sidebar bg-custom-black col-lg-3">
-        <h5 class="text-uppercase text-center">Informations</h5>
-        <div class="button bg-dark"><a href="#">Brochure</a></div>
+        <div class="py-3 px-4 border-bottom border-white border-4">
+            <h5 class="text-uppercase text-center titre-sidebar">Informations</h5>
+        </div>
+        <div class="d-flex justify-content-center p-4 border-bottom border-white border-4">
+            <a class="button btn" href="#">BROCHURE</a>
+        </div>
     </div>
 </div>
 
