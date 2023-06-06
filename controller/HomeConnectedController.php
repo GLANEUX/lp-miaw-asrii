@@ -16,7 +16,9 @@ class HomeConnectedController {
             $data = [
                 'title' => 'Espace Entreprise',
                 'style' => [
-                    'style.css'
+                    'header.css',
+                    'footer.css',
+                    'entreprise.css',
                 ],
                 'script' => [
                     'script.js'
@@ -43,7 +45,9 @@ class HomeConnectedController {
             $data = [
                 'title' => 'Espace Etudiant',
                 'style' => [
-                    'style.css'
+                    'header.css',
+                    'footer.css',
+                    'etudiant.css',
                 ],
                 'script' => [
                     'script.js'
@@ -70,7 +74,9 @@ class HomeConnectedController {
             $data = [
                 'title' => 'Espace Enseignant',
                 'style' => [
-                    'style.css'
+                    'header.css',
+                    'footer.css',
+                    'enseignant.css',
                 ],
                 'script' => [
                     'script.js'
@@ -97,7 +103,9 @@ class HomeConnectedController {
             $data = [
                 'title' => 'Espace Administrateur',
                 'style' => [
-                    'style.css'
+                    'header.css',
+                    'footer.css',
+                    'admin.css'
                 ],
                 'script' => [
                     'script.js'
