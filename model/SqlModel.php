@@ -47,5 +47,28 @@ class SqlModel {
 
         return $data;
     }
+    public function selectRequest($req) {
+        $query = "SELECT $req";
+
+        // Exécution de la requête
+        $result = $this->mysqli->query($query);
+
+        // Vérification des erreurs de requête
+        if (!$result) {
+            echo "Erreur lors de l'exécution de la requête: " . $this->mysqli->error;
+            exit();
+        }
+
+        // Récupération des données de la table
+        $data = array();
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        // Libération des résultats de la requête
+        $result->free();
+
+        return $data;
+    }
 }
 ?>

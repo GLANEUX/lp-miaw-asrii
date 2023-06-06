@@ -12,5 +12,6 @@ $routes = [
     URL . '/projets/edit' => ['ProjetsController', 'modifier'],
     URL . '/formations' => ['FormationsController', 'index'],
     URL . '/entreprises' => ['EntreprisesController', 'index'],
+    URL . '/campus' => ['CampusController', 'index'],
     // Ajoutez d'autres routes selon vos besoins
 ];
