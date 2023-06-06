@@ -11,13 +11,29 @@
   
   }
   
+  .txt-font-h2 {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 215%;
+    font-weight: 700;
+  
+  
+  }
+
+
+
   /* card */
 .card-title{
   font-family: "Roboto Condensed", sans-serif;
   font-size: x-large;
   font-weight: 600;
-}
 
+}
+.none{
+  text-decoration: none;
+}
+.card:hover{
+  box-shadow :0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
 .bg-fixed{
   height: 150px;
   background-size: cover;

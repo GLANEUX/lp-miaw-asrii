@@ -28,7 +28,7 @@
     <!-- Nav-bar -->
     <header class="sticky-top">
   <nav class="navbar navbar-expand-md navbar-dark bg-custom-black justify-content-between">
-    <a class="navbar-brand w-25" href="<?= URL ?>"><img class="logo" src="<?= URL ?> /public/img/ASRII_TXT-V.png" alt="Logo"></a>
+    <a class="navbar-brand w-25" href="<?= URL ?>"><img class="logo" src="<?= URL ?> /public/img/ASRII_LOGO-TXT-V.png" alt="Logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -54,9 +54,9 @@
         <li class="nav-item active ">
         <?php 
             if (isset($_SESSION['is_logged_in']) && isset($_SESSION['level']) && $_SESSION['is_logged_in'] == true && $_SESSION['level'] !== null) { ?>
-                <a href="deconnexion" class="nav-link"> Déconnexion </a>
+                <a href="<?= URL ?>/deconnexion" class="nav-link"> Déconnexion </a>
             <?php } else { ?>
-                <a href="connexion" class="nav-link"> Connexion </a>
+                <a href="<?= URL ?>/connexion" class="nav-link"> Connexion </a>
             <?php } 
         ?>
         </li>
