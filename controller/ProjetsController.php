@@ -186,7 +186,7 @@ class ProjetsController {
                 if ($_SESSION['level'] == 'entreprise'){
                     $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = ' . $_SESSION['userid'] . 'AND id = ' . $_GET['id']);
                 } elseif ($_SESSION['level'] == 'admin'){
-                    $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = ' . $_SESSION['userid']);
+                    $projets = $sqlModel->selectRequest('* FROM projets WHERE id = ' . $_GET['id']);
                 } else { $projet = null; }
 
                 if ($projets[0]) {
@@ -257,7 +257,7 @@ class ProjetsController {
 
                 $sqlModel = new SqlModel();
                 // Récupérer les données des projets depuis la base de données
-                $projets = $sqlModel->updateRequest('projets SET titre = ' . $_POST['titre'] . ', description = ' . $_POST['description'] . ' WHERE id =' . $_POST['id']);
+                $projets = $sqlModel->updateRequest('projets SET titre = \'' . $_POST['titre'] . '\', description = \'' . $_POST['description'] . '\' WHERE id =' . $_POST['id']);
 
                 header('Location: ' . URL .'/projets/list');
                 exit;
@@ -284,38 +284,112 @@ class ProjetsController {
 
         }
 
-    }
-
-    public function modification($id) {
-        // Vérifier si un formulaire de modification a été soumis
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nom = $_POST['nom'];
-            $description = $_POST['description'];
-
-            // Effectuer les opérations de mise à jour dans la base de données
-            // ...
-            echo "Projet $id modifié avec succès.";
-        } else {
-            // Afficher le formulaire de modification
-            echo "Formulaire de modification du projet $id";
-            // ...
+        else {
+            header('Location: ' . URL .'/projets/list');
+            exit;
         }
-    }
 
+    }
 
     public function ajouter() {
-        // Vérifier si un formulaire d'ajout a été soumis
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nom = $_POST['nom'];
-            $description = $_POST['description'];
+        
+        session_start();
 
-            // Effectuer les opérations d'ajout dans la base de données
-            // ...
-            echo "Projet ajouté avec succès.";
-        } else {
-            // Afficher le formulaire d'ajout
-            echo "Formulaire d'ajout de projet";
-            // ...
+        if (isset($_POST['titre']) && isset($_POST['description']) && $_POST['titre'] && $_POST['description']) {
+
+            if (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                )
+            ) {
+
+                $sqlModel = new SqlModel();
+                // Récupérer les données des projets depuis la base de données
+                $projets = $sqlModel->addRequest($_SESSION['userid'] . ', \''  . $_POST['titre'] . '\', \'' . $_POST['description'] . '\'');
+
+                header('Location: ' . URL .'/projets');
+                exit;
+                
+            }
+            elseif (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+                )
+            ) {
+                header('Location: ' . URL .'/projets/list');
+                exit;
+            }
+
+            else {
+                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+                header('Location: ' . URL .'/connexion');
+                exit;
+            }
+
         }
+
+        else {
+
+            if (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                )
+            ) {
+
+                // Charger les données nécessaires pour la vue
+                $data = [
+                    'title' => 'Ajouter - Projet tuteuré',
+                    'style' => [
+                        'style.css'
+                    ],
+                    'script' => [
+                        'script.js'
+                    ],
+                ];
+            
+                // Inclure le fichier d'en-tête
+                require 'view/header.php';
+                
+                // Afficher la vue avec les données
+                require 'view/projetsAjout.php';
+            
+                // Inclure le fichier de pied de page
+                require 'view/footer.php';
+                
+            }
+            elseif (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+                )
+            ) {
+                header('Location: ' . URL .'/projets/list');
+                exit;
+            }
+
+            else {
+                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+                header('Location: ' . URL .'/connexion');
+                exit;
+            }
+
+        }
+
     }
+
 }

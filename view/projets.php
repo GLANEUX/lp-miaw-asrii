@@ -1,3 +1,2 @@
-<!-- Ajouter un lien vers Consulter les projets
-Ajouter un lien vers Ajouter un projet
-Ajouter un lien vers Modifier un projet -->
+<a href="<?= URL ?>/projets/list"> Consulter les projets </a> <br />
+<a href="<?= URL ?>/projets/add"> Ajouter un projet </a>
