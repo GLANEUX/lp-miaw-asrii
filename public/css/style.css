@@ -89,3 +89,13 @@
   background-color: transparent;
 }
 /* FIN HEADER */
+
+/* Début Footer */
+
+.text-uppercase{
+  color:white;
+  padding-top: 4%;
+}
+.row{width:100%}
+
+/* FIN FOOTER */
