@@ -94,6 +94,11 @@
           <li>
             <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 4</a>
           </li>
+          <br>
+          <i class="fa-brands fa-square-facebook fa-2xl" style="color: #9678d3;"></i>
+          <i class="fa-brands fa-instagram fa-2xl" style="color: #9678d3;"></i>
+          <i class="fa-brands fa-linkedin fa-2xl" style="color: #9678d3;"></i>
+          <i class="fa-brands fa-square-twitter fa-2xl" style="color: #9678d3;"></i>
         </ul>
 
       </div>
@@ -101,13 +106,14 @@
 
     </div>
     <!-- Grid row -->
-
+    
   </div>
   <!-- Footer LIENS -->
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3" style="background-color: rgba(0, 0, 0, 0.2);">© 2022-2023 CoopTeam - Copyright
-    <a href="/"> </a>
+    <a href="#"> </a>
+    
   </div>
   <!-- Copyright -->
 <!-- Footer -->
