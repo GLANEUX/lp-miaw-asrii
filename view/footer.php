@@ -1,29 +1,7 @@
-<<<<<<< HEAD
         
 
         
         <footer class="page-footer font-small teal pt-4 ">
-=======
-<head>
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="public/css/style.css" />
-
-    <title>
-        <?php echo $data['title']; ?>
-    </title>
-
-</head>
-
-<footer class="page-footer font-small indigo">
->>>>>>> 5f18bff51d4aa1758f7041818d36170b9a2fd455
 
 
 <!-- Footer -->
