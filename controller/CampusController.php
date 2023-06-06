@@ -7,7 +7,9 @@ class CampusController {
             'title' => 'Campus',
             'style' => [
                 'header.css',
-                'footer.css'
+                'footer.css',
+                'banner.css',
+                'campus.css'
             ]
         ];
 
