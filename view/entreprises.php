@@ -19,45 +19,22 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active p-5" id="presentation">
-                <h4 class="">Pour y accéder</h4>
-                <p class="text-justify">Le BUT Gestion des Entreprises et des Administrations (GEA) se prépare dans un Institut Universitaire de Technologie (IUT), 
-                    en 3 ans et est organisé en unités d'enseignement (UE) capitalisables, facilement évaluables en unités de compte européennes 
-                    (ECTS), avec un découpage en six semestres ouvrant droit à l'attribution de 30 ECTS chacun.
+                <h4 class="">Pourquoi choisir l'alternance ? </h4>
+                <p class="text-justify">
+                L'alternance présente des avantages pour les étudiants et les entreprises. Les étudiants peuvent combiner l'apprentissage théorique en classe avec une expérience pratique en milieu professionnel, acquérir des compétences concrètes et se familiariser avec le fonctionnement d'une entreprise.
+                Ils bénéficient d'un encadrement personnalisé, de conseils et de mentorat. De plus, ils sont rémunérés, ce qui leur permet de financer leurs études et d'être autonomes financièrement. 
+                Pour les entreprises, l'alternance permet de recruter des talents prometteurs et de les former selon leurs besoins spécifiques.
+                Cela favorise la diversité et l'inclusion en offrant des opportunités professionnelles à un plus grand nombre d'étudiants.
+                En résumé, l'alternance offre une expérience enrichissante aux étudiants, une formation de qualité et des perspectives d'emploi solides, tout en permettant aux entreprises de bénéficier d'une main-d'œuvre qualifiée et motivée.
                 </p>
 
-                <h4>Programme</h4>
-                <ul>
-                    <li>Sécurité Réseaux et des Applications</li>
-                    <li>Interconnexion des réseaux locaux</li>
-                    <li>Administration et configuration des Services intranet et internet (Windows / Linux)</li>
-                    <li>Programmation systèmes / Supervision</li>
-                    <li>Projets tutorés</li>
-                </ul>
-
-                <h4>Objectifs de la formation</h4>
-                <p class="text-justify">La Licence Métiers de l'Informatique: Applications Web offre un parcours spécifique, ASRII, qui vise à former des jeunes de 
-                    niveau BAC+2 aux métiers de l'Internet et de responsable informatique. Cette formation ASRII a des objectifs scientifiques et 
-                    professionnels clairement définis et s'inscrit dans l'offre globale de l'établissement en tant que parcours distinct de la 
-                    formation MIAW DAW2I.
-                </p>
-
-                <h4>Parcours</h4>
-                <p class="text-justify">Pour la formation Administration et Sécurisation des Réseaux et services Internet et Intranet (ASR2I), il est chargé de 
-                    l'administration et la gestion d'un parc informatique, la supervision et la sécurisation d'un réseau local, et de l'intégration 
-                    de produits et de services Intranet ou/et Internet. Les postes visés sont intermédiaires entre des techniciens supérieurs et des 
-                    ingénieurs. Savoir-faire et compétences à l'issue de ce parcours:
-                </p>
-                <ul>
-                    <li class="text-justify">Modéliser des données pour mieux intégrer les services web, concevoir et réaliser des sites web Intranet et Internet, CMS, programmer côté client et serveur.</li>
-                    <li class="text-justify">Configurer un réseau local pour un ensemble de postes informatiques, dans un environnement hétérogène (Windows, Linux) et assurer l'interconnexion avec le monde extérieur.</li>
-                    <li class="text-justify">Administrer au quotidien un parc hétérogène de postes serveurs et bureautiques rattachés au réseau informatique pour garantir, en permanence, leur disponibilité et leur sécurité.</li>
-                    <li class="text-justify">Intégrer des solutions de sécurité des applications et des données.</li>
-                </ul>
+                <h4>Quel salaire en contrat d'apprentissage en 2023 ?</h4>
+                <br>
+                <img src="public/img/Salaires_alternance.jpg">
             </div>
             <div class="tab-pane fade p-5" id="enseignement">
                 <h1>Enseignement</h1>
                 <div class="entry-content">
-		
 <h2 class="wp-block-heading">A</h2>
 
 
@@ -232,10 +209,13 @@
     <!-- sidebar -->
     <div class="sidebar bg-custom-black col-lg-3">
         <div class="py-3 px-4 border-bottom border-white border-4">
-            <h5 class="text-uppercase text-center titre-sidebar">Informations</h5>
+            <h5 class="text-uppercase text-center titre-sidebar">Vous êtes une entreprise ?</h5>
         </div>
         <div class="d-flex justify-content-center p-4 border-bottom border-white border-4">
-            <a class="button btn" href="#">BROCHURE</a>
+            <a class="button btn" href="#"><h5>Vos offres d'emplois</h5></a>
+        </div>
+        <div class="d-flex justify-content-center p-4 border-bottom border-white border-4">
+            <a class="button btn" href="#"><h5>Vos projets tuteuré</h5></a>
         </div>
     </div>
 </div>
