@@ -39,3 +39,7 @@
     font-weight: 600 !important;
     color: #ffffff !important; 
   }
+  .entry-content {
+    column-count: 2;
+    column-gap: 20px;
+  }

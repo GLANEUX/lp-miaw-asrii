@@ -18,7 +18,7 @@ class HomeConnectedController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'entreprise.css',
+                    'homeEntreprise.css',
                 ],
                 'script' => [
                     'script.js'
@@ -47,7 +47,7 @@ class HomeConnectedController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'etudiant.css',
+                    'homeEtudiant.css',
                 ],
                 'script' => [
                     'script.js'
@@ -76,7 +76,7 @@ class HomeConnectedController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'enseignant.css',
+                    'homeEnseignant.css.css',
                 ],
                 'script' => [
                     'script.js'

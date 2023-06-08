@@ -8,7 +8,7 @@ class EntreprisesController {
             'style' => [
                 'header.css',
                 'footer.css',
-                'entreprisePres.css',
+                'entreprise.css',
                 'banner.css'
             ]
         ];
