@@ -129,35 +129,62 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 </div>
 
 -->
-<section>
-<div class="container-fluid mb-5" >
+<section id="Card">
+  <div class="container py-5">
+    <h2 class="txt-font text-center py-3 ">RESTAURATION</h2>
 
-    <div class="row" style="display:flex;justify-content:space-around;text-align:center">
-    <h1 class="mt-2"> RESTAURATION</h1>
-    
-        <div class="col-lg-3" style="border:4px solid #9678D3; padding:2%">
-          <strong><h3>Restaurant Universitaire Monseigneur Roméro</h3></strong>
-              <p style="height: 4%;">Bâtiment des 1ers Cycles de l’université</p>
-              <p style="height: 4%;">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height: 4%;">Self traditionnel/grillades/pizzas</p>
-          
-        </div>
-        <div class="col-lg-3" style="border:4px solid #9678D3; padding:2%">
-          <strong><h3>Restaurant Universitaire Le sablier</h3></strong>
-              <p style="height: 4%;">Rue du père Jarlan</p>
-              <p style="height: 4%;">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height: 4%;">Self traditionnel/ligne express/grillade</p>
-          
-        </div>
-        <div class="col-lg-3" style="border:4px solid #9678D3; padding:2%">
-          <strong><h3>Restaurant Universitaire Le Boomerang</h3></strong>
-              <p style="height: 4%;">IUT de Brétigny</p>
-              <p style="height: 4%;">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height: 4%;">Self traditionnel/Cafétéria</p>
-          
-        </div>
+    <div class="row py-3">
+
+
+      <div class="col-md-4">
+        <a href="<?= URL ?>/formations" class="none">
+          <div class="card">
+            <img src="<?= URL ?>/public/img/Formation-card-HOME.png" class="card-img-top" alt="Image 1">
+            <div class="card-body">
+              <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Monseigneur Roméro</h5>
+              <p style="height:4%">Bâtiment des 1ers Cycles de l’université</p>
+              <p style="height:4%">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height:4%">Self traditionnel/grillades/pizzas</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+
+      <div class="col-md-4">
+        <a href="<?= URL ?>/campus" class="none">
+          <div class="card">
+            <img src="<?= URL ?>/public/img/Campus-card-HOME.jpg" class="card-img-top" alt="Image 1">
+            <div class="card-body">
+              <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Le sablier</h5>
+              <p style="height:4%">Rue du père Jarlan</p>
+              <p style="height:4%">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height:4%">Self traditionnel/ligne express/grillade</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a target="_blank"
+          href="<?= URL ?>/public/img/program-licence-professionnelle-metiers-de-l-informatique-application-web.PDF"
+          class="none">
+          <div class="card">
+            <img src="<?= URL ?>/public/img/PDF-Card-HOME.png" class="card-img-top" alt="Image 1">
+            <div class="card-body">
+              <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Le Boomerang</h5>
+              <p style="height:4%">IUT de Brétigny</p>
+              <p style="height:4%">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height:4%">Self traditionnel/Cafétéria</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
     </div>
-</div>
+
+
+  </div>
 </section>
 <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=IUT%20romero+(Projet)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">area maps</a></iframe></div>
 

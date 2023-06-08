@@ -5,3 +5,23 @@
 .residence{
     text-align: left;
 }
+
+/* card */
+.card-title{
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: x-large;
+    font-weight: 600;
+  
+  }
+  .none{
+    text-decoration: none;
+  }
+  .card:hover{
+    box-shadow :0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
+  .bg-fixed{
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
