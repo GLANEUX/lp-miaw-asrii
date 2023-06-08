@@ -1,7 +1,4 @@
 /* HEADER */
-.logo{
-    max-width: 35%;
-}
 
  /* Couleurs personnalisées */
  .bg-custom-black {
@@ -14,9 +11,22 @@
   .txt-color-black{
     color:#101820
   }
-
+  .txt-color-purple{
+    color:#9678D3
+  }
+.with{
+  max-width: 20%!important;
+}
   .bg-custom-grey {
-    background-color: #a9a9a9; /* Remplacez par votre couleur personnalisée */
+    background-color: #EAEDF1; /* Remplacez par votre couleur personnalisée */
+  }
+
+  .button-nav-font{
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: x-large;
+    font-weight: 600;
+    text-decoration: none;
+    text-decoration: none;
   }
 /* FIN HEADER */
 

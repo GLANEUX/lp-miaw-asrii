@@ -5,7 +5,7 @@
   <div style="background: #101820;text-align:center">
 
     <!-- Grid row -->
-    <div class="row">
+    <div class="row row-with">
 
       <!-- Grid column -->
       <div class="col-md-3 mx-auto">
