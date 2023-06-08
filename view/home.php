@@ -7,6 +7,9 @@
     <h1 class="">ASRII</h1>
     <h2 class="txt-font">PRÉSENTATION</h2>
   </div>
+  <div class="logo-banner">
+  <img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1">
+  </div>
 </section>
 
 <section id="Card">
@@ -66,7 +69,7 @@
         <h2 class="text-white txt-font">ENTREPRISES</h2>
         <p class="text-white">Nous sommes fiers de collaborer avec de nombreuses entreprises renommées dans divers secteurs d'activité. Leurs contributions et leur soutien sont essentiels pour offrir à nos étudiants une expérience d'apprentissage enrichissante et une mise en pratique concrète de leurs connaissances.</p>
         <div class=" py-3">
-          <a href="#" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Entreprises partenaire</a>
+          <a href="<?= URL ?>/entreprises" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Entreprises partenaire</a>
         </div>
       </div>
   

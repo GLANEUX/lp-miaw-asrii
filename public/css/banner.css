@@ -37,3 +37,14 @@
     font-weight: 700;
   }
 
+
+
+  .logo-banner {
+    position: relative;
+    z-index: 1;
+    text-align: right;
+    color: #fff;
+    top: -108vh;
+    padding: 50px;
+    max-width: 25em;
+  }

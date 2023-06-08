@@ -5,6 +5,9 @@
     <h1 class="">ASRII</h1>
     <h2 class="text-font">ENTREPRISE</h2>
   </div>
+  <div class="logo-banner">
+  <img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1">
+  </div>
 </section>
 <div class="container py-5 d-flex">
     <!-- Main content -->
