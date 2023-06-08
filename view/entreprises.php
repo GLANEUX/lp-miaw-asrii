@@ -1,5 +1,5 @@
 
-<section class="banner background-image" style="background-image: url('public/img/test.png')">
+<section class="banner background-image" style="background-image: url('<?= URL ?>/public/img/BANNER-Entreprise.jpg')">
   <div class="banner-overlay " ></div>
   <div class="banner-content" >
     <h1 class="">ASRII</h1>
@@ -208,14 +208,14 @@
     </div>
     <!-- sidebar -->
     <div class="sidebar bg-custom-black col-lg-3">
-        <div class="py-3 px-4 border-bottom border-white border-4">
-            <h5 class="text-uppercase text-center titre-sidebar">Vous êtes une entreprise ?</h5>
+        <div class="py-3 px-3 ">
+        <h2 class="text-white txt-font-h2 text-center">Vous êtes une entreprise ?</h2>
+        <p class="text-white  text-center">Inscrivez-vous et déposez une offre d'alternance ou de projet tuteuré</p>
+
         </div>
-        <div class="d-flex justify-content-center p-4 border-bottom border-white border-4">
-            <a class="button btn" href="#"><h5>Vos offres d'emplois</h5></a>
+        <div class="d-flex justify-content-center ">
+            <a class="button btn" href="<?= URL ?>/inscription"><h5>Inscription</h5></a>
         </div>
-        <div class="d-flex justify-content-center p-4 border-bottom border-white border-4">
-            <a class="button btn" href="#"><h5>Vos projets tuteuré</h5></a>
-        </div>
+      
     </div>
 </div>

@@ -72,14 +72,12 @@
   
       <div class="col-lg-5 align-items-center justify-content-end">
         <h2 class="text-white txt-font-h2 text-center">Vous êtes une entreprise ?</h2>
-        <p class="text-white  text-center">Déposez une offre d'alternance ou de projet tuteuré</p>
+        <p class="text-white  text-center">Inscrivez-vous et déposez une offre d'alternance ou de projet tuteuré</p>
 
         <div class="text-center py-3 ">
-          <a href="#" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Projet tuteuré</a>
+          <a href="<?= URL ?>/inscription" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Inscription</a>
         </div>
-        <div class="text-center py-3">
-          <a href="#" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Offre d'alternance</a>
-        </div>
+       
       </div>
 
     </div>
