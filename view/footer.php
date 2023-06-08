@@ -53,20 +53,27 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white; padding-top:12%">LIENS</h3>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white; padding-top:12%">LIENS UTILES</h3>
 
-        <ul class="list-unstyled">
+        <ul class="list-unstyled" style="text-align:left">
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 1</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Université d’Evry Val d’Essonne</a>
           </li>
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 2</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Présentation de l’IUT</a>
           </li>
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 3</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Liste des B.U.T</a>
           </li>
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 4</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Liste des Licences Professionnelles
+</a>
+          </li>
+          <li>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Scolarité – Infos pratiques</a>
+          </li>
+          <li>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Vie étudiante</a>
           </li>
         </ul>
 
@@ -79,26 +86,26 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white; padding-top:12%">LIENS</h3>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white; padding-top:12%">Réseaux sociaux</h3>
 
         <ul class="list-unstyled">
-          <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 1</a>
+          <li class="mt-2">
+          <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!"><i class="fa-brands fa-square-facebook fa-2xl" style="color: #9678d3;"></i></a>
           </li>
-          <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 2</a>
+          <li class="mt-2">
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!"><i class="fa-brands fa-instagram fa-2xl" style="color: #9678d3;"></i></a>
           </li>
-          <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 3</a>
+          <li class="mt-2">
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!"><i class="fa-brands fa-linkedin fa-2xl" style="color: #9678d3;"></i></a>
           </li>
-          <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 4</a>
+          <li class="mt-2">
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!"><i class="fa-brands fa-square-twitter fa-2xl" style="color: #9678d3;"></i></a>
           </li>
           <br>
-          <i class="fa-brands fa-square-facebook fa-2xl" style="color: #9678d3;"></i>
-          <i class="fa-brands fa-instagram fa-2xl" style="color: #9678d3;"></i>
-          <i class="fa-brands fa-linkedin fa-2xl" style="color: #9678d3;"></i>
-          <i class="fa-brands fa-square-twitter fa-2xl" style="color: #9678d3;"></i>
+          
+          
+          
+          
         </ul>
 
       </div>

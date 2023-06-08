@@ -1,5 +1,5 @@
 <section id="Banner" class="banner background-image"
-  style="background-image: url('<?= URL ?>/public/img/Banner-HOME.jpg')">
+  style="background-image: url('<?= URL ?>/public/img/Batiment_Evry.jpg')">
 
   <div class="banner-overlay "></div>
   <div class="banner-content">
@@ -8,50 +8,55 @@
   </div>
 </section>
 
-<br>
-<div class="row">
+<section>
+<div class="row mt-5" style="justify-content:center;margin:0">
+<img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1" style="max-width:30%;text-align:center">
+
 <p style="padding:5%;text-align:center">Le campus de la formation ASRII à l'Université d'Évry est riche et diversifié, à l'image des étudiantes et étudiants qui la composent. Les chercheuses, chercheurs et artistes qui y participent forment une communauté ouverte, caractérisée par une grande diversité sociale, culturelle et géographique.
 
 Situé au cœur d'Évry, ce campus dédié à la formation ASRII offre un environnement unique, avec une offre large d'activités spécifiquement adaptées à cette filière. Les étudiants bénéficient d'un cadre propice à leur développement académique et professionnel, avec des opportunités sportives, culturelles et festives qui enrichissent leur expérience tout au long de leur formation.
 </p>
 </div>
+</section>
+<section>
 <div class="container-fluid" style="background-color:#101820">
-    <div class="row" style="display:inline-block; margin:0;">
+    <div class="row mb-3 mt-3" style="display:inline-block; margin:0;">
         <div class="col-lg-6" style="float:left;color:white">
-          <br>
+          
           <h2>Etudiants</h2>
           <p style="text-align:left">Étudiant·e à l'Université d'Évry et engagé·e dans la vie associative, sociale ou professionnelle ? Demandez la validation de compétences acquises dans ces activités (bonus de 0,5 point maximum, dispense de stage ou enseignement). Une seule validation par cycle de formation (licence, master) est possible, indépendamment de l'année universitaire. La dispense concerne les matières ou stages du deuxième semestre.</p>
-          <br>
-          <br>
+          
+          
         </div>
         <div class="col-lg-4" style="float:right">
-          <br>
-          <img src="<?= URL ?>/public/img/Formation-card-HOME.png" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;">
-          <br>
+          
+          <img src="<?= URL ?>/public/img/etudiant.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;margin-top:3%;border-radius:8px">
+          
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <div class="row" style="display:inline-block; margin:0;">
+    
+    
+    
+    <div class="row mb-3 mt-3" style="display:inline-block; margin:0">
         <div class="col-lg-6" style="float:right;color:white">
-          <br>
+          
           <h2 style="text-align:right">Logements</h2>
           <p style="text-align:right">
 L'Université d'Évry met à disposition une plateforme de logement spécialement conçue pour les ASRII. Cette plateforme permet de rechercher des locations en France et à l'étranger, de constituer des colocations et d'accéder à des chambres temporaires. Les résidences CROUS à Évry-Courcouronnes proposent des logements adaptés aux ASRII ayant des besoins spécifiques en termes de mobilité réduite.
           </p>
-          <br>
-          <br>
+          
+          
         </div>
         <div class="col-lg-4" style="float:left">
-          <br>
-          <img src="<?= URL ?>/public/img/Formation-card-HOME.png" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;">
-          <br>
+          
+          <img src="<?= URL ?>/public/img/logement_crous.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;border-radius:8px">
+          
         </div>
     </div>
 </div>
+</section>
 
-<br>
+
 
 
 
@@ -66,7 +71,7 @@ Situé au cœur d'Évry, ce campus dédié à la formation ASRII offre un enviro
         <div class="col-lg-4" style="border:4px solid; padding:3%">
           <h2>Etudiants</h2>
           <p>Étudiant·e à l'Université d'Évry et engagé·e dans la vie associative, sociale ou professionnelle ? Demandez la validation de compétences acquises dans ces activités (bonus de 0,5 point maximum, dispense de stage ou enseignement). Une seule validation par cycle de formation (licence, master) est possible, indépendamment de l'année universitaire. La dispense concerne les matières ou stages du deuxième semestre.</p>
-          <br>
+          
         <ul style="text-align:left">
           <li>Élus étudiants dans les conseils de l'Université d'Évry ou du CROUS</li>
           <li>Service civique</li>
@@ -79,7 +84,7 @@ Situé au cœur d'Évry, ce campus dédié à la formation ASRII offre un enviro
         </ul>
 
           <button type="button" class="btn btn-outline-secondary"><a href="https://sphinx4.univ-evry.fr/UEVE/Engagement_etudiant_22-23/depot_demande.htm">Candidater</a></button>
-          <br>
+          
         </div>
         <div class="col-lg-4" style="border:4px solid; padding:3%">
           <h2>Logements</h2>
@@ -116,44 +121,47 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
             </ul>
           </li>
         </ul>
-          <br>
+          
           <button type="button" class="btn btn-outline-secondary">Secondary</button>
-          <br>
+          
         </div>
     </div>
 </div>
-<br>
--->
 
-<div class="container-fluid" >
-<br>
+-->
+<section>
+<div class="container-fluid mb-5" >
+
     <div class="row" style="display:flex;justify-content:space-around;text-align:center">
-    <h1 style="margin-bottom:1%"> Restauration</h1>
+    <h1 class="mt-2"> RESTAURATION</h1>
     
-        <div class="col-lg-3" style="border:4px solid; padding:2%">
+        <div class="col-lg-3" style="border:4px solid #9678D3; padding:2%">
           <strong><h3>Restaurant Universitaire Monseigneur Roméro</h3></strong>
-              <p style="height: 3%;">Bâtiment des 1ers Cycles de l’université</p>
-              <p style="height: 3%;">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height: 3%;">Self traditionnel/grillades/pizzas</p>
-          <br>
+              <p style="height: 4%;">Bâtiment des 1ers Cycles de l’université</p>
+              <p style="height: 4%;">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height: 4%;">Self traditionnel/grillades/pizzas</p>
+          
         </div>
-        <div class="col-lg-3" style="border:4px solid; padding:2%">
+        <div class="col-lg-3" style="border:4px solid #9678D3; padding:2%">
           <strong><h3>Restaurant Universitaire Le sablier</h3></strong>
-              <p style="height: 3%;">Rue du père Jarlan</p>
-              <p style="height: 3%;">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height: 3%;">Self traditionnel/ligne express/grillade</p>
-          <br>
+              <p style="height: 4%;">Rue du père Jarlan</p>
+              <p style="height: 4%;">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height: 4%;">Self traditionnel/ligne express/grillade</p>
+          
         </div>
-        <div class="col-lg-3" style="border:4px solid; padding:2%">
+        <div class="col-lg-3" style="border:4px solid #9678D3; padding:2%">
           <strong><h3>Restaurant Universitaire Le Boomerang</h3></strong>
-              <p style="height: 3%;">IUT de Brétigny</p>
-              <p style="height: 3%;">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height: 3%;">Self traditionnel/Cafétéria</p>
-          <br>
+              <p style="height: 4%;">IUT de Brétigny</p>
+              <p style="height: 4%;">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height: 4%;">Self traditionnel/Cafétéria</p>
+          
         </div>
     </div>
 </div>
-<br>
+</section>
+<div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=IUT%20romero+(Projet)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">area maps</a></iframe></div>
+
+
 
 
 
