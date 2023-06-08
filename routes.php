@@ -22,5 +22,6 @@ $routes = [
     URL . '/notes/add' => ['NotesController', 'ajouter'],
     URL . '/inscription' => ['InscriptionController', 'index'],
     URL . '/emplois-du-temps' => ['EDTController', 'index'],
+    URL . '/emplois-du-temps/add' => ['EDTController', 'ajouter'],
     // Ajoutez d'autres routes selon vos besoins
 ];

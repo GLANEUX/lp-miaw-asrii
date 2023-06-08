@@ -141,5 +141,19 @@ class SqlModel {
 
         return $result;
     }
+    public function addEDTRequest($req) {
+        $query = "INSERT INTO emploi_du_temps (date, url) VALUES ($req)";
+
+        // Exécution de la requête
+        $result = $this->mysqli->query($query);
+
+        // Vérification des erreurs de requête
+        if (!$result) {
+            echo "Erreur lors de l'exécution de la requête: " . $this->mysqli->error;
+            exit();
+        }
+
+        return $result;
+    }
 }
 ?>
