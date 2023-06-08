@@ -24,7 +24,7 @@ class ProjetsController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'projets.css',
+                    'projets.css'
                 ],
                 'script' => [
                     'script.js'

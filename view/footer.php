@@ -14,8 +14,8 @@
         <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;"></h3>
 
         <ul class="list-unstyled">
-          <img style="max-width:45%" src="public/img/ASRII_LOGO-FULL-2.png">
-          <img style="max-width:55%" src="public/img/ASRII_TXT-V.png">
+          <img style="max-width:45%" src="<?= URL ?>/public/img/ASRII_LOGO-FULL-2.png">
+          <img style="max-width:55%" src="<?= URL ?>/public/img/ASRII_TXT-V.png">
         </ul>
 
       </div>
