@@ -17,5 +17,8 @@ $routes = [
     URL . '/offres' => ['AlternancesController', 'list'],
     URL . '/offres/add' => ['AlternancesController', 'ajouter'],
     URL . '/offres/edit' => ['AlternancesController', 'modifier'],
+    URL . '/notes' => ['NotesController', 'index'],
+    URL . '/notes/edit' => ['NotesController', 'modifier'],
+    URL . '/notes/add' => ['NotesController', 'ajouter'],
     // Ajoutez d'autres routes selon vos besoins
 ];

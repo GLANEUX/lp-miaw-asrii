@@ -112,5 +112,19 @@ class SqlModel {
 
         return $result;
     }
+    public function addNoteRequest($req) {
+        $query = "INSERT INTO notes (user_id, matiere, libelle, note, enseignant) VALUES ($req)";
+
+        // Exécution de la requête
+        $result = $this->mysqli->query($query);
+
+        // Vérification des erreurs de requête
+        if (!$result) {
+            echo "Erreur lors de l'exécution de la requête: " . $this->mysqli->error;
+            exit();
+        }
+
+        return $result;
+    }
 }
 ?>

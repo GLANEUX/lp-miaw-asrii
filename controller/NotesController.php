@@ -14,24 +14,39 @@ class NotesController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
             )  || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'&&
+                isset($_GET['id'])
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_GET['id'])
             )
         ) {
 
             $sqlModel = new SqlModel();
-            // Récupérer les données des notes depuis la base de données
-            $notes = $sqlModel->selectRequest('* FROM notes');////////////////////////////////////////////////////////////////////
+
+            if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant') {
+                $notes = $sqlModel->selectRequest('* FROM notes WHERE user_id = ' . $_SESSION['userid']);
+            }
+            elseif (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant') {
+                $notes = $sqlModel->selectRequest('* FROM notes WHERE user_id = ' . $_GET['id'] . ' AND enseignant = ' . $_SESSION['userid']); 
+            }
+            elseif ( isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
+                $notes = $sqlModel->selectRequest('* FROM notes WHERE user_id = ' . $_GET['id']);
+            } 
+            else {
+                header('Location: ' . URL .'/home');
+                exit;
+            }
         
             $not = [];
         
             foreach ($notes as $note) {
                 $not[] = [
-                    'id' => $note['id'],////////////////////////////////////////////////////////////////////
-                    'titre' => $note['titre'],////////////////////////////////////////////////////////////////////
-                    'description' => $note['description']////////////////////////////////////////////////////////////////////
+                    'matiere' => $note['matiere'],
+                    'libelle' => $note['libelle'],
+                    'note' => $note['note'],
+                    'idnote' => $note['id']
                 ];
             }
 
@@ -41,7 +56,7 @@ class NotesController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'projetsList.css',////////////////////////////////////////////////////////////////////
+                    'notes.css',
                 ],
                 'script' => [
                     'script.js'
@@ -53,41 +68,13 @@ class NotesController {
             require 'view/header.php';
 
             // Afficher la vue avec les données
-            require 'view/notes.php';////////////////////////////////////////////////////////////////////
+            require 'view/notes.php';
 
             // Inclure le fichier de pied de page
             require 'view/footer.php';
-        } 
-
+        }
         elseif (
             (
-                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
-            )
-        ) {
-
-            header('Location: ' . URL .'/home');
-        } 
-        
-        else {
-            // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-            header('Location: ' . URL .'/connexion');
-            exit;
-        }
-        
-    }
-
-
-
-    public function list() {
-
-        session_start();
-
-        if (
-            (
-                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
-            ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
                 isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
             ) || (
@@ -95,93 +82,144 @@ class NotesController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
             )
         ) {
-
             $sqlModel = new SqlModel();
-            // Récupérer les données des projets depuis la base de données
-            $projets = $sqlModel->getTableData('projets');
+            $etudiants = $sqlModel->selectRequest('* FROM users WHERE level = \'etudiant\'');
+
+            $etud = [];
         
-            $proj = [];
-        
-            foreach ($projets as $projet) {
-                $proj[] = [
-                    'id' => $projet['id'],
-                    'titre' => $projet['titre'],
-                    'description' => $projet['description']
+            foreach ($etudiants as $etudiant) {
+                $etud[] = [
+                    'id' => $etudiant['id'],
+                    'nom' => $etudiant['nom'],
+                    'prenom' => $etudiant['prenom']
                 ];
             }
 
             // Charger les données nécessaires pour la vue
             $data = [
-                'title' => 'Liste - Projets Tuteurés',
+                'title' => 'Notes',
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'projetsList.css',
+                    'notes.css',
                 ],
                 'script' => [
                     'script.js'
                 ],
-                'projets' => $proj,
+                'etudiants' => $etud,
             ];
-        
+
             // Inclure le fichier d'en-tête
             require 'view/header.php';
-            
+
             // Afficher la vue avec les données
-            require 'view/projetsList.php';
-        
+            require 'view/listEtudiants.php';
+
             // Inclure le fichier de pied de page
             require 'view/footer.php';
 
         }
-
         elseif (
             isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
             isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
         ) {
-            $sqlModel = new SqlModel();
-            // Récupérer les données des projets depuis la base de données
-            $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = ' . $_SESSION['userid']);
-        
-            $proj = [];
-        
-            foreach ($projets as $projet) {
-                $proj[] = [
-                    'id' => $projet['id'],
-                    'titre' => $projet['titre'],
-                    'description' => $projet['description']
-                ];
-            }
 
-            // Charger les données nécessaires pour la vue
-            $data = [
-                'title' => 'Liste - Projets Tuteurés',
-                'style' => [
-                    'header.css',
-                    'footer.css',
-                    'projets.css',
-                ],
-                'script' => [
-                    'script.js'
-                ],
-                'projets' => $proj,
-            ];
-        
-            // Inclure le fichier d'en-tête
-            require 'view/header.php';
-            
-            // Afficher la vue avec les données
-            require 'view/projetsList.php';
-        
-            // Inclure le fichier de pied de page
-            require 'view/footer.php';
-        }
+            header('Location: ' . URL .'/home');
+            exit;
+        } 
         
         else {
             // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
             header('Location: ' . URL .'/connexion');
             exit;
         }
+
+    }
+
+
+    public function ajouter() {
+
+        session_start();
+
+        if (
+            (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'&&
+                isset($_GET['id'])
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_GET['id'])
+            )
+        ) {
+
+            // Charger les données nécessaires pour la vue
+            $data = [
+                'title' => 'Ajouter une note',
+                'style' => [
+                    'header.css',
+                    'footer.css',
+                    'notes.css',
+                ],
+                'script' => [
+                    'script.js'
+                ]
+            ];
+
+            // Inclure le fichier d'en-tête
+            require 'view/header.php';
+
+            // Afficher la vue avec les données
+            require 'view/notesAjout.php';
+
+            // Inclure le fichier de pied de page
+            require 'view/footer.php';
+
+        }
+
+        elseif (
+            (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'&&
+                isset($_POST['idetudiant'])
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_POST['idetudiant'])
+            )
+        ) {
+
+            $sqlModel = new SqlModel();
+
+            $notes = $sqlModel->addNoteRequest($_POST['idetudiant'] . ', \''  . $_POST['matiere'] . '\', \'' . $_POST['libelle'] . '\',' . $_POST['note'] . ', \'' . $_SESSION['userid'] . '\'');
+        
+            header('Location: ' . URL .'/notes');
+            exit;
+        }
+        elseif (
+            (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+            )
+        ) {
+            header('Location: ' . URL .'/home');
+            exit;
+        }
+        else {
+            // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+            header('Location: ' . URL .'/connexion');
+            exit;
+        }
+
     }
 
 
@@ -189,231 +227,98 @@ class NotesController {
 
         session_start();
 
-        if (isset($_GET['id']) && $_GET['id']) {
+        if (
+            (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'&&
+                isset($_GET['id'])
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_GET['id'])
+            )
+        ) {
 
-            if (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
-                )
-            ) {
+            $sqlModel = new SqlModel();
 
-                $sqlModel = new SqlModel();
-                // Récupérer les données des projets depuis la base de données
-                if ($_SESSION['level'] == 'entreprise'){
-                    $projets = $sqlModel->selectRequest('* FROM projets WHERE user_id = \'' . $_SESSION['userid'] . '\' AND id = \'' . $_GET['id'] .'\'');
-                } elseif ($_SESSION['level'] == 'admin'){
-                    $projets = $sqlModel->selectRequest('* FROM projets WHERE id = ' . $_GET['id']);
-                } else { $projet = null; }
+            $notes = $sqlModel->selectRequest('* FROM notes WHERE id = ' . $_GET['id']);
 
-                if ($projets[0]) {
+            $not = [
+                'id' => $notes[0]['id'],
+                'matiere' => $notes[0]['matiere'],
+                'libelle' => $notes[0]['libelle'],
+                'note' => $notes[0]['note'],
+            ];
 
-                    $proj = [
-                        'id' => $projets[0]['id'],
-                        'titre' => $projets[0]['titre'],
-                        'description' => $projets[0]['description']
-                    ];
 
-                    // Charger les données nécessaires pour la vue
-                    $data = [
-                        'title' => $proj['titre'] . '- Modification',
-                        'style' => [
-                            'header.css',
-                            'footer.css',
-                            'projetsModification.css',
-                        ],
-                        'script' => [
-                            'script.js'
-                        ],
-                        'projets' => $proj,
-                    ];
-                
-                    // Inclure le fichier d'en-tête
-                    require 'view/header.php';
-                    
-                    // Afficher la vue avec les données
-                    require 'view/projetsModification.php';
-                
-                    // Inclure le fichier de pied de page
-                    require 'view/footer.php';
+            // Charger les données nécessaires pour la vue
+            $data = [
+                'title' => 'Modifier une note',
+                'style' => [
+                    'header.css',
+                    'footer.css',
+                    'notes.css',
+                ],
+                'script' => [
+                    'script.js'
+                ],
+                'notes' => $not
+            ];
 
-                }
-                else {
-                    header('Location: ' . URL .'/projets/list');
-                    exit;
-                }
-            }
-            elseif (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
-                )
-            ) {
-                header('Location: ' . URL .'/projets/list');
-                exit;
-            }
+            // Inclure le fichier d'en-tête
+            require 'view/header.php';
 
-            else {
-                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-                header('Location: ' . URL .'/connexion');
-                exit;
-            }
+            // Afficher la vue avec les données
+            require 'view/notesModification.php';
 
-        } elseif (isset($_POST['id']) && $_POST['id']) {
-
-            if (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
-                )
-            ) {
-
-                $sqlModel = new SqlModel();
-                // Récupérer les données des projets depuis la base de données
-                $projets = $sqlModel->updateRequest('projets SET titre = \'' . $_POST['titre'] . '\', description = \'' . $_POST['description'] . '\' WHERE id =' . $_POST['id']);
-
-                header('Location: ' . URL .'/projets/list');
-                exit;
-                
-            }
-            elseif (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
-                )
-            ) {
-                header('Location: ' . URL .'/projets/list');
-                exit;
-            }
-
-            else {
-                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-                header('Location: ' . URL .'/connexion');
-                exit;
-            }
+            // Inclure le fichier de pied de page
+            require 'view/footer.php';
 
         }
 
+        elseif (
+            (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'&&
+                isset($_POST['idnote'])
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_POST['idnote'])
+            )
+        ) {
+
+            $sqlModel = new SqlModel();
+
+            $notes = $sqlModel->updateRequest('notes SET matiere = \'' . $_POST['matiere'] . '\', libelle = \'' . $_POST['libelle'] . '\', note = ' . $_POST['note'] . ' WHERE id =' . $_POST['idnote']);
+        
+            header('Location: ' . URL .'/notes');
+            exit;
+        }
+        elseif (
+            (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+            ) || (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+            )
+        ) {
+            header('Location: ' . URL .'/home');
+            exit;
+        }
         else {
-            header('Location: ' . URL .'/projets/list');
+            // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+            header('Location: ' . URL .'/connexion');
             exit;
         }
 
     }
-
-    public function ajouter() {
-        
-        session_start();
-
-        if (isset($_POST['titre']) && isset($_POST['description']) && $_POST['titre'] && $_POST['description']) {
-
-            if (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
-                )
-            ) {
-
-                $sqlModel = new SqlModel();
-                // Récupérer les données des projets depuis la base de données
-                $projets = $sqlModel->addProjetRequest($_SESSION['userid'] . ', \''  . $_POST['titre'] . '\', \'' . $_POST['description'] . '\'');
-
-                header('Location: ' . URL .'/projets');
-                exit;
-                
-            }
-            elseif (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
-                )
-            ) {
-                header('Location: ' . URL .'/projets/list');
-                exit;
-            }
-
-            else {
-                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-                header('Location: ' . URL .'/connexion');
-                exit;
-            }
-
-        }
-
-        else {
-
-            if (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
-                )
-            ) {
-
-                // Charger les données nécessaires pour la vue
-                $data = [
-                    'title' => 'Ajouter - Projet tuteuré',
-                    'style' => [
-                        'header.css',
-                        'footer.css',
-                        'projetsAjout.css',
-                    ],
-                    'script' => [
-                        'script.js'
-                    ],
-                ];
-            
-                // Inclure le fichier d'en-tête
-                require 'view/header.php';
-                
-                // Afficher la vue avec les données
-                require 'view/projetsAjout.php';
-            
-                // Inclure le fichier de pied de page
-                require 'view/footer.php';
-                
-            }
-            elseif (
-                (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
-                ) || (
-                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
-                )
-            ) {
-                header('Location: ' . URL .'/projets/list');
-                exit;
-            }
-
-            else {
-                // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-                header('Location: ' . URL .'/connexion');
-                exit;
-            }
-
-        }
-
-    }
-
+    
 }
