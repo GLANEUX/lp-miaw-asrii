@@ -56,9 +56,9 @@
             </div>
             <!-- enseignement -->
             <div class="tab-pane fade p-5" id="enseignement">
-                <h4>Semestre 1</h4>
+                <h4>SEMESTRE 1</h4>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Enseignement</th>
@@ -68,14 +68,130 @@
                         </thead>
                         <thead>
                             <tr>
-                                <th>UE11 Connaissance de l'entreprise</th>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#UE11" class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE11 Connaissance de l'entreprise
+                                    </a>
+                                </th>
+                                <th>6</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="collapse" id="UE11">
+                                <td>
+                                    <a data-toggle="collapse" href="#OGE" class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                        <span class="fas fa-chevron-down m-2"></span>
+                                        Organisation et Gestion des entreprises
+                                    </a>
+                                    <div class="collapse" id="OGE">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
+                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>6</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse" id="UE11">
+                                <td>
+                                    <a data-toggle="collapse" href="#GP" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
+                                        <span class="fas fa-chevron-down m-2"></span>                                        
+                                        Gestion et management des projets
+                                    </a>
+                                    <div class="collapse" id="GP">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
+                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>6</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse" id="UE11">
+                                <td>
+                                    <a data-toggle="collapse" href="#QE" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
+                                        <span class="fas fa-chevron-down m-2"></span>
+                                        La qualité en entreprise
+                                    </a>
+                                    <div class="collapse" id="QE">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
+                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>2</td>
+                                <td>16h</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th colspan="" class="">UE12 Modélisation de données et intégration de réseaux locaux</th>
                                 <th>6</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th></th>
+                                <td>
+                                    <a data-toggle="collapse" href="#RL" class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                        <span class="fas fa-chevron-down m-2"></span>
+                                        Réseaux locaux
+                                    </a>
+                                    <div class="collapse" id="RL">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
+                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>6</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a data-toggle="collapse" href="#BD" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
+                                        <span class="fas fa-chevron-down m-2"></span>                                        
+                                        Bases de données relationnelles
+                                    </a>
+                                    <div class="collapse" id="BD">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
+                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>6</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a data-toggle="collapse" href="#SH" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
+                                        <span class="fas fa-chevron-down m-2"></span>
+                                        Outils de configuration SHELL
+                                    </a>
+                                    <div class="collapse" id="SH">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
+                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>2</td>
+                                <td>16h</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a data-toggle="collapse" href="#PP" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
+                                        <span class="fas fa-chevron-down m-2"></span>
+                                        Programmation objet en python
+                                    </a>
+                                    <div class="collapse" id="PP">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
+                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>2</td>
+                                <td>16h</td>
                             </tr>
                         </tbody>
                     </table>
@@ -93,7 +209,3 @@
         </div>
     </div>
 </div>
-
-<!-- Inclure les fichiers JavaScript de Bootstrap (jQuery requis) -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

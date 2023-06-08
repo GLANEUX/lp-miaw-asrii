@@ -39,3 +39,7 @@
     font-weight: 600 !important;
     color: #ffffff !important; 
   }
+
+  a:hover{
+    color: #9678D3 !important;
+  }
