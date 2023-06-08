@@ -8,3 +8,13 @@
     <?php }
 
 } ?>
+
+
+
+
+
+
+
+
+
+<style>header{ display: none;} footer{display: none;}</style>
