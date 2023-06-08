@@ -126,5 +126,20 @@ class SqlModel {
 
         return $result;
     }
+    public function addEntrepriseRequest($req) {
+        $val = $req . ', \'' . date('Y-m-d H:i:s') . '\', \'' . $_SERVER['REMOTE_ADDR'] . '\', \'entreprise\'';
+        $query = "INSERT INTO users (nom, prenom, email, username, password, last_login, last_login_ip, level) VALUES ($val)";
+
+        // Exécution de la requête
+        $result = $this->mysqli->query($query);
+
+        // Vérification des erreurs de requête
+        if (!$result) {
+            echo "Erreur lors de l'exécution de la requête: " . $this->mysqli->error;
+            exit();
+        }
+
+        return $result;
+    }
 }
 ?>
