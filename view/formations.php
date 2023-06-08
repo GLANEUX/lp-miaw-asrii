@@ -57,19 +57,19 @@
             <!-- enseignement -->
             <div class="tab-pane fade p-5" id="enseignement">
                 <h4>SEMESTRE 1</h4>
-                <div class="table-responsive">
+                <div class="table-responsive">  
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Enseignement</th>
-                                <th>ECTS</th>
-                                <th>TP/TD</th>
+                                <th class="bg-light">Enseignements</th>
+                                <th class="bg-light">ECTS</th>
+                                <th class="bg-light">TP/TD</th>
                             </tr>
                         </thead>
                         <thead>
                             <tr>
                                 <th colspan="" class="">
-                                    <a data-toggle="collapse" href="#UE11" class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <a data-toggle="collapse" href="#" data-target=".ue11-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
                                     <span class="fas fa-chevron-down m-2"></span>
                                     UE11 Connaissance de l'entreprise
                                     </a>
@@ -79,121 +79,202 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="collapse" id="UE11">
-                                <td>
-                                    <a data-toggle="collapse" href="#OGE" class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
-                                        <span class="fas fa-chevron-down m-2"></span>
-                                        Organisation et Gestion des entreprises
-                                    </a>
-                                    <div class="collapse" id="OGE">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
-                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
-                                        </p>
-                                    </div>
-                                </td>
+                            <tr class="collapse ue11-content">
+                                <td>Organisation et Gestion des entreprises</td>
                                 <td>6</td>
                                 <td>20h</td>
                             </tr>
-                            <tr class="collapse" id="UE11">
-                                <td>
-                                    <a data-toggle="collapse" href="#GP" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
-                                        <span class="fas fa-chevron-down m-2"></span>                                        
-                                        Gestion et management des projets
-                                    </a>
-                                    <div class="collapse" id="GP">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
-                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
-                                        </p>
-                                    </div>
-                                </td>
+                            <tr class="collapse ue11-content">
+                                <td>Gestion et management des projets</td>
                                 <td>6</td>
                                 <td>20h</td>
                             </tr>
-                            <tr class="collapse" id="UE11">
-                                <td>
-                                    <a data-toggle="collapse" href="#QE" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
-                                        <span class="fas fa-chevron-down m-2"></span>
-                                        La qualité en entreprise
-                                    </a>
-                                    <div class="collapse" id="QE">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
-                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
-                                        </p>
-                                    </div>
-                                </td>
+                            <tr class="collapse ue11-content">
+                                <td>La qualité en entreprise</td>
                                 <td>2</td>
                                 <td>16h</td>
                             </tr>
                         </tbody>
                         <thead>
                             <tr>
-                                <th colspan="" class="">UE12 Modélisation de données et intégration de réseaux locaux</th>
-                                <th>6</th>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#" data-target=".ue12-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE12 Modélisation de données et intégration de réseaux locaux
+                                </th>
+                                <th>7</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <a data-toggle="collapse" href="#RL" class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
-                                        <span class="fas fa-chevron-down m-2"></span>
-                                        Réseaux locaux
-                                    </a>
-                                    <div class="collapse" id="RL">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
-                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>6</td>
+                            <tr class="collapse ue12-content">
+                                <td>Réseaux locaux</td>
+                                <td>2</td>
+                                <td>24h</td>
+                            </tr>
+                            <tr class="collapse ue12-content">
+                                <td>Bases de données relationnelles</td>
+                                <td>1.5</td>
                                 <td>20h</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <a data-toggle="collapse" href="#BD" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
-                                        <span class="fas fa-chevron-down m-2"></span>                                        
-                                        Bases de données relationnelles
-                                    </a>
-                                    <div class="collapse" id="BD">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
-                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>6</td>
-                                <td>20h</td>
+                            <tr class="collapse ue12-content">
+                                <td>Outils de configuration SHELL</td>
+                                <td>1.5</td>
+                                <td>24h</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <a data-toggle="collapse" href="#SH" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
-                                        <span class="fas fa-chevron-down m-2"></span>
-                                        Outils de configuration SHELL
-                                    </a>
-                                    <div class="collapse" id="SH">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
-                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
-                                        </p>
-                                    </div>
-                                </td>
+                            <tr class="collapse ue12-content">
+                                <td>Programmation objet en python</td>
                                 <td>2</td>
-                                <td>16h</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a data-toggle="collapse" href="#PP" class="collapsed  text-decoration-none text-body" aria-expanded="collapsed">
-                                        <span class="fas fa-chevron-down m-2"></span>
-                                        Programmation objet en python
-                                    </a>
-                                    <div class="collapse" id="PP">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ullam veniam neque corrupti accusamus aperiam necessitatibus 
-                                            fugit, sint, nulla et consequuntur asperiores deleniti. Iste a voluptatum inventore nobis ipsa sit!
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>2</td>
-                                <td>16h</td>
+                                <td>24h</td>
                             </tr>
                         </tbody>
+                        <thead>
+                            <tr>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#" data-target=".ue13-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE13 Développement et programmation des services web
+                                </th>
+                                <th>8</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="collapse ue13-content">
+                                <td>Programmation XML</td>
+                                <td>2</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse ue13-content">
+                                <td>Développement en JavaScript</td>
+                                <td>2</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse ue13-content">
+                                <td>Programmation PHP</td>
+                                <td>2</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse ue13-content">
+                                <td>Programmation HTML/CSS</td>
+                                <td>2</td>
+                                <td>20h</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>SEMESTRE 2</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="bg-light">Enseignements</th>
+                                <th class="bg-light">ECTS</th>
+                                <th class="bg-light">TP/TD</th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#" data-target=".ue21-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE21 Compétences transversales
+                                    </a>
+                                </th>
+                                <th>4</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="collapse ue21-content">
+                                <td>Anglais</td>
+                                <td>2</td>
+                                <td>24h</td>
+                            </tr>
+                            <tr class="collapse ue21-content">
+                                <td>Communication et techniques de recherche d'emploi</td>
+                                <td>2</td>
+                                <td>20h</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#" data-target=".ue22-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE22 Administration des réseaux hétérogènes (Windows, Linux)
+                                </th>
+                                <th>10</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="collapse ue22-content">
+                                <td>Administration Windows et Configuration des services</td>
+                                <td>2.5</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse ue22-content">
+                                <td>Administration Linux et Configuration des services</td>
+                                <td>2.5</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse ue22-content">
+                                <td>Virtualisation</td>
+                                <td>2.5</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse ue22-content">
+                                <td>Programmation Systèmes/Supervision</td>
+                                <td>2.5</td>
+                                <td>20h</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#" data-target=".ue23-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE23 Interconnexion des réseaux et sécurisation des applications
+                                </th>
+                                <th>5</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="collapse ue23-content">
+                                <td>Interconnexion des réseaux locaux</td>
+                                <td>2.5</td>
+                                <td>20h</td>
+                            </tr>
+                            <tr class="collapse ue23-content">
+                                <td>Sécurité réseaux et des applications</td>
+                                <td>2.5</td>
+                                <td>24h</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#" data-target=".ue24-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE24 Pratique professionnelle
+                                </th>
+                                <th>12</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th colspan="" class="">
+                                    <a data-toggle="collapse" href="#" data-target=".ue25-content"class="collapsed text-decoration-none text-body" aria-expanded="collapsed">
+                                    <span class="fas fa-chevron-down m-2"></span>
+                                    UE25 Projet tuteuré
+                                </th>
+                                <th>8</th>
+                                <th></th>
+                            </tr>
+                        </thead>
                     </table>
                 </div>
             </div>
