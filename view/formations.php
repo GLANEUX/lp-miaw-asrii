@@ -1,3 +1,7 @@
+<!-- Page formations -->
+<!-- Accessible pour tous le monde -->
+<!-- Accessible sur /formations -->
+
 <section class="banner background-image" style="background-image: url('<?= URL ?>/public/img/Banner-formation.jpg')">
   <div class="banner-overlay " ></div>
   <div class="banner-content" >

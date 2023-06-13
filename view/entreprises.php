@@ -1,3 +1,6 @@
+<!-- Page entreprises -->
+<!-- Accessible pour tous le monde -->
+<!-- Accessible sur /entreprises -->
 
 <section class="banner background-image" style="background-image: url('<?= URL ?>/public/img/BANNER-Entreprise.jpg')">
   <div class="banner-overlay " ></div>

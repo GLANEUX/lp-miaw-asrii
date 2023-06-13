@@ -72,7 +72,15 @@ class User {
 
         $emailOrUsername = $mysqli->real_escape_string($emailOrUsername);
 
-        $query = "SELECT * FROM users WHERE email = '$emailOrUsername' OR username = '$emailOrUsername' LIMIT 1";
+        $query = "SELECT * FROM (
+            SELECT id, username, email, password, 'etudiant' AS level FROM etudiants WHERE email = '$emailOrUsername' OR username = '$emailOrUsername'
+            UNION
+            SELECT id, username, email, password, 'enseignant' AS level FROM enseignants WHERE email = '$emailOrUsername' OR username = '$emailOrUsername'
+            UNION
+            SELECT id, username, email, password, 'entreprise' AS level FROM entreprises WHERE email = '$emailOrUsername' OR username = '$emailOrUsername' AND confirme = 1
+            UNION
+            SELECT id, username, email, password, 'administrateur' AS level FROM administrateurs WHERE email = '$emailOrUsername' OR username = '$emailOrUsername'
+        ) AS users LIMIT 1";
 
         $result = $mysqli->query($query);
 
@@ -85,11 +93,9 @@ class User {
         if ($row = $result->fetch_assoc()) {
             $user = new User();
             $user->setId($row['id']);
-            $user->setEmail($row['email']);
             $user->setUsername($row['username']);
+            $user->setEmail($row['email']);
             $user->setPassword($row['password']);
-            $user->setLastLogin($row['last_login']);
-            $user->setLastLoginIP($row['last_login_ip']);
             $user->setLevel($row['level']);
         }
 
@@ -103,10 +109,19 @@ class User {
         $mysqli = $sqlModel->getMysqli();
 
         $id = $this->getId();
+        $level = $this->getLevel();
         $lastLogin = $mysqli->real_escape_string($this->getLastLogin());
         $lastLoginIP = $mysqli->real_escape_string($this->getLastLoginIP());
 
-        $query = "UPDATE users SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
+        if ($level == 'etudiant'){
+            $query = "UPDATE etudiants SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
+        } elseif ($level == 'enseignant'){
+            $query = "UPDATE enseignants SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
+        } elseif ($level == 'entreprise'){
+            $query = "UPDATE entreprises SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
+        } elseif ($level == 'administrateur'){
+            $query = "UPDATE administrateurs SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
+        }
 
         $result = $mysqli->query($query);
 

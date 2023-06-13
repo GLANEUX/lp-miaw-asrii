@@ -76,7 +76,7 @@ class HomeConnectedController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'homeEnseignant.css.css',
+                    'homeEnseignant.css',
                 ],
                 'script' => [
                     'script.js'
@@ -96,7 +96,7 @@ class HomeConnectedController {
         // Admin
         elseif (
             isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-            isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+            isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur'
         ) {
 
             // Charger les données nécessaires pour la vue
@@ -105,7 +105,7 @@ class HomeConnectedController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'admin.css'
+                    'homeAdmin.css'
                 ],
                 'script' => [
                     'script.js'

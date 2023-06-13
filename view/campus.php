@@ -1,3 +1,7 @@
+<!-- Page campus -->
+<!-- Accessible pour tous le monde -->
+<!-- Accessible sur /campus -->
+
 <section id="Banner" class="banner background-image"
   style="background-image: url('<?= URL ?>/public/img/Batiment_Evry.jpg')">
 

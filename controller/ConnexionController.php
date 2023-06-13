@@ -22,7 +22,7 @@ class ConnexionController {
 
     private function showLoginForm($error = '') {
 
-         // Charger les données nécessaires pour la vue
+        // Variables transmises
          $data = [
             'title' => 'Connexion',
             'style' => [
@@ -31,14 +31,9 @@ class ConnexionController {
             'connexion.css'],
         ];
 
-
-        // Inclure le fichier d'en-tête
+        // Afficher la page
         require 'view/header.php';
-
-        // Afficher la vue
         require 'view/connexion.php';
-
-        // Inclure le fichier de pied de page
         require 'view/footer.php';
     }
 

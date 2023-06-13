@@ -1,3 +1,7 @@
+<!-- Liste des étudiants -->
+<!-- Accessible uniquement pour les Enseignants ou les Admins -->
+<!-- Accessible sur /notes -->
+
 <h1> Liste des étudiants </h1>
 <table>
     <thead>

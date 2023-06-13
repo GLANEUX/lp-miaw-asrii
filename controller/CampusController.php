@@ -1,8 +1,12 @@
 <?php
 class CampusController {
+
+    // Page Campus
     public function index() {
+        
         session_start();
-        // Charger les données nécessaires pour la vue
+
+        // Variables transmises
         $data = [
             'title' => 'Campus',
             'style' => [
@@ -13,13 +17,9 @@ class CampusController {
             ]
         ];
 
-        // Inclure le fichier d'en-tête
+        // Afficher la page
         require 'view/header.php';
-
-        // Afficher la vue
         require 'view/campus.php';
-
-        // Inclure le fichier de pied de page
         require 'view/footer.php';
     }
 }

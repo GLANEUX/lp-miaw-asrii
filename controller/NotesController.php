@@ -18,7 +18,7 @@ class NotesController {
                 isset($_GET['id'])
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur' &&
                 isset($_GET['id'])
             )
         ) {
@@ -26,27 +26,28 @@ class NotesController {
             $sqlModel = new SqlModel();
 
             if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant') {
-                $notes = $sqlModel->selectRequest('* FROM notes WHERE user_id = ' . $_SESSION['userid']);
+                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = $_SESSION[userid]");
             }
             elseif (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant') {
-                $notes = $sqlModel->selectRequest('* FROM notes WHERE user_id = ' . $_GET['id'] . ' AND enseignant = ' . $_SESSION['userid']); 
+                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = $_GET[id] AND enseignant_id = $_SESSION[userid]");
             }
-            elseif ( isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
-                $notes = $sqlModel->selectRequest('* FROM notes WHERE user_id = ' . $_GET['id']);
+            elseif ( isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur') {
+                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = $_GET[id]");
             } 
             else {
                 header('Location: ' . URL .'/home');
                 exit;
             }
         
-            $not = [];
+            $notes = [];
         
-            foreach ($notes as $note) {
-                $not[] = [
-                    'matiere' => $note['matiere'],
-                    'libelle' => $note['libelle'],
-                    'note' => $note['note'],
-                    'idnote' => $note['id']
+            foreach ($query as $row) {
+                $notes[] = [
+                    'matiere' => $row['matiere'],
+                    'libelle' => $row['libelle'],
+                    'commentaire' => $row['commentaire'],
+                    'note' => $row['note'],
+                    'idnote' => $row['id']
                 ];
             }
 
@@ -61,7 +62,7 @@ class NotesController {
                 'script' => [
                     'script.js'
                 ],
-                'notes' => $not,
+                'notes' => $notes,
             ];
 
             // Inclure le fichier d'en-tête
@@ -79,19 +80,19 @@ class NotesController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur'
             )
         ) {
             $sqlModel = new SqlModel();
-            $etudiants = $sqlModel->selectRequest('* FROM users WHERE level = \'etudiant\'');
+            $query = $sqlModel->SqlRequest("SELECT * FROM etudiants");
 
-            $etud = [];
+            $etudiants = [];
         
-            foreach ($etudiants as $etudiant) {
-                $etud[] = [
-                    'id' => $etudiant['id'],
-                    'nom' => $etudiant['nom'],
-                    'prenom' => $etudiant['prenom']
+            foreach ($query as $row) {
+                $etudiants[] = [
+                    'id' => $row['id'],
+                    'nom' => $row['nom'],
+                    'prenom' => $row['prenom']
                 ];
             }
 
@@ -101,19 +102,19 @@ class NotesController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'notes.css',
+                    'notesListEtudiants.css',
                 ],
                 'script' => [
                     'script.js'
                 ],
-                'etudiants' => $etud,
+                'etudiants' => $etudiants,
             ];
 
             // Inclure le fichier d'en-tête
             require 'view/header.php';
 
             // Afficher la vue avec les données
-            require 'view/listEtudiants.php';
+            require 'view/notesListEtudiants.php';
 
             // Inclure le fichier de pied de page
             require 'view/footer.php';
@@ -148,10 +149,24 @@ class NotesController {
                 isset($_GET['id'])
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur' &&
                 isset($_GET['id'])
             )
         ) {
+            $sqlModel = new SqlModel();
+
+            if ($_SESSION['level'] == 'administrateur') {
+                $query = $sqlModel->SqlRequest("SELECT id, nom, prenom FROM `enseignants`");
+            
+                $enseignant = [];
+            
+                foreach ($query as $row) {
+                    $enseignant[] = [
+                        'id' => $row['id'],
+                        'name' => $row['prenom'] . ' ' . $row['nom'],
+                    ];
+                }
+            }
 
             // Charger les données nécessaires pour la vue
             $data = [
@@ -159,11 +174,12 @@ class NotesController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'notes.css',
+                    'notesAjout.css',
                 ],
                 'script' => [
                     'script.js'
-                ]
+                ],
+                'enseignant' => $enseignant ?? null,
             ];
 
             // Inclure le fichier d'en-tête
@@ -180,19 +196,27 @@ class NotesController {
         elseif (
             (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'&&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant' &&
                 isset($_POST['idetudiant'])
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur' &&
                 isset($_POST['idetudiant'])
             )
         ) {
 
             $sqlModel = new SqlModel();
 
-            $notes = $sqlModel->addNoteRequest($_POST['idetudiant'] . ', \''  . $_POST['matiere'] . '\', \'' . $_POST['libelle'] . '\',' . $_POST['note'] . ', \'' . $_SESSION['userid'] . '\'');
-        
+            if ($_SESSION['level'] == 'enseignant') {
+                $query = $sqlModel->SqlRequest("INSERT INTO notes (etudiant_id, matiere, libelle, commentaire, note, enseignant_id) VALUES ($_POST[idetudiant], '$_POST[matiere]', '$_POST[libelle]', '$_POST[commentaire]', '$_POST[note]', '$_SESSION[userid]')");
+            }
+            else if ($_SESSION['level'] == 'administrateur') {
+                $query = $sqlModel->SqlRequest("INSERT INTO notes (etudiant_id, matiere, libelle, commentaire, note, enseignant_id) VALUES ($_POST[idetudiant], '$_POST[matiere]', '$_POST[libelle]', '$_POST[commentaire]', '$_POST[note]', '$_POST[enseignant_id]')");
+            } else {
+                header('Location: ' . URL .'/notes');
+                exit;
+            }
+
             header('Location: ' . URL .'/notes');
             exit;
         }
@@ -202,7 +226,7 @@ class NotesController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur'
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
                 isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
@@ -234,20 +258,25 @@ class NotesController {
                 isset($_GET['id'])
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur' &&
                 isset($_GET['id'])
             )
         ) {
 
             $sqlModel = new SqlModel();
 
-            $notes = $sqlModel->selectRequest('* FROM notes WHERE id = ' . $_GET['id']);
+            $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE id =  $_GET[id]");
 
-            $not = [
-                'id' => $notes[0]['id'],
-                'matiere' => $notes[0]['matiere'],
-                'libelle' => $notes[0]['libelle'],
-                'note' => $notes[0]['note'],
+            while ($row = $query->fetch_assoc()) {
+                $note[] = $row;
+            }
+
+            $note = [
+                'id' => $note[0]['id'],
+                'matiere' => $note[0]['matiere'],
+                'libelle' => $note[0]['libelle'],
+                'commentaire' => $note[0]['commentaire'],
+                'note' => $note[0]['note'],
             ];
 
 
@@ -257,12 +286,12 @@ class NotesController {
                 'style' => [
                     'header.css',
                     'footer.css',
-                    'notes.css',
+                    'notesModification.css',
                 ],
                 'script' => [
                     'script.js'
                 ],
-                'notes' => $not
+                'note' => $note
             ];
 
             // Inclure le fichier d'en-tête
@@ -283,15 +312,16 @@ class NotesController {
                 isset($_POST['idnote'])
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin' &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur' &&
                 isset($_POST['idnote'])
             )
         ) {
+            if ($_POST['commentaire'] != '') { $commentaire = '\'' . $_POST['commentaire'] . '\''; } else { $commentaire = 'NULL'; }
 
             $sqlModel = new SqlModel();
 
-            $notes = $sqlModel->updateRequest('notes SET matiere = \'' . $_POST['matiere'] . '\', libelle = \'' . $_POST['libelle'] . '\', note = ' . $_POST['note'] . ' WHERE id =' . $_POST['idnote']);
-        
+            $query = $sqlModel->SqlRequest("UPDATE notes SET matiere = '$_POST[matiere]', libelle = '$_POST[libelle]', commentaire = $commentaire, note = $_POST[note] WHERE id = $_POST[idnote]");
+
             header('Location: ' . URL .'/notes');
             exit;
         }
@@ -301,7 +331,7 @@ class NotesController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
-                isset($_SESSION['level']) && $_SESSION['level'] == 'admin'
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur'
             ) || (
                 isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
                 isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
@@ -317,6 +347,96 @@ class NotesController {
             // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
             header('Location: ' . URL .'/connexion');
             exit;
+        }
+
+    }
+
+    // Supprimer une note
+    public function supprimer() {
+        
+        session_start();
+
+        // Si les données de l'offre ont été transmises en GET (Suppression)
+        if (isset($_GET['id'])) {
+
+            // Si connecté en tant qu'enseignant
+            if (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+            ) {
+                $sqlModel = new SqlModel();
+                $query = $sqlModel->SqlRequest("DELETE FROM notes WHERE id = $_GET[id] AND enseignant_id = $_SESSION[userid]");
+
+                // Rediriger vers la liste des offres d'alternance
+                header('Location: ' . URL .'/notes');
+                exit;
+            }
+
+            // Si connecté en tant qu'administrateur
+            elseif (
+                isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur'
+            ) {
+                $sqlModel = new SqlModel();
+                // Ajouter l'offre d'alternance pour une entreprise
+                $query = $sqlModel->SqlRequest("DELETE FROM notes WHERE id = $_GET[id]");
+
+                // Rediriger vers la liste des offres d'alternance
+                header('Location: ' . URL .'/notes');
+                exit;
+            }
+            // Si connecté en tant qu'étudiant ou entreprise
+            elseif (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+                ) 
+            ) {
+                // Rediriger vers la liste des offres d'alternance
+                header('Location: ' . URL .'/offres');
+                exit;
+            }
+            // Si non connecté
+            else {
+                // Rediriger vers la page de connexion
+                header('Location: ' . URL .'/connexion');
+                exit;
+            }
+
+        }
+        // Si les données n'ont pas été transmises (Redirection)
+        else {
+            // Si connecté en tant qu'entreprise ou administrateur
+            if (
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
+                ) ||
+                (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
+                ) || (
+                    isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
+                    isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur'
+                )
+            ) {
+                // Rediriger vers la liste des offres d'alternance
+                header('Location: ' . URL .'/offres');
+                exit;
+            }
+            // Si non connecté
+            else {
+                // Rediriger vers la page de connexion
+                header('Location: ' . URL .'/connexion');
+                exit;
+            }
+
         }
 
     }

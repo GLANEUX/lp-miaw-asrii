@@ -1,10 +1,15 @@
+<!-- Formulaire pour modifier un projet -->
+<!-- Accessible uniquement pour les Entreprises ou les Admins -->
+<!-- Accessible sur /projets/edit?id=id_du_projet (Il est plus simple d'aller sur /projets/list puis "Modifier") -->
+<!-- Ne pas modifier ou supprimer les names ou les id. -->
+
 <form method="post" action="<?= URL ?>/projets/edit">
     <label>Titre
-        <input type="text" name="titre" value="<?=$data['projets']['titre']?>">
+        <input type="text" name="titre" id="titre" value="<?=$data['projets']['titre']?>">
     </label>
     <label>Description
-        <input type="text" name="description" value="<?=$data['projets']['description']?>">
+        <textarea name="description" id="description"><?=$data['projets']['description']?></textarea>
     </label>
-    <input type="hidden" name="id" value="<?=$data['projets']['id']?>">
+    <input type="hidden" name="id" id="id" value="<?=$data['projets']['id']?>">
     <input type="submit">
 </form>

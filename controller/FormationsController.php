@@ -9,7 +9,7 @@ class FormationsController {
             'header.css',
             'footer.css',
             'banner.css',
-            'formation.css'],
+            'formations.css'],
         ];
 
         // Inclure le fichier d'en-tête

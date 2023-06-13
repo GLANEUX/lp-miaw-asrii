@@ -1,4 +1,7 @@
-<!-- Contenu de la page d'accueil -->
+<!-- Page d'accueil -->
+<!-- Accessible pour tous le monde -->
+<!-- Accessible sur / -->
+
 <section id="Banner" class="banner background-image"
   style="background-image: url('<?= URL ?>/public/img/Banner-HOME.jpg')">
 
