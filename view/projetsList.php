@@ -4,9 +4,15 @@
 
 <h1>Les Projet Tuteuré</h1>
 
-<div class="contain my-3">
 
-<?php if ($_SESSION['level'] != 'etudiant') {?>
+<?php if ($_SESSION['level'] != 'entreprise') {?>
+
+<div class="contain my-3">
+<?php } else{?>
+  <div class="contain my-3" style="max-width: 70%!important;">
+
+  <?php }?>
+<?php           if (($_SESSION['level'] == 'entreprise') || ($_SESSION['level'] == 'administrateur')) { ?>
 
 <a href="<?= URL ?>/projets/add" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Ajouter un
   Projet</a>
@@ -15,7 +21,13 @@
 
 
 <a href="<?= URL ?>/home" class="see">Retour</a></div>
-<div class="container mb-5">
+<?php if ($_SESSION['level'] != 'entreprise') {?>
+  <div class="container mb-5">
+
+  <?php } else{?>
+    <div class="container mb-5" style="max-width: 70%!important;">
+
+<?php }?>
 
   <table class="table">
     <thead class="thead-dark">

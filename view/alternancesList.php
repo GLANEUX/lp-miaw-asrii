@@ -12,7 +12,8 @@
 
   <?php }?>
 
-<?php if ($_SESSION['level'] != 'etudiant') {?>
+<?php           if (($_SESSION['level'] == 'entreprise') || ($_SESSION['level'] == 'administrateur')) { ?>
+
 
 <a href="<?= URL ?>/offres/add" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Ajouter une Offre</a>
 <a class="see"> -</a>

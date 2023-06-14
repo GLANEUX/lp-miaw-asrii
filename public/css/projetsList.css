@@ -4,7 +4,7 @@ body {
   }
   
   .container {
-    max-width: 900px;
+    max-width: 90%;
     margin:auto;
     padding: 20px;
     background-color: #fff;
@@ -16,7 +16,7 @@ body {
 
 
   .contain {
-    max-width: 900px;
+    max-width: 90%;
     margin: auto;
   }
 
