@@ -3,7 +3,7 @@
 <!-- Accessible sur /supports -->
 
 <?php foreach ($data['sup'] as $sup) { ?>
-    <a href="<?= URL ?>/supports?id=<?= $sup['id'] ?>"> <?= $sup['matiere'] ?> - <?= $sup['titre'] ?> </a>
+    <a target="_blank" href="<?= URL . $data['url'] ?>"> <?= $sup['matiere'] ?> - <?= $sup['titre'] ?> </a>
 <?php } ?>
 <iframe src="<?= URL . $data['url']; ?>" ></iframe>
 <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>

@@ -3,8 +3,9 @@
 <!-- Accessible sur /emplois-du-temps -->
 
 <?php foreach ($data['edt'] as $edt) { ?>
-    <a href="<?= URL ?>/emplois-du-temps?id=<?= $edt['id'] ?>"> <?= $edt['date'] ?> </a>
-<?php } ?>
+
+    <a target="_blank" href="<?=  URL . $data['url'] ?>"> <?= $edt['date'] ?> </a>
+    <?php } ?>
 <iframe src="<?= URL . $data['url']; ?>" ></iframe>
 <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>
         <a href="<?= URL ?>/emplois-du-temps/add"> Ajouter </a>
