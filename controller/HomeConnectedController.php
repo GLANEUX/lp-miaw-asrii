@@ -6,12 +6,52 @@ class HomeConnectedController {
     public function index() {
         session_start();
 
+
+
+
+
+
+
+
+
+
+
+
         // Entreprise
         if (
             isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true &&
             isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
-        ) {
+        ) { 
+             // Récupérer les données des projets depuis la base de données
+             $sqlModel = new SqlModel();
+             $query = $sqlModel->SqlRequest("SELECT id, titre, description FROM projets WHERE entreprise_id = $_SESSION[userid]");
+ 
+             $projets = [];
+             foreach ($query as $row) {
+                 $projets[] = [
+                     'id' => $row['id'],
+                     'titre' => $row['titre'],
+                     'description' => $row['description']
+                 ];
+             }
 
+
+             
+            // Récupérer la liste des offres d'alternance de l'entreprise de la base de données
+            $sqlModel = new SqlModel();
+            $query = $sqlModel->SqlRequest("SELECT id, poste, description FROM alternances WHERE entreprise_id = $_SESSION[userid]");
+
+            // Stocker les offres d'alternance dans une variable
+            $alternances = [];
+            foreach ($query as $row) {
+                $alternances[] = [
+                    'id' => $row['id'],
+                    'poste' => $row['poste'],
+                    'description' => $row['description']
+                ];
+            }
+
+ 
             // Charger les données nécessaires pour la vue
             $data = [
                 'title' => 'Espace Entreprise',
@@ -22,7 +62,9 @@ class HomeConnectedController {
                 ],
                 'script' => [
                     'script.js'
-                ]
+                ],
+                'projets' => $projets,
+                'alternances' => $alternances,
             ];
 
             // Inclure le fichier d'en-tête
@@ -34,6 +76,24 @@ class HomeConnectedController {
             // Inclure le fichier de pied de page
             require 'view/footer.php';
         } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Etudiant
         elseif (

@@ -13,7 +13,11 @@ body {
   display: flex;
   justify-content: space-between;
 }
-
+.button:hover{
+  background-color: transparent!important;
+  color: #9678D3;
+  font-weight: 800;
+}
 .column {
   flex: 1;
   padding: 0 10px;
@@ -57,4 +61,10 @@ input[type="submit"]:hover {
 
 form {
     margin-bottom: 5%;
+}
+
+.retour{
+  color: #9678D3;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
 }

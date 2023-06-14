@@ -3,12 +3,6 @@
 <!-- Accessible sur /projets/add -->
 <!-- Ne pas modifier ou supprimer les names ou les id. -->
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Proposer un Projet Tuteuré</title>
-</head>
-<body>
 <h1>Proposer un Projet Tuteuré</h1> 
   <div class="container">
     <div class="column">
@@ -31,9 +25,7 @@
         <label for="description">Description du projet :</label>
         <textarea id="description" name="description" rows="5" placeholder="Description du projet" required></textarea>
 
-        <input type="submit" value="Envoyer">
+        <input type="submit" value="Envoyer" class="button"> <a href="<?= URL ?>/home" class="retour">Retour</a>
       </form>
     </div>
   </div>
-</body>
-</html>
