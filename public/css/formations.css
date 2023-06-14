@@ -41,6 +41,13 @@
     color: #ffffff !important; 
   }
 
+
+  .button:hover{
+    background-color: transparent !important; 
+    color: #9678D3 !important; 
+  }
+
+
   a:hover{
     color: #9678D3 !important;
   }

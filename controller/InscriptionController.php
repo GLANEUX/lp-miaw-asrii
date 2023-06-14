@@ -47,6 +47,7 @@ class InscriptionController {
                     'header.css',
                     'footer.css',
                     'inscription.css',
+                    
                 ],
                 'script' => [
                     'script.js'

@@ -290,12 +290,12 @@
             <h5 class="text-uppercase text-center titre-sidebar">Informations</h5>
         </div>
         <div class="d-flex justify-content-center p-4 border-bottom border-white border-4">
-            <a class="button btn" href="<?= URL ?>/public/img/program-licence-professionnelle-metiers-de-l-informatique-application-web.PDF">BROCHURE</a>
+            <a class="button btn" target="_blank" href="<?= URL ?>/public/img/program-licence-professionnelle-metiers-de-l-informatique-application-web.PDF">BROCHURE</a>
         </div>
         <div class="p-5">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3 class="titre-sidebar text-center">DÉPARTEMENT</h3>
-            <p><a href="https://www.iut-evry.fr/iut/les-departements/departement-geii-genie-electrique-et-informatique-industrielle//">Génie Électrique et Informatique Industrielle (GEII)</a></p>
+            <p><a href="https://www.iut-evry.fr/iut/les-departements/departement-geii-genie-electrique-et-informatique-industrielle//" target="_blank">Génie Électrique et Informatique Industrielle (GEII)</a></p>
         </div>
     </div>
 </div>

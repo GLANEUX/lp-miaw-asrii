@@ -141,9 +141,9 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 
 
       <div class="col-md-4">
-        <a href="<?= URL ?>/formations" class="none">
+        <a href="https://www.crous-versailles.fr/restaurant/ru-monseigneur-romero/" target="_blank" class="none">
           <div class="card">
-            <img src="<?= URL ?>/public/img/Formation-card-HOME.png" class="card-img-top" alt="Image 1">
+            <img src="<?= URL ?>/public/img/Crous.png" class="card-img-top" alt="Image 1">
             <div class="card-body">
               <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Monseigneur Roméro</h5>
               <p style="height:4%">Bâtiment des 1ers Cycles de l’université</p>
@@ -156,9 +156,9 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 
 
       <div class="col-md-4">
-        <a href="<?= URL ?>/campus" class="none">
+        <a href="https://www.crous-versailles.fr/restaurant/ru-le-sablier/"  target="_blank" class="none">
           <div class="card">
-            <img src="<?= URL ?>/public/img/Campus-card-HOME.jpg" class="card-img-top" alt="Image 1">
+            <img src="<?= URL ?>/public/img/Crous.png" class="card-img-top" alt="Image 1">
             <div class="card-body">
               <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Le sablier</h5>
               <p style="height:4%">Rue du père Jarlan</p>
@@ -171,10 +171,10 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 
       <div class="col-md-4">
         <a target="_blank"
-          href="<?= URL ?>/public/img/program-licence-professionnelle-metiers-de-l-informatique-application-web.PDF"
-          class="none">
+          href="https://www.crous-versailles.fr/restaurant/ru-le-boomerang/"
+          target="_blank" class="none">
           <div class="card">
-            <img src="<?= URL ?>/public/img/PDF-Card-HOME.png" class="card-img-top" alt="Image 1">
+            <img src="<?= URL ?>/public/img/Crous.png" class="card-img-top" alt="Image 1">
             <div class="card-body">
               <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Le Boomerang</h5>
               <p style="height:4%">IUT de Brétigny</p>

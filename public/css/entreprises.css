@@ -39,6 +39,11 @@
     font-weight: 600 !important;
     color: #ffffff !important; 
   }
+
+  .button:hover{
+    background-color: transparent !important; 
+    color: #9678D3 !important; 
+  }
   .entry-content {
     column-count: 2;
     column-gap: 20px;
