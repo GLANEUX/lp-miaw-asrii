@@ -60,7 +60,7 @@
   <div class="row g-5 py-3">
     <div class="col-12">
       <div class="bg-custom-black p-2 text-white">Supports de cours</div>
-      <div class="bg-white p-3">Contenu de la boîte 3</div>
+      <div class="bg-white p-3"><a href="<?= URL ?>/supports"> Supports de cours </a> </div>
     </div>
   
   </div>
@@ -136,6 +136,4 @@
   </div>
 </section>
 
-<a href="<?= URL ?>/emplois-du-temps"> Emplois du temps </a> <br />
-<a href="<?= URL ?>/notes"> Notes </a> <br />
-<a href="<?= URL ?>/supports"> Supports de cours </a> <br />
+
