@@ -1,6 +1,13 @@
 <!-- Liste et gestion des enseignants -->
 <!-- Accessible uniquement pour les Admins -->
 <!-- Accessible sur /users/list/enseignant -->
+<h1>Les enseignant</h1>
+
+<div class="contain my-3">
+<a  href="<?= URL ?>/users/add/enseignant" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Ajouter un
+enseignant</a>
+<a href="<?= URL ?>/home" class="see">Retour</a></div>
+<div class="container mb-5">
 
 <table class="table">
   <thead class="thead-dark">
@@ -29,4 +36,4 @@
 
 
 
-<style>header{ display: none;} footer{display: none;}</style>
+</div>

@@ -10,7 +10,7 @@
 <section class="bg-custom-grey px-5 py-3">
   <div class="row g-5 py-3">
     <div class="col-8">
-      <div class="bg-custom-black p-2 text-white">Mes notes</div>
+      <div class="bg-custom-black p-2 text-white">Mes notes <a  href="<?= URL ?>/notes" class="see-more" > - voir plus</a></div>
       <div class="bg-white p-3">
         <table class="table">
           <thead class="thead-dark">
@@ -45,7 +45,9 @@
 
     </div>
     <div class="col-4">
-      <div class="bg-custom-black p-2 text-white">Emplois du temps</div>
+    
+    <div class="col-12 mb-3">
+      <div class="bg-custom-black p-2 text-white">Emplois du temps <a  href="<?= URL ?>/emplois-du-temps" class="see-more" > - voir plus</a></div>
       <div class="bg-white p-3">
         <ul>
         <?php foreach ($data['edt'] as $edt) { ?>
@@ -56,19 +58,45 @@
 
       </div>
     </div>
-  </div>
-  <div class="row g-5 py-3">
+
+
     <div class="col-12">
-      <div class="bg-custom-black p-2 text-white">Supports de cours</div>
-      <div class="bg-white p-3"><a href="<?= URL ?>/supports"> Supports de cours </a> </div>
+      <div class="bg-custom-black p-2 text-white">Supports de cours <a  href="<?= URL ?>/supports" class="see-more" > - voir plus</a></div>
+      <div class="bg-white p-3">
+        
+      <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Matière</th>
+             
+              <th>titre</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach ($data['sup'] as $sup) { ?>
+              <tr>
+                <td>
+                <?= $sup['matiere'] ?>
+                </td>
+           
+                <td>
+                <a target="_blank" href="<?= URL . $data['url_s'] ?>"> <?= $sup['titre'] ?> </a>
+                </td>
+                
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table></div>
     </div>
-  
+    </div>
   </div>
+
 
 
   <div class="row g-5 py-3">
     <div class="col-6">
-      <div class="bg-custom-black p-2 text-white">Projet tuteuré</div>
+      <div class="bg-custom-black p-2 text-white">Projet tuteuré <a  href="<?= URL ?>/projets/list" class="see-more" > - voir plus</a></div>
       <div class="bg-white p-3">
         <table class="table">
           <thead class="thead-dark">
@@ -102,7 +130,7 @@
       </div>
     </div>
     <div class="col-6">
-      <div class="bg-custom-black p-2 text-white">Offres d'alternance</div>
+      <div class="bg-custom-black p-2 text-white">Offres d'alternance <a  href="<?= URL ?>/offres" class="see-more" > - voir plus</a></div>
       <div class="bg-white p-3">
         <table class="table">
           <thead class="thead-dark">

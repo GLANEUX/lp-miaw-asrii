@@ -9,11 +9,132 @@
   </div>
 </section>
 <section class="bg-custom-grey px-5 py-3">
- 
+  <div class="row g-5 py-3">
+    <div class="col-5">
+      <div class="bg-custom-black p-2 text-white">Mes notes <a href="<?= URL ?>/notes" class="see-more"> - voir plus</a>
+      </div>
+      <div class="bg-white p-3">
 
-<div class="row g-5 py-3">
+
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Consulter</th>
+              <th>Ajouter</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($data['etudiants'] as $etudiant) { ?>
+              <tr>
+                <td>
+                  <?= $etudiant['nom'] ?>
+                </td>
+
+                <td>
+                  <?= $etudiant['prenom'] ?>
+                </td>
+                <td><a href="<?= URL ?>/notes?id=<?= $etudiant['id'] ?>" class="btn btn-primary btn-sm">Consulter les
+                    notes</a></td>
+                <td><a href="<?= URL ?>/notes/add?id=<?= $etudiant['id'] ?>" class="btn btn-success btn-sm">Ajouter une
+                    note</a></td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+
+
+
+      </div>
+
+    </div>
+
+
+    <div class="col-4">
+      <div class="bg-custom-black p-2 text-white">Supports de cours <a href="<?= URL ?>/supports" class="see-more"> -
+          voir plus</a></div>
+      <div class="bg-white p-3">
+
+
+      
+<table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Matière</th>
+             
+              <th>titre</th>
+               <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach ($data['sup'] as $sup) { ?>
+              <tr>
+                <td>
+                <?= $sup['matiere'] ?>
+                </td>
+           
+                <td>
+                <a target="_blank" href="<?= URL . $data['url_s'] ?>"> <?= $sup['titre'] ?> </a>
+                </td>
+           
+                 <td>  
+            <a href="<?= URL ?>/supports/delete?id=<?= $sup['id'] ?>" class="btn btn-danger btn-sm"> Supprimer </a>
+            
+                 </td>
+                <?php } ?>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+
+    <div class="col-3">
+
+
+      <div class="bg-custom-black p-2 text-white">Emplois du temps <a href="<?= URL ?>/emplois-du-temps"
+          class="see-more"> - voir plus</a></div>
+      <div class="bg-white p-3">
+
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($data['edt'] as $edt) { ?>
+              <tr>
+                <td>
+                  <a target="_blank" href="<?= URL . $data['url'] ?>"> <?= $edt['date'] ?> </a>
+                </td>
+
+                <td>
+                  <a href="<?= URL ?>/emplois-du-temps/delete?id=<?= $edt['id'] ?>" class="btn btn-danger btn-sm">
+                    Supprimer </a>
+                </td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="row g-5 py-3">
     <div class="col-6">
-      <div class="bg-custom-black p-2 text-white">Projet tuteuré</div>
+      <div class="bg-custom-black p-2 text-white">Projet tuteuré <a href="<?= URL ?>/projets/list" class="see-more"> -
+          voir plus</a></div>
       <div class="bg-white p-3">
         <table class="table">
           <thead class="thead-dark">
@@ -47,7 +168,8 @@
       </div>
     </div>
     <div class="col-6">
-      <div class="bg-custom-black p-2 text-white">Offres d'alternance</div>
+      <div class="bg-custom-black p-2 text-white">Offres d'alternance <a href="<?= URL ?>/offres" class="see-more"> -
+          voir plus</a></div>
       <div class="bg-white p-3">
         <table class="table">
           <thead class="thead-dark">
@@ -82,9 +204,3 @@
 </section>
 </section>
 
-
-
-
-<a href="<?= URL ?>/emplois-du-temps"> Emplois du temps </a> <br />
-<a href="<?= URL ?>/notes"> Notes </a> <br />
-<a href="<?= URL ?>/supports"> Supports de cours </a> <br />
