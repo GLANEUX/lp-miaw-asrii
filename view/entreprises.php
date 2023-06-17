@@ -220,7 +220,7 @@
 
         </div>
         <div class="d-flex justify-content-center ">
-            <a class="button btn" href="<?= URL ?>/inscription"><h5>Inscription</h5></a>
+            <a class="button btn"href="<?= URL ?>/inscription" ><h5>Inscription</h5></a>
         </div>
       
     </div>

@@ -4,24 +4,43 @@
 <!-- Accessible sur /notes?id=id_de_l_etudiant pour les enseignants ou admins (Il est plus simple d'aller sur /notes puis "Consulter les notes") -->
 
 <h1> Test Notes </h1>
-<table>
-    <thead>
-        <tr>
-            <th colspan="2">Notes</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($data['notes'] as $note) { ?>
+
+<div class="contain my-3" style="max-width: 50%!important;">
+<a href="<?= URL ?>/home" class="see">Retour</a></div>
+<div class="container mb-5" style="max-width: 50%!important;">
+
+<table class="table">
+          <thead class="thead-dark">
             <tr>
-                <td><?= $note['matiere'] ?></td>
-                <td><?= $note['libelle'] ?></td>
-                <td><?= $note['note'] ?></td>
-                <td><pre><?= $note['commentaire'] ?></pre></td>
-                <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>
-                    <td><a href="<?= URL ?>/notes/edit?id=<?= $note['idnote'] ?>"> Modifier </a></td>
-                    <td><a href="<?= URL ?>/notes/delete?id=<?= $note['idnote'] ?>"> Supprimer </a></td>
+              <th>Matière</th>
+              <th>libelle</th>
+              <th>note</th>
+              <th>commentaire</th>
+              <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>
+               <th>Actions</th>
                 <?php } ?>
             </tr>
-        <?php } ?>
-    </tbody>
-</table>
+          </thead>
+          <tbody>
+            <?php foreach ($data['notes'] as $note) { ?>
+              <tr>
+                <td>
+                  <?= $note['matiere'] ?>
+                </td>
+                <td>
+                  <?= $note['libelle'] ?>
+                </td>
+                <td>
+                  <?= $note['note'] ?>
+                </td>
+                <td>
+                  <pre><?= $note['commentaire'] ?></pre>
+                </td>
+                <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>
+                    <td><a href="<?= URL ?>/notes/edit?id=<?= $note['idnote'] ?>" class="btn btn-primary btn-sm"> Modifier </a> <a href="<?= URL ?>/notes/delete?id=<?= $note['idnote'] ?>" class="btn btn-danger btn-sm"> Supprimer </a></td>
+                <?php } ?>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+</div>

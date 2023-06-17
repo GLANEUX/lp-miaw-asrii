@@ -44,7 +44,7 @@ class SupportsController {
 
             // Charger les données nécessaires pour la vue
             $data = [
-                'title' => 'Emploi du temps',
+                'title' => 'Support de cours',
                 'style' => [
                     'header.css',
                     'footer.css',
@@ -100,7 +100,7 @@ class SupportsController {
 
             // Charger les données nécessaires pour la vue
             $data = [
-                'title' => 'Emploi du temps',
+                'title' => 'Support de cours',
                 'style' => [
                     'header.css',
                     'footer.css',

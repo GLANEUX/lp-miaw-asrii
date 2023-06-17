@@ -353,7 +353,7 @@ class AlternancesController {
                 ");
 
                 // Rediriger vers la gestion des offres d'alternance
-                header('Location: ' . URL .'/alternances');
+                header('Location: ' . URL .'/offres');
                 exit;
             }
 
@@ -370,7 +370,7 @@ class AlternancesController {
                 ");
 
                 // Rediriger vers la gestion des offres d'alternance
-                header('Location: ' . URL .'/alternances');
+                header('Location: ' . URL .'/offres');
                 exit;
             }
             // Si connecté en tant qu'étudiant ou enseignant

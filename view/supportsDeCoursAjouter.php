@@ -2,6 +2,9 @@
 <!-- Accessible sur /supports/add -->
 <!-- Ne pas modifier ou supprimer les names ou les id. -->
 
+<h1> Modifier support</h1> 
+  <div class="container">
+    <div class="column">
 <form method="post" enctype="multipart/form-data" action="<?= URL ?>/supports/add">
     <label>Matière
         <input type="text" name="matiere" id="matiere" >
@@ -21,5 +24,11 @@
     <label>Fichier
         <input type="file" name="sup" id="sup" >
     </label>
-    <input type="submit">
+    <input type="submit" value="Envoyer" class="button"> <a href="<?= URL ?>/home" class="retour">Retour</a>
 </form>
+
+
+
+</div>
+  </div>
+

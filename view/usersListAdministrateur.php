@@ -1,6 +1,15 @@
 <!-- Liste et gestion des administrateurs -->
 <!-- Accessible uniquement pour les Admins -->
 <!-- Accessible sur /users/list/administrateur -->
+<h1>Les admin</h1>
+
+<div class="contain my-3">
+
+<a  href="<?= URL ?>/users/add/administrateur" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Ajouter un
+administrateur</a>
+<a class="see"> -</a>
+<a href="<?= URL ?>/home" class="see">Retour</a></div>
+<div class="container mb-5">
 
 <table class="table">
   <thead class="thead-dark">
@@ -24,7 +33,7 @@
     <?php } ?>
   </tbody>
 </table>
+</div>
 
 
 
-<style>header{ display: none;} footer{display: none;}</style>

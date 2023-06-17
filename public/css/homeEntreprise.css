@@ -4,10 +4,19 @@
   font-weight: 600;
   text-decoration: none;
   text-decoration: none;
+  color: white;
 }
 
 .button-font:hover{
   color: #9678D3;
   background-color: transparent;
   background-color: transparent;
+}
+
+.see{
+  color: #9678D3;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: larger;
 }
