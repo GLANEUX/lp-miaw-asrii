@@ -27,6 +27,7 @@ $routes = [
     URL . '/emplois-du-temps' => ['EDTController', 'index'],
     URL . '/emplois-du-temps/add' => ['EDTController', 'ajouter'],
     URL . '/emplois-du-temps/delete' => ['EDTController', 'supprimer'],
+    URL . '/rgpd' => ['RGPDController', 'index'],
     URL . '/users' => ['UsersController', 'index'],
     URL . '/users/add' => ['UsersController', 'ajouter'],
     URL . '/users/add/etudiant' => ['UsersController', 'ajouterEtudiant'],
