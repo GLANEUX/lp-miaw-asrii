@@ -46,6 +46,9 @@
           <p style="text-align:right">
 L'Université d'Évry met à disposition une plateforme de logement spécialement conçue pour les ASRII. Cette plateforme permet de rechercher des locations en France et à l'étranger, de constituer des colocations et d'accéder à des chambres temporaires. Les résidences CROUS à Évry-Courcouronnes proposent des logements adaptés aux ASRII ayant des besoins spécifiques en termes de mobilité réduite.
           </p>
+          
+          
+        </div>
         <div class="col-lg-4" style="float:left">
           
           <img src="<?= URL ?>/public/img/logement_crous.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;border-radius:8px">
