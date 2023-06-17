@@ -34,16 +34,3 @@
   strong{
     color: #9678D3
   }
-  .skew-c{
-    width:100%;
-    height:100px;
-    position:absolute;
-    left:0px;
-    background: linear-gradient(to left bottom, #fff 49%, #823A9C 50%);
-  }
-  .colour-block {
-    background:#823A9C;
-    width:60%;
-    padding:7% 20% 10% 20%;
-    color:#fff;
-  }
