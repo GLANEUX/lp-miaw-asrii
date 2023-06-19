@@ -86,7 +86,7 @@
                 <p class="text-justify">La reproduction de tout ou partie de ce site sur un support électronique est au torisée pour un usage privé sous réserve de l’ajout de façon claire et lisible de la source et de la mention « Droits réservés ». Les informations utilisées ne doivent l’être qu’à des fins personnelles, associatives ou professionnelles ; toute utilisation à des fins commerciales ou publicitaires est exclue. La mise à disposition sur un serveur est interdite.
                 </p>
 
-                <h4 class="font-weight-bold mb-3" style="font-weight:800;">La création de liens vers <a href="ww.iut-evry.fr" style="color:orange">www.iut-evry.fr</a></h4>
+                <h4 class="font-weight-bold mb-3" style="font-weight:800;">La création de liens vers <a href="https://www.iut-evry.fr" target="_blank" style="color:orange">www.iut-evry.fr</a></h4>
                 <p class="text-justify">Le site de l’IUT d’Evry-Val-d’Essonne au torise la mise en place d’un lien hypertexte pointant vers son contenu, sous réserve de :
                 </p>
                 <ul>

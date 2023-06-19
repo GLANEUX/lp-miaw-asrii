@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-4" style="float:right">
           
-          <img src="<?= URL ?>/public/img/etudiant.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;margin-top:3%;border-radius:8px">
+          <img src="<?= URL ?>/public/img/etudiant.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;margin-top:3%;border-radius:8px;float:right">
           
         </div>
     </div>
@@ -66,7 +66,7 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 
 
       <div class="col-md-4">
-        <a href="<?= URL ?>/formations" class="none">
+      <a href="https://www.crous-versailles.fr/restaurant/ru-monseigneur-romero/" target="_blank" class="none">
           <div class="card" style="text-align:center">
             <img src="<?= URL ?>/public/img/Restaurant-Universitaire-Monseigneur-Romero.jpg" class="card-img-top" alt="Image 1">
             <div class="card-body">
@@ -81,7 +81,7 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 
 
       <div class="col-md-4">
-        <a href="<?= URL ?>/campus" class="none">
+      <a href="https://www.crous-versailles.fr/restaurant/ru-le-sablier/"  target="_blank" class="none">
           <div class="card" style="text-align:center">
             <img src="<?= URL ?>/public/img/Le_Sablier.jpg" class="card-img-top" alt="Image 1">
             <div class="card-body">
@@ -95,9 +95,10 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
       </div>
 
       <div class="col-md-4">
-        <a target="_blank"
-          href="<?= URL ?>/public/img/program-licence-professionnelle-metiers-de-l-informatique-application-web.PDF"
-          class="none">
+        
+      <a target="_blank"
+          href="https://www.crous-versailles.fr/restaurant/ru-le-boomerang/"
+          target="_blank" class="none">
           <div class="card" style="text-align:center">
             <img src="<?= URL ?>/public/img/site_bretigny_leboomerang.jpg" class="card-img-top" alt="Image 1">
             <div class="card-body">
