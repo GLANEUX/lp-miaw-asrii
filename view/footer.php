@@ -27,20 +27,20 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;padding-top:12%">LIENS</h3>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;padding-top:12%;text-align:left">LIENS</h3>
 
-        <ul class="list-unstyled">
+        <ul class="list-unstyled" style="text-align:left">
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 1</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="<?= URL ?>">Accueil</a>
           </li>
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 2</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="<?= URL ?>/formations">Formation</a>
           </li>
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 3</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="<?= URL ?>/campus">Campus</a>
           </li>
           <li>
-            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="#!">Link 4</a>
+            <a class="link-light link-offset-2 link-underline link-underline-opacity-0" href="<?= URL ?>/entreprises">Espace entreprise</a>
           </li>
         </ul>
 
