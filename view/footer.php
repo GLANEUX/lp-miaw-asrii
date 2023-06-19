@@ -27,7 +27,7 @@
       <div class="col-md-3 mx-auto">
 
         <!-- LIENS -->
-        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;padding-top:12%;text-align:left">LIENS</h3>
+        <h3 class="font-weight-bold text-uppercase mt-3 mb-4" style="color:white;padding-top:12%;text-align:left">Navigation</h3>
 
         <ul class="list-unstyled" style="text-align:left">
           <li>

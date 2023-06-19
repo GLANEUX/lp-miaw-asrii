@@ -8,4 +8,7 @@
   .row-with{width:100%}
   
   /* FIN FOOTER */
+  .link-light:hover{
+    color: #9678D3 !important;
+  }
   

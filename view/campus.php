@@ -16,9 +16,7 @@
 <div class="row mt-5" style="justify-content:center;margin:0">
 <img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1" style="max-width:30%;text-align:center">
 
-<p style="padding:5%;text-align:center">Le campus de la formation ASRII à l'Université d'Évry est riche et diversifié, à l'image des étudiantes et étudiants qui la composent. Les chercheuses, chercheurs et artistes qui y participent forment une communauté ouverte, caractérisée par une grande diversité sociale, culturelle et géographique.
-
-Situé au cœur d'Évry, ce campus dédié à la formation ASRII offre un environnement unique, avec une offre large d'activités spécifiquement adaptées à cette filière. Les étudiants bénéficient d'un cadre propice à leur développement académique et professionnel, avec des opportunités sportives, culturelles et festives qui enrichissent leur expérience tout au long de leur formation.
+<p style="padding:5%;text-align:center">Le campus de la formation ASRII à l'Université d'Évry est un lieu diversifié et dynamique, rassemblant des étudiants, chercheurs et artistes issus de divers horizons. Situé au cœur d'Évry, il offre un environnement propice à la formation ASRII, avec des activités variées adaptées à cette filière. Les étudiants y bénéficient d'un cadre stimulant, favorisant leur développement académique et professionnel, tout en offrant des opportunités sportives, culturelles et festives pour enrichir leur expérience.
 </p>
 </div>
 </section>
@@ -27,14 +25,14 @@ Situé au cœur d'Évry, ce campus dédié à la formation ASRII offre un enviro
     <div class="row mb-3 mt-3" style="display:inline-block; margin:0;">
         <div class="col-lg-6" style="float:left;color:white">
           
-          <h2>Etudiants</h2>
+          <h2 class="mb-2">Etudiants</h2>
           <p style="text-align:left">Étudiant·e à l'Université d'Évry et engagé·e dans la vie associative, sociale ou professionnelle ? Demandez la validation de compétences acquises dans ces activités (bonus de 0,5 point maximum, dispense de stage ou enseignement). Une seule validation par cycle de formation (licence, master) est possible, indépendamment de l'année universitaire. La dispense concerne les matières ou stages du deuxième semestre.</p>
           
           
         </div>
         <div class="col-lg-4" style="float:right">
           
-          <img src="<?= URL ?>/public/img/etudiant.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;margin-top:3%;border-radius:8px">
+          <img src="<?= URL ?>/public/img/etudiant.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;margin-top:3%;border-radius:8px;float:right">
           
         </div>
     </div>
@@ -44,7 +42,7 @@ Situé au cœur d'Évry, ce campus dédié à la formation ASRII offre un enviro
     <div class="row mb-3 mt-3" style="display:inline-block; margin:0">
         <div class="col-lg-6" style="float:right;color:white">
           
-          <h2 style="text-align:right">Logements</h2>
+          <h2 style="text-align:right" class="mb-2">Logements</h2>
           <p style="text-align:right">
 L'Université d'Évry met à disposition une plateforme de logement spécialement conçue pour les ASRII. Cette plateforme permet de rechercher des locations en France et à l'étranger, de constituer des colocations et d'accéder à des chambres temporaires. Les résidences CROUS à Évry-Courcouronnes proposent des logements adaptés aux ASRII ayant des besoins spécifiques en termes de mobilité réduite.
           </p>
@@ -60,79 +58,6 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 </div>
 </section>
 
-
-
-
-
-<!-- <div class="row">
-<p style="padding:5%;text-align:center">Le campus de la formation ASRII à l'Université d'Évry est riche et diversifié, à l'image des étudiantes et étudiants qui la composent. Les chercheuses, chercheurs et artistes qui y participent forment une communauté ouverte, caractérisée par une grande diversité sociale, culturelle et géographique.
-
-Situé au cœur d'Évry, ce campus dédié à la formation ASRII offre un environnement unique, avec une offre large d'activités spécifiquement adaptées à cette filière. Les étudiants bénéficient d'un cadre propice à leur développement académique et professionnel, avec des opportunités sportives, culturelles et festives qui enrichissent leur expérience tout au long de leur formation.
-</p>
-</div>
-<div class="container-fluid" >
-    <div class="row" style="display:flex;justify-content:space-around;text-align:center">
-        <div class="col-lg-4" style="border:4px solid; padding:3%">
-          <h2>Etudiants</h2>
-          <p>Étudiant·e à l'Université d'Évry et engagé·e dans la vie associative, sociale ou professionnelle ? Demandez la validation de compétences acquises dans ces activités (bonus de 0,5 point maximum, dispense de stage ou enseignement). Une seule validation par cycle de formation (licence, master) est possible, indépendamment de l'année universitaire. La dispense concerne les matières ou stages du deuxième semestre.</p>
-          
-        <ul style="text-align:left">
-          <li>Élus étudiants dans les conseils de l'Université d'Évry ou du CROUS</li>
-          <li>Service civique</li>
-          <li>Militaires dans la réserve professionnelle</li>
-          <li>Volontaires dans les armées</li>
-          <li>Sapeurs-pompiers volontaires</li>
-          <li>Activité professionnelle : salariée, travail indépendant, entrepreneur</li>
-          <li>Bénévoles au sein d'une association régie par la loi du 1er juillet 1901</li>
-          <li>Autres engagements à examiner par la commission</li>
-        </ul>
-
-          <button type="button" class="btn btn-outline-secondary"><a href="https://sphinx4.univ-evry.fr/UEVE/Engagement_etudiant_22-23/depot_demande.htm">Candidater</a></button>
-          
-        </div>
-        <div class="col-lg-4" style="border:4px solid; padding:3%">
-          <h2>Logements</h2>
-          <p>
-L'Université d'Évry met à disposition une plateforme de logement spécialement conçue pour les ASRII. Cette plateforme permet de rechercher des locations en France et à l'étranger, de constituer des colocations et d'accéder à des chambres temporaires. Les résidences CROUS à Évry-Courcouronnes proposent des logements adaptés aux ASRII ayant des besoins spécifiques en termes de mobilité réduite.
-          </p>
-          <ul style="text-align:left">
-          <li>
-            <h5>RÉSIDENCE FLORA TRISTAN</h5>
-            <ul>
-              <li>1 rue Jules Vallès, 91000 Evry-Courcouronnes</li>
-              <li>Évry-Courcouronnes (RER D)</li>
-            </ul>
-          </li>
-          <li>
-            <h5>RÉSIDENCE LES AUNETTES</h5>
-            <ul>
-              <li>1 impasse de Prédecelle, 91000 Evry-Courcouronnes</li>
-              <li>Evry-Courcouronnes (RER D)</li>
-            </ul>
-          </li>
-          <li>
-            <h5>RÉSIDENCE LE DRAGUEUR</h5>
-            <ul>
-              <li>4, allée Jean Rostand, 91000 Evry-Courcouronnes</li>
-              <li>Evry-Courcouronnes (RER D)</li>
-            </ul>
-          </li>
-          <li>
-            <h5>RÉSIDENCE MARGUERITE YOURCENAR</h5>
-            <ul>
-              <li>15, rue André Lalande, 91000 Evry-Courcouronnes</li>
-              <li>Evry-Courcouronnes (RER D)</li>
-            </ul>
-          </li>
-        </ul>
-          
-          <button type="button" class="btn btn-outline-secondary">Secondary</button>
-          
-        </div>
-    </div>
-</div>
-
--->
 <section id="Card">
   <div class="container py-5">
     <h2 class="txt-font text-center py-3 ">RESTAURATION</h2>
@@ -141,14 +66,14 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 
 
       <div class="col-md-4">
-        <a href="https://www.crous-versailles.fr/restaurant/ru-monseigneur-romero/" target="_blank" class="none">
-          <div class="card">
-            <img src="<?= URL ?>/public/img/Crous.png" class="card-img-top" alt="Image 1">
+      <a href="https://www.crous-versailles.fr/restaurant/ru-monseigneur-romero/" target="_blank" class="none">
+          <div class="card" style="text-align:center">
+            <img src="<?= URL ?>/public/img/Restaurant-Universitaire-Monseigneur-Romero.jpg" class="card-img-top" alt="Image 1">
             <div class="card-body">
               <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Monseigneur Roméro</h5>
-              <p style="height:4%">Bâtiment des 1ers Cycles de l’université</p>
-              <p style="height:4%">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height:4%">Self traditionnel/grillades/pizzas</p>
+              <p style="height:4%;margin:0;">Bâtiment des 1ers Cycles de l’université</p>
+              <p style="height:4%;margin:0;">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height:4%;margin:0;">Self traditionnel/grillades/pizzas</p>
             </div>
           </div>
         </a>
@@ -156,30 +81,31 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
 
 
       <div class="col-md-4">
-        <a href="https://www.crous-versailles.fr/restaurant/ru-le-sablier/"  target="_blank" class="none">
-          <div class="card">
-            <img src="<?= URL ?>/public/img/Crous.png" class="card-img-top" alt="Image 1">
+      <a href="https://www.crous-versailles.fr/restaurant/ru-le-sablier/"  target="_blank" class="none">
+          <div class="card" style="text-align:center">
+            <img src="<?= URL ?>/public/img/Le_Sablier.jpg" class="card-img-top" alt="Image 1">
             <div class="card-body">
               <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Le sablier</h5>
-              <p style="height:4%">Rue du père Jarlan</p>
-              <p style="height:4%">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height:4%">Self traditionnel/ligne express/grillade</p>
+              <p style="height:4%;margin:0;">Rue du père Jarlan</p>
+              <p style="height:4%;margin:0;">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height:4%;margin:0;">Self traditionnel/ligne express/grillade</p>
             </div>
           </div>
         </a>
       </div>
 
       <div class="col-md-4">
-        <a target="_blank"
+        
+      <a target="_blank"
           href="https://www.crous-versailles.fr/restaurant/ru-le-boomerang/"
           target="_blank" class="none">
-          <div class="card">
-            <img src="<?= URL ?>/public/img/Crous.png" class="card-img-top" alt="Image 1">
+          <div class="card" style="text-align:center">
+            <img src="<?= URL ?>/public/img/site_bretigny_leboomerang.jpg" class="card-img-top" alt="Image 1">
             <div class="card-body">
               <h5 class="card-title text-center" style="text-decoration:none">Restaurant Universitaire Le Boomerang</h5>
-              <p style="height:4%">IUT de Brétigny</p>
-              <p style="height:4%">Du lundi au vendredi de 11h30 à 14h</p>
-              <p style="height:4%">Self traditionnel/Cafétéria</p>
+              <p style="height:4%;margin:0;">IUT de Brétigny</p>
+              <p style="height:4%;margin:0;">Du lundi au vendredi de 11h30 à 14h</p>
+              <p style="height:4%;margin:0;">Self traditionnel/Cafétéria</p>
             </div>
           </div>
         </a>
