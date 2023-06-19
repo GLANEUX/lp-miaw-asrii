@@ -1,5 +1,5 @@
 <!-- Page formations -->
-<!-- Accessible pour tous le monde -->
+<!-- Accessible pour tout le monde -->
 <!-- Accessible sur /formations -->
 
 <section class="banner background-image" style="background-image: url('<?= URL ?>/public/img/Banner-formation.jpg')">
@@ -293,9 +293,22 @@
             <a class="button btn" target="_blank" href="<?= URL ?>/public/img/program-licence-professionnelle-metiers-de-l-informatique-application-web.PDF">BROCHURE</a>
         </div>
         <div class="p-5">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <h3 class="titre-sidebar text-center">DÉPARTEMENT</h3>
-            <p><a href="https://www.iut-evry.fr/iut/les-departements/departement-geii-genie-electrique-et-informatique-industrielle//" target="_blank">Génie Électrique et Informatique Industrielle (GEII)</a></p>
+            <i class="fa-solid fa-graduation-cap text-light mb-3 fs-3"></i>
+            <h3 class="titre-sidebar">DÉPARTEMENT</h3>
+            <p><a href="https://www.iut-evry.fr/iut/les-departements/departement-geii-genie-electrique-et-informatique-industrielle//" target="_blank" class="text-decoration-none text-violet">Génie Électrique et Informatique Industrielle (GEII)</a></p>
+        </div>
+        <div class="p-5">
+            <i class="fa-regular fa-envelope-open text-light mb-3 fs-3"></i>
+            <h3 class="titre-sidebar">RESPONSABLE(S)</h3>
+            <p class="text-secondary">Khalifa Djemal</p>
+            <p><a href="mailto:k.djemal@iut.univ-evry.fr" target="_blank" class="text-decoration-none text-violet">k.djemal@iut.univ-evry.fr</a></p>
+        </div>
+        <div class="p-5">
+        <i class="fa-regular fa-envelope-open text-light mb-3 fs-3"></i>
+            <h3 class="titre-sidebar fs-5">CONTACT(S)</h3>
+            <p class="text-secondary">Marie OCARIZ</p>
+            <p><a href="mailto:m.ocariz@iut.univ-evry.fr" target="_blank" class="text-decoration-none text-violet">m.ocariz@iut.univ-evry.fr</a></p>
+            <p><a href="tel:01 69 47 72 21" target="_blank" class="text-decoration-none text-violet">01 69 47 72 21</a></p>
         </div>
     </div>
 </div>
