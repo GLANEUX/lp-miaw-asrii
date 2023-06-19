@@ -51,6 +51,9 @@ class HomeConnectedController {
                 ];
             }
 
+            $query = $sqlModel->SqlRequest("SELECT societe FROM entreprises WHERE id = $_SESSION[userid]");
+            foreach ($query as $row) { $nom = $row['societe']; }
+                
  
             // Charger les données nécessaires pour la vue
             $data = [
@@ -65,6 +68,7 @@ class HomeConnectedController {
                 ],
                 'projets' => $projets,
                 'alternances' => $alternances,
+                'nom' => $nom
             ];
 
             // Inclure le fichier d'en-tête
@@ -223,6 +227,9 @@ class HomeConnectedController {
                 ];
             }
 
+            
+            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM etudiants WHERE id = $_SESSION[userid]");
+            foreach ($query as $row) { $nom = $row['prenom'] . ' ' . $row['nom']; }
 
             // Charger les données nécessaires pour la vue
             $data = [
@@ -242,6 +249,7 @@ class HomeConnectedController {
                 'url' => $url,
                 'sup' => $sup,
                 'url_s' => $url_s,
+                'nom' => $nom
 
 
 
@@ -390,6 +398,10 @@ class HomeConnectedController {
             } else {
                 $url_s = $supports[0]['url'];
             }
+
+            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM enseignants WHERE id = $_SESSION[userid]");
+            foreach ($query as $row) { $nom = $row['prenom'] . ' ' . $row['nom']; }
+
             // Charger les données nécessaires pour la vue
             $data = [
                 'title' => 'Espace Enseignant',
@@ -408,6 +420,7 @@ class HomeConnectedController {
                 'url' => $url,
                 'sup' => $sup,
                 'url_s' => $url_s,
+                'nom' => $nom
                 
             ];
 
@@ -551,6 +564,11 @@ class HomeConnectedController {
             } else {
                 $url_s = $supports[0]['url'];
             }
+
+            
+            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM administrateurs WHERE id = $_SESSION[userid]");
+            foreach ($query as $row) { $nom = $row['prenom'] . ' ' . $row['nom']; }
+
             // Charger les données nécessaires pour la vue
             $data = [
                 'title' => 'Espace Administrateur',
@@ -569,6 +587,7 @@ class HomeConnectedController {
                 'url' => $url,
                 'sup' => $sup,
                 'url_s' => $url_s,
+                'nom' => $nom
             ];
 
             // Inclure le fichier d'en-tête

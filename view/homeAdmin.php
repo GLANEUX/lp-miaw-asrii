@@ -4,7 +4,7 @@
 
 <section class="bg-custom-grey p-4 pb-0">
   <div class=" py-2 px-3 rounded bg-white">
-    <h2>Bienvenue - Admin</h2>
+    <h2>Bienvenue - <?= $data['nom'] ?></h2>
   </div>
 </section>
 
