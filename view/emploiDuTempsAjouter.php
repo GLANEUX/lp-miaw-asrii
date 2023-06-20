@@ -3,7 +3,7 @@
 <!-- Accessible sur /emplois-du-temps/add -->
 
 
-<h1>Proposer un EDT</h1> 
+<h1>Déposer un EDT</h1> 
   <div class="container">
     <div class="column">
       <form method="post" enctype="multipart/form-data" action="<?= URL ?>/emplois-du-temps/add">

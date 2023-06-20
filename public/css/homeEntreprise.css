@@ -20,3 +20,13 @@
   font-weight: 700;
   font-size: larger;
 }
+
+.see-more{
+  color: #9678d3;
+  text-decoration: none;
+}
+
+.see-more:hover{
+  color: #9678d3;
+  text-decoration:underline;
+}

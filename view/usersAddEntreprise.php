@@ -3,10 +3,10 @@
 <!-- Accessible sur /users/add/entreprise -->
 <!-- Ne pas modifier ou supprimer les names ou les id. -->
 
-<h1>Proposer un Projet Tuteuré</h1> 
+<h1>Ajouter une entreprise</h1> 
   <div class="container">
     <div class="column">
-<form method="POST" action="">
+<form method="POST" action="<?= URL ?>/users/add/entreprise" >
   <input type="text" placeholder="Dénomination sociale"  name="societe" id="societe" required>
   <input type="number" placeholder="SIRET"  name="siret" id="siret" required>
   <input type="text" placeholder="Adresse"  name="adresse" id="adresse" required>

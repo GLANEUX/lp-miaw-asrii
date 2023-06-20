@@ -2,7 +2,7 @@
 <!-- Accessible uniquement pour les Enseignants ou les Admins -->
 <!-- Accessible sur /notes/add?id=id_de_l_etudiant (Il est plus simple d'aller sur /notes puis "Ajouter une note") -->
 <!-- Ne pas modifier ou supprimer les names ou les id. -->
-<h1>Proposer une note</h1> 
+<h1>Ajouter une note</h1> 
   <div class="container">
     <div class="column">
 <form method="post" action="<?= URL ?>/notes/add">

@@ -12,11 +12,14 @@
 <div class="row g-5 py-3">
 <div class="col-12">
 <div class="bg-custom-black p-2 text-white">utilisateurs   </div>
-<div class="bg-white p-3">
-<a href="<?= URL ?>/users/list/entreprise"  class="btn btn-primary btn-sm"> Lister les entreprises </a>
-<a href="<?= URL ?>/users/list/enseignant" class="btn btn-primary btn-sm"> Lister les enseignants </a>
-<a href="<?= URL ?>/users/list/administrateur" class="btn btn-primary btn-sm"> Lister les administrateurs </a>
-<a href="<?= URL ?>/users/list/etudiant" class="btn btn-primary btn-sm"> Lister les etudiant </a>
+<div class="bg-white p-3" style="
+    display: flex;
+    justify-content: space-around;
+">
+<a href="<?= URL ?>/users/list/entreprise"  class="btn btn-primary btn-sm list"> Lister les entreprises </a>
+<a href="<?= URL ?>/users/list/enseignant" class="btn btn-primary btn-sm list"> Lister les enseignants </a>
+<a href="<?= URL ?>/users/list/administrateur" class="btn btn-primary btn-sm list"> Lister les administrateurs </a>
+<a href="<?= URL ?>/users/list/etudiant" class="btn btn-primary btn-sm list"> Lister les etudiant </a>
 
 </div>
 </div>

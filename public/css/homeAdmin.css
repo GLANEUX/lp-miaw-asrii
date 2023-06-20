@@ -1,0 +1,45 @@
+.button-font{
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: x-large;
+    font-weight: 600;
+    text-decoration: none;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .button-font:hover{
+    color: #9678D3;
+    background-color: transparent;
+    background-color: transparent;
+  }
+  
+  .see{
+    color: #9678D3;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: larger;
+  }
+  
+  .see-more{
+    color: #9678d3;
+    text-decoration: none;
+  }
+  
+  .see-more:hover{
+    color: #9678d3;
+    text-decoration:underline;
+  }
+
+  .list{
+    background: #9678d3;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: larger;
+    border: none;
+  }
+
+  .list:hover{
+    background-color: #675390;
+  }

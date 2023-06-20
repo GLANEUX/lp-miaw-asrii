@@ -3,7 +3,7 @@
 <!-- Accessible sur /notes pour les étudiants -->
 <!-- Accessible sur /notes?id=id_de_l_etudiant pour les enseignants ou admins (Il est plus simple d'aller sur /notes puis "Consulter les notes") -->
 
-<h1> Test Notes </h1>
+<h1> Visualisation des Notes </h1>
 
 <div class="contain my-3" style="max-width: 50%!important;">
 <a href="<?= URL ?>/home" class="see">Retour</a></div>

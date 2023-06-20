@@ -1,7 +1,7 @@
 <!-- Liste et gestion des administrateurs -->
 <!-- Accessible uniquement pour les Admins -->
 <!-- Accessible sur /users/list/administrateur -->
-<h1>Les admin</h1>
+<h1>Les Administrateurs</h1>
 
 <div class="contain my-3">
 
@@ -27,6 +27,8 @@ administrateur</a>
         <td><?= $administrateurs['prenom'] ?></td>
         <td><?= $administrateurs['email'] ?></td>
         <td>
+        <a href="<?= URL ?>/users/edit/administrateur?id=<?= $administrateurs['id'] ?>" class="btn btn-primary btn-sm">Modifier</a>
+
           <a href="<?= URL ?>/users/list/administrateur?id=<?= $administrateurs['id'] ?>" class="btn btn-danger btn-sm">Supprimer</a>
         </td>
       </tr>

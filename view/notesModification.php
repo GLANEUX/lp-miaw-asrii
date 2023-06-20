@@ -3,7 +3,7 @@
 <!-- Accessible sur /notes/edit?id=id_de_la_note (Il est plus simple d'aller sur /notes puis "Consulter les notes" puis "Modifier") -->
 <!-- Ne pas modifier ou supprimer les names ou les id. -->
 
-<h1>modif une note</h1> 
+<h1>Modifier une note</h1> 
   <div class="container">
     <div class="column">
 <form method="post" action="<?= URL ?>/notes/edit">

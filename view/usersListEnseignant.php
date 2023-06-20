@@ -1,7 +1,7 @@
 <!-- Liste et gestion des enseignants -->
 <!-- Accessible uniquement pour les Admins -->
 <!-- Accessible sur /users/list/enseignant -->
-<h1>Les enseignant</h1>
+<h1>Les Enseignants</h1>
 
 <div class="contain my-3">
 <a  href="<?= URL ?>/users/add/enseignant" class="bg-custom-purple txt-color-black button-font py-2 px-3 rounded">Ajouter un
@@ -27,6 +27,7 @@ enseignant</a>
         <td><?= $enseignants['adresse'] . ', '. $enseignants['code_postal'] . ' ' . $enseignants['ville'] ?></td>
         <td><?= $enseignants['email'] ?></td>
         <td>
+        <a href="<?= URL ?>/users/edit/enseignant?id=<?= $enseignants['id'] ?>" class="btn btn-primary btn-sm">Modifier</a>
           <a href="<?= URL ?>/users/list/enseignant?id=<?= $enseignants['id'] ?>" class="btn btn-danger btn-sm">Supprimer</a>
         </td>
       </tr>

@@ -371,10 +371,8 @@ class HomeConnectedController {
             }
             $url = $emploisdutemps[0]['url'];
 
-
-
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("SELECT * FROM supports");
+            $query = $sqlModel->SqlRequest("SELECT * FROM supports WHERE enseignant_id = $_SESSION[userid]");
 
             $supports = [];
             while ($row = $query->fetch_assoc()) {
@@ -390,7 +388,7 @@ class HomeConnectedController {
             }
 
             if (isset($_GET['id'])) {
-                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id=' . $_GET['id']);
+                $query = $sqlModel->SqlRequest("SELECT url FROM supports WHERE id= $_GET[id] AND enseignant_id = $_SESSION[userid]");
                 while ($row = $query->fetch_assoc()) {
                     $supporturl[] = $row;
                 }
@@ -398,7 +396,6 @@ class HomeConnectedController {
             } else {
                 $url_s = $supports[0]['url'];
             }
-
             $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM enseignants WHERE id = $_SESSION[userid]");
             foreach ($query as $row) { $nom = $row['prenom'] . ' ' . $row['nom']; }
 

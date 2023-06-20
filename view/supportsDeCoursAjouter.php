@@ -2,7 +2,7 @@
 <!-- Accessible sur /supports/add -->
 <!-- Ne pas modifier ou supprimer les names ou les id. -->
 
-<h1> Modifier support</h1> 
+<h1> Modifier le support de cours</h1> 
   <div class="container">
     <div class="column">
 <form method="post" enctype="multipart/form-data" action="<?= URL ?>/supports/add">
