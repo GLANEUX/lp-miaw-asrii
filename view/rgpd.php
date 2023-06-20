@@ -6,6 +6,9 @@
     <h1 class="">Politique de</h1>
     <h2 class="txt-font">CONFIDENTIALITE</h2>
   </div>
+  <div class="logo-banner">
+  <img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1">
+  </div>
 </section>
 
 <div class="tab-pane fade show active p-5" id="presentation">

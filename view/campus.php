@@ -10,18 +10,23 @@
     <h1 class="">Vie de</h1>
     <h2 class="txt-font">CAMPUS</h2>
   </div>
+  <div class="logo-banner">
+  <img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1">
+  </div>
 </section>
 
 <section>
 <div class="row mt-5" style="justify-content:center;margin:0">
-<img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1" style="max-width:30%;text-align:center">
+<img src="<?= URL ?>/public/img/logo_evry.png" class="card-img-top" alt="Image 1" style="max-width:30%;text-align:center;width: 50%;
+    margin: auto;
+    margin-top: 10px;">
 
 <p style="padding:5%;text-align:center">Le campus de la formation ASRII à l'Université d'Évry est un lieu diversifié et dynamique, rassemblant des étudiants, chercheurs et artistes issus de divers horizons. Situé au cœur d'Évry, il offre un environnement propice à la formation ASRII, avec des activités variées adaptées à cette filière. Les étudiants y bénéficient d'un cadre stimulant, favorisant leur développement académique et professionnel, tout en offrant des opportunités sportives, culturelles et festives pour enrichir leur expérience.
 </p>
 </div>
 </section>
 <section>
-<div class="container-fluid" style="background-color:#101820">
+<div class="container-fluid " style="background-color:#101820;padding:5%">
     <div class="row mb-3 mt-3" style="display:inline-block; margin:0;">
         <div class="col-lg-6" style="float:left;color:white">
           
@@ -32,7 +37,9 @@
         </div>
         <div class="col-lg-4" style="float:right">
           
-          <img src="<?= URL ?>/public/img/etudiant.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;margin-top:3%;border-radius:8px;float:right">
+          <img src="<?= URL ?>/public/img/etudiant.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;margin-top:3%;border-radius:8px;float:right;width: 60%;
+    margin: auto;
+    margin-top: 10px;">
           
         </div>
     </div>
@@ -51,7 +58,9 @@ L'Université d'Évry met à disposition une plateforme de logement spécialemen
         </div>
         <div class="col-lg-4" style="float:left">
           
-          <img src="<?= URL ?>/public/img/logement_crous.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;border-radius:8px">
+          <img src="<?= URL ?>/public/img/logement_crous.jpg" class="card-img-top" alt="Image 1" style="margin-bottom: 3%;border-radius:8px;width: 60%;
+    margin: auto;
+    margin-top: 10px;">
           
         </div>
     </div>

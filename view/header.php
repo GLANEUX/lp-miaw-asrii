@@ -40,16 +40,16 @@
       <div class="collapse navbar-collapse w-60 justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="<?= URL ?>">ACCUEIL</a>
+            <a class="nav-link" id="accueil" href="<?= URL ?>">ACCUEIL</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-3" href="<?= URL ?>/formations">FORMATION</a>
+            <a class="nav-link mx-3" id="formations" href="<?= URL ?>/formations">FORMATION</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-3" href="<?= URL ?>/campus">CAMPUS</a>
+            <a class="nav-link mx-3" id="campus" href="<?= URL ?>/campus">CAMPUS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL ?>/entreprises">ESPACE ENTREPRISE</a>
+            <a class="nav-link" id="entreprises" href="<?= URL ?>/entreprises">ESPACE ENTREPRISE</a>
           </li>
          
 
@@ -74,7 +74,7 @@
             if (isset($_SESSION['is_logged_in']) && isset($_SESSION['level']) && $_SESSION['is_logged_in'] == true && $_SESSION['level'] !== null) { ?>
               <a href="<?= URL ?>/deconnexion" class="nav-link"> Déconnexion </a>
             <?php } else { ?>
-              <a href="<?= URL ?>/connexion" class="nav-link"> Connexion </a>
+              <a href="<?= URL ?>/connexion" id="connexion" class="nav-link"> Connexion </a>
             <?php }
             ?>
           </li>
@@ -83,3 +83,4 @@
       </div>
     </nav>
   </header>
+  
