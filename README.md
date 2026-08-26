@@ -2,6 +2,12 @@
 
 Site web de la **Licence Professionnelle MIAW / ASRII** de l'IUT d'Évry (Université d'Évry Paris-Saclay) : vitrine de la formation (formations, campus, entreprises partenaires, alternance) et espace connecté pour les administrateurs, enseignants, étudiants et entreprises.
 
+## Aperçu
+
+![Démonstration du site : pages publiques, connexion et espaces par rôle](docs/captures/demo.gif)
+
+*Démonstration accélérée (×3). Version vidéo complète : [`docs/captures/demo.mp4`](docs/captures/demo.mp4) (1 min 40, 1280 px).*
+
 ## Contexte
 
 - **Quand** : mai – juin 2023 (premier commit le 11 mai 2023, dernier le 20 juin 2023).
