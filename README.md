@@ -1,92 +1,156 @@
-# LP-MIAW-ASRII
+# site-licence-pro-miaw-asrii — site de la Licence Pro MIAW / ASRII
 
-hello
+Site web de la **Licence Professionnelle MIAW / ASRII** de l'IUT d'Évry (Université d'Évry Paris-Saclay) : vitrine de la formation (formations, campus, entreprises partenaires, alternance) et espace connecté pour les administrateurs, enseignants, étudiants et entreprises.
 
-## Getting started
+## Contexte
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- **Quand** : mai – juin 2023 (premier commit le 11 mai 2023, dernier le 20 juin 2023).
+- **Cadre** : projet de fin d'année de la **Licence Professionnelle MIAW / ASRII** (Métiers de l'Informatique : Applications Web / Administration et Sécurité des Réseaux et des Infrastructures Informatiques) à l'**IUT d'Évry**, réalisé pour le compte de la formation elle-même, à partir d'un cahier des charges fourni par l'équipe pédagogique (`public/supports_de_cours/Site_Web_LP-MIAW-ASR2I_Spécifications_fonctionnelle.pdf`).
+- **Équipe** : 5 étudiants, dont Océane Glaneux (auteure principale du dépôt : ~55 % des commits). Travail en équipe sur GitLab (`asrii-site/lp-miaw-asrii`), branches par personne puis fusion dans `main`.
+- **Objectif pédagogique** : concevoir de A à Z un site vitrine + espace membres multi-rôles en **PHP sans framework** (architecture MVC écrite à la main, routeur maison, mysqli), avec gestion des utilisateurs, des notes, des offres d'alternance, des supports de cours et des emplois du temps.
+- **Depuis** : dépôt mirroré sur GitHub (`GLANEUX`) le 26 août 2026 puis réhabilité le même jour (voir « Statut ») pour qu'il tourne à nouveau, en une commande, avec les failles de sécurité d'origine corrigées.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Statut
 
-## Add your files
+**Fonctionnel** — réhabilité le 2026-08-26.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Le projet ne démarrait plus (configuration et `.htaccess` non versionnés, aucun schéma SQL, chemin Windows en dur dans un `require`). Il tourne à nouveau en local et via Docker ; un parcours de 47 vérifications automatisées (pages publiques, inscription, connexion des 4 rôles, contrôle d'accès, uploads, injections SQL/XSS) passe sur la stack Docker sans aucun warning PHP.
+
+Ce qui a été fait lors de la réhabilitation :
+
+- Configuration : `conf.example.php` (local) et `conf.docker.php` (variables d'environnement), `.htaccess.example`, `router.php` pour le serveur PHP intégré.
+- Base de données : schéma reconstitué depuis le code (`sql/01-schema.sql`, 10 tables avec clés étrangères) + jeu de démo (`sql/02-seed.sql`).
+- Sécurité : toutes les requêtes contenant des entrées utilisateur passent par des **requêtes préparées** (`SqlModel::SqlRequest($sql, $params)`) ; échappement HTML systématique dans les vues via le helper `e()` ; uploads filtrés (liste blanche d'extensions, vérification MIME, nom aléatoire, 20 Mo max) et **exécution PHP désactivée dans `public/`** ; correction d'un bug qui laissait une entreprise non confirmée se connecter ; `session_regenerate_id` au login, cookies `HttpOnly`/`SameSite` ; erreurs loguées et jamais affichées.
+- Compatibilité PHP 8 : sessions conditionnelles, tableaux initialisés, `?>` finaux retirés (ils cassaient les redirections de login).
+- Front : logo cassé corrigé, une seule version de Bootstrap (5.3.3) chargée.
+
+Fonctionnalités :
+
+- Pages publiques : accueil, formations, entreprises, campus, alternances, RGPD.
+- Inscription des entreprises (compte à confirmer par un administrateur), connexion par e-mail ou nom d'utilisateur.
+- 4 rôles : `administrateur` (gestion des utilisateurs), `entreprise` (offres d'alternance, projets), `enseignant` (notes des étudiants, supports de cours, emplois du temps), `etudiant` (consultation).
+- Upload de fichiers (supports de cours, emplois du temps).
+
+## Stack
+
+- **PHP >= 8.0** (testé avec 8.3), extension `mysqli` — aucune dépendance Composer.
+- **MySQL / MariaDB** (MariaDB 11 en Docker).
+- Architecture MVC maison : `index.php` (front-controller) → `routes.php` → `controller/*Controller.php` → `view/*.php`.
+- Front : Bootstrap 5.3.3 et Font Awesome via CDN, CSS par page dans `public/css/`.
+
+## Prérequis
+
+- Docker >= 24 et Docker Compose v2 (voie recommandée), **ou**
+- PHP >= 8.0 avec `mysqli` + un serveur MySQL/MariaDB (et Apache avec `mod_rewrite` si vous n'utilisez pas `php -S`).
+
+## Lancement via Docker (recommandé)
+
+```powershell
+cd lp-miaw-asrii
+Copy-Item .env.example .env      # adapter les mots de passe si besoin
+docker compose up -d --build
+```
+
+Le site est disponible sur <http://localhost:8080>.
+
+- Service `web` : `php:8.3-apache` + `mysqli` + `mod_rewrite`, port `8080` → `80`.
+- Service `db` : `mariadb:11`, données dans le volume `db_data`. Les fichiers de `sql/` sont chargés **au premier démarrage uniquement**. Le port MySQL n'est pas publié (décommenter dans `docker-compose.yml` pour y accéder depuis l'hôte).
+- Les fichiers uploadés sont persistés via des bind mounts sur `public/supports_de_cours` et `public/emplois_du_temps`.
+
+Arrêt : `docker compose down` — ajouter `-v` pour supprimer la base et la recréer depuis `sql/` au prochain démarrage.
+
+## Installation & lancement en local
+
+1. Créer la base et charger le schéma (+ la démo si souhaité) :
+
+   ```powershell
+   mysql -u root -p -e "CREATE DATABASE asrii CHARACTER SET utf8mb4; CREATE USER 'asrii'@'localhost' IDENTIFIED BY 'changez-moi'; GRANT ALL ON asrii.* TO 'asrii'@'localhost';"
+   Get-Content sql\01-schema.sql | mysql -u asrii -p asrii
+   Get-Content sql\02-seed.sql   | mysql -u asrii -p asrii
+   ```
+
+2. Copier la configuration et renseigner les identifiants :
+
+   ```powershell
+   Copy-Item conf.example.php conf.php
+   ```
+
+   La constante `URL` est le préfixe de chemin : `''` si le site est servi à la racine, `'/lp-miaw-asrii'` s'il est dans un sous-dossier (XAMPP par exemple).
+
+3. Lancer avec le serveur PHP intégré :
+
+   ```powershell
+   php -S localhost:8000 router.php
+   ```
+
+   puis ouvrir <http://localhost:8000>.
+
+   Alternative Apache : copier `.htaccess.example` en `.htaccess` à la racine du projet et pointer un VirtualHost (ou un sous-dossier `htdocs`) sur ce répertoire, avec `AllowOverride All`.
+
+## Comptes de démonstration
+
+Créés par `sql/02-seed.sql`, mot de passe commun **`Demo1234!`** :
+
+| Identifiant  | Rôle           |
+|--------------|----------------|
+| `admin`      | administrateur |
+| `enseignant` | enseignant     |
+| `etudiant`   | étudiant       |
+| `entreprise` | entreprise (confirmée) |
+
+À supprimer ou modifier avant toute mise en ligne réelle.
+
+## Variables d'environnement
+
+Utilisées par la stack Docker (`.env`, lu par `docker-compose.yml`, puis par `conf.docker.php`). Modèle : `.env.example`. Ne jamais commiter `.env` ni `conf.php`.
+
+| Variable           | Rôle                                                        | Exemple        |
+|--------------------|-------------------------------------------------------------|----------------|
+| `DB_HOST`          | Hôte MySQL (nom du service compose)                         | `db`           |
+| `DB_PORT`          | Port MySQL                                                  | `3306`         |
+| `DB_NAME`          | Nom de la base                                              | `asrii`        |
+| `DB_USER`          | Utilisateur applicatif                                      | `asrii`        |
+| `DB_PASSWORD`      | Mot de passe de l'utilisateur applicatif                    | `change-me`    |
+| `DB_ROOT_PASSWORD` | Mot de passe root MariaDB (conteneur `db` uniquement)       | `change-me`    |
+| `APP_URL_PREFIX`   | Préfixe d'URL si servi dans un sous-dossier (vide à la racine) | *(vide)*    |
+
+En local, les mêmes valeurs sont définies comme constantes dans `conf.php` (`URL`, `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT`).
+
+## Structure du projet
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/asrii-site/lp-miaw-asrii.git
-git branch -M main
-git push -uf origin main
+lp-miaw-asrii/
+├── index.php              # front-controller : routage, helper e(), chargement de conf
+├── routes.php             # table URL → [Contrôleur, action]
+├── router.php             # routeur pour `php -S`
+├── conf.example.php       # modèle de configuration locale (→ conf.php, ignoré par Git)
+├── conf.docker.php        # configuration via variables d'environnement (Docker)
+├── .htaccess.example      # réécriture Apache (→ .htaccess)
+├── controller/            # 15 contrôleurs (Home, Connexion, Inscription, Users, Notes,
+│                          #   Alternances, Projets, Supports, EDT, RGPD…)
+├── model/
+│   ├── SqlModel.php       # connexion mysqli partagée, requêtes préparées, validation d'upload
+│   └── ConnexionModel.php # classe User : recherche multi-tables, login
+├── view/                  # 40 vues PHP, header.php / footer.php partagés
+├── public/
+│   ├── css/, img/, js/    # assets statiques
+│   ├── supports_de_cours/ # uploads enseignants (gitignoré, .gitkeep)
+│   └── emplois_du_temps/  # uploads enseignants (gitignoré, .gitkeep)
+├── sql/
+│   ├── 01-schema.sql      # 10 tables : adresses, administrateurs, enseignants, etudiants,
+│   │                      #   entreprises, alternances, projets, notes, supports, emplois_du_temps
+│   └── 02-seed.sql        # données de démo
+├── Dockerfile             # php:8.3-apache, mysqli, rewrite, PHP désactivé dans public/
+├── docker-compose.yml     # services web + db
+└── .env.example
 ```
 
-## Integrate with your tools
+## Tests
 
-- [ ] [Set up project integrations](https://gitlab.com/asrii-site/lp-miaw-asrii/-/settings/integrations)
+Aucun test automatisé n'est versionné. La validation de la réhabilitation a été faite avec un script Playwright externe (47 vérifications) — voir `TODO.md` pour son intégration au dépôt.
 
-## Collaborate with your team
+Vérification syntaxique rapide :
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+```powershell
+Get-ChildItem -Recurse -Filter *.php | ForEach-Object { php -l $_.FullName }
+```

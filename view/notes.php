@@ -25,19 +25,19 @@
             <?php foreach ($data['notes'] as $note) { ?>
               <tr>
                 <td>
-                  <?= $note['matiere'] ?>
+                  <?= e($note['matiere']) ?>
                 </td>
                 <td>
-                  <?= $note['libelle'] ?>
+                  <?= e($note['libelle']) ?>
                 </td>
                 <td>
-                  <?= $note['note'] ?>
+                  <?= e($note['note']) ?>
                 </td>
                 <td>
-                  <pre><?= $note['commentaire'] ?></pre>
+                  <pre><?= e($note['commentaire']) ?></pre>
                 </td>
                 <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>
-                    <td><a href="<?= URL ?>/notes/edit?id=<?= $note['idnote'] ?>" class="btn btn-primary btn-sm"> Modifier </a> <a href="<?= URL ?>/notes/delete?id=<?= $note['idnote'] ?>" class="btn btn-danger btn-sm"> Supprimer </a></td>
+                    <td><a href="<?= URL ?>/notes/edit?id=<?= e($note['idnote']) ?>" class="btn btn-primary btn-sm"> Modifier </a> <a href="<?= URL ?>/notes/delete?id=<?= e($note['idnote']) ?>" class="btn btn-danger btn-sm"> Supprimer </a></td>
                 <?php } ?>
               </tr>
             <?php } ?>

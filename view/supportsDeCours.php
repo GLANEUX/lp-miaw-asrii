@@ -30,19 +30,19 @@
           <?php foreach ($data['sup'] as $sup) { ?>
               <tr>
                 <td>
-                <?= $sup['matiere'] ?>
+                <?= e($sup['matiere']) ?>
                 </td>
            
                 <td>
-                <a target="_blank" href="<?= URL . $data['url'] ?>"> <?= $sup['titre'] ?> </a>
+                <a target="_blank" href="<?= e(URL . $data['url']) ?>"> <?= e($sup['titre']) ?> </a>
                 </td>
                 <td>
 
-<iframe src="<?= URL . $data['url']; ?>" ></iframe>
+<iframe src="<?= e(URL . $data['url']) ?>" ></iframe>
 </td>
 <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>
                  <td>  
-            <a href="<?= URL ?>/supports/delete?id=<?= $sup['id'] ?>" class="btn btn-danger btn-sm"> Supprimer </a>
+            <a href="<?= URL ?>/supports/delete?id=<?= e($sup['id']) ?>" class="btn btn-danger btn-sm"> Supprimer </a>
             
                  </td>
                 <?php } ?>

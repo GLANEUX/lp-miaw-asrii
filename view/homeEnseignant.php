@@ -5,7 +5,7 @@
 
 <section class="bg-custom-grey p-4 pb-0">
   <div class=" py-2 px-3 rounded bg-white">
-    <h2>Bienvenue - <?= $data['nom'] ?></h2>
+    <h2>Bienvenue - <?= e($data['nom']) ?></h2>
   </div>
 </section>
 <section class="bg-custom-grey px-5 py-3">
@@ -30,15 +30,15 @@
             <?php foreach ($data['etudiants'] as $etudiant) { ?>
               <tr>
                 <td>
-                  <?= $etudiant['nom'] ?>
+                  <?= e($etudiant['nom']) ?>
                 </td>
 
                 <td>
-                  <?= $etudiant['prenom'] ?>
+                  <?= e($etudiant['prenom']) ?>
                 </td>
-                <td><a href="<?= URL ?>/notes?id=<?= $etudiant['id'] ?>" class="btn btn-primary btn-sm">Consulter les
+                <td><a href="<?= URL ?>/notes?id=<?= e($etudiant['id']) ?>" class="btn btn-primary btn-sm">Consulter les
                     notes</a></td>
-                <td><a href="<?= URL ?>/notes/add?id=<?= $etudiant['id'] ?>" class="btn btn-success btn-sm">Ajouter une
+                <td><a href="<?= URL ?>/notes/add?id=<?= e($etudiant['id']) ?>" class="btn btn-success btn-sm">Ajouter une
                     note</a></td>
               </tr>
             <?php } ?>
@@ -72,15 +72,15 @@
           <?php foreach ($data['sup'] as $sup) { ?>
               <tr>
                 <td>
-                <?= $sup['matiere'] ?>
+                <?= e($sup['matiere']) ?>
                 </td>
            
                 <td>
-                <a target="_blank" href="<?= URL . $data['url_s'] ?>"> <?= $sup['titre'] ?> </a>
+                <a target="_blank" href="<?= e(URL . $data['url_s']) ?>"> <?= e($sup['titre']) ?> </a>
                 </td>
            
                  <td>  
-            <a href="<?= URL ?>/supports/delete?id=<?= $sup['id'] ?>" class="btn btn-danger btn-sm"> Supprimer </a>
+            <a href="<?= URL ?>/supports/delete?id=<?= e($sup['id']) ?>" class="btn btn-danger btn-sm"> Supprimer </a>
             
                  </td>
                 <?php } ?>
@@ -112,11 +112,11 @@
             <?php foreach ($data['edt'] as $edt) { ?>
               <tr>
                 <td>
-                  <a target="_blank" href="<?= URL . $data['url'] ?>"> <?= $edt['date'] ?> </a>
+                  <a target="_blank" href="<?= e(URL . $data['url']) ?>"> <?= e($edt['date']) ?> </a>
                 </td>
 
                 <td>
-                  <a href="<?= URL ?>/emplois-du-temps/delete?id=<?= $edt['id'] ?>" class="btn btn-danger btn-sm">
+                  <a href="<?= URL ?>/emplois-du-temps/delete?id=<?= e($edt['id']) ?>" class="btn btn-danger btn-sm">
                     Supprimer </a>
                 </td>
               </tr>
@@ -149,10 +149,10 @@
             <?php foreach ($data['projets'] as $projet) { ?>
               <tr>
                 <td>
-                  <?= $projet['titre'] ?>
+                  <?= e($projet['titre']) ?>
                 </td>
                 <td>
-                  <pre><?= $projet['description'] ?></pre>
+                  <pre><?= e($projet['description']) ?></pre>
                 </td>
                 <td>
                   <a href="<?= URL ?>/projets/list" class="btn btn-primary btn-sm">Voir plus</a>
@@ -184,10 +184,10 @@
             <?php foreach ($data['alternances'] as $alternances) { ?>
               <tr>
                 <td>
-                  <?= $alternances['poste'] ?>
+                  <?= e($alternances['poste']) ?>
                 </td>
                 <td>
-                  <pre><?= $alternances['description'] ?></pre>
+                  <pre><?= e($alternances['description']) ?></pre>
                 </td>
 
                 <td>

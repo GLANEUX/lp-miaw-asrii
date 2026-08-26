@@ -1,2 +1,15 @@
-.htaccess
+# Configuration locale (contient les identifiants BDD)
 conf.php
+.htaccess
+.env
+.env.*
+!.env.example
+
+# Fichiers uploadés par les utilisateurs
+public/supports_de_cours/*
+public/emplois_du_temps/*
+!public/supports_de_cours/.gitkeep
+!public/emplois_du_temps/.gitkeep
+
+.DS_Store
+Thumbs.db

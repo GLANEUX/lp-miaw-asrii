@@ -6,7 +6,7 @@
 <section class="co">
 <form method="POST" action="" class="login row">
     <?php if (isset($error)) { ?>
-        <p><?= $error ?></p>
+        <p><?= e($error) ?></p>
     <?php } ?>
     <h1 class="txt-font">INSCRIPTION</h1>
   <input class="col-6" type="text" placeholder="Dénomination sociale"  name="societe" id="societe" required>

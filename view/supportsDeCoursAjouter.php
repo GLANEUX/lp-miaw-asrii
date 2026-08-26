@@ -16,7 +16,7 @@
         <label>Enseignant
             <select name="enseignant" id="enseignant">
                 <?php foreach ($data['enseignant'] as $enseignant) { ?>
-                    <option value="<?= $enseignant['id'] ?>"><?= $enseignant['name'] ?></option>
+                    <option value="<?= e($enseignant['id']) ?>"><?= e($enseignant['name']) ?></option>
                 <?php } ?>
             </select>
         </label>

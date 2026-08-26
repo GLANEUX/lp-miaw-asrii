@@ -31,15 +31,15 @@
           <?php foreach ($data['edt'] as $edt) { ?>
               <tr>
               <td>
-                <a target="_blank" href="<?=  URL . $data['url'] ?>"> <?= $edt['date'] ?> </a>
+                <a target="_blank" href="<?= e(URL . $data['url']) ?>"> <?= e($edt['date']) ?> </a>
                 </td>
                 <td>
 
-                <iframe src="<?= URL . $data['url']; ?>" ></iframe>
+                <iframe src="<?= e(URL . $data['url']) ?>" ></iframe>
 </td>
 <?php if ( ($_SESSION['level'] == 'enseignant') || ($_SESSION['level'] == 'administrateur')) { ?>
                  <td>  
-            <a href="<?= URL ?>/emplois-du-temps/delete?id=<?= $edt['id'] ?>" class="btn btn-danger btn-sm"> Supprimer </a>
+            <a href="<?= URL ?>/emplois-du-temps/delete?id=<?= e($edt['id']) ?>" class="btn btn-danger btn-sm"> Supprimer </a>
                  </td>
                 <?php } ?>
               </tr>

@@ -1,0 +1,14 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+README.md
+TODO.md
+.env
+.env.*
+conf.php
+.htaccess
+sql/
+.DS_Store
+Thumbs.db

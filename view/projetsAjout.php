@@ -13,7 +13,7 @@
             <label>Entreprise
                 <select name="entreprise_id" id="entreprise_id">
                     <?php foreach ($data['entreprises'] as $entreprises) { ?>
-                        <option value="<?= $entreprises['id'] ?>"><?= $entreprises['name'] ?></option>
+                        <option value="<?= e($entreprises['id']) ?>"><?= e($entreprises['name']) ?></option>
                     <?php } ?>
                 </select>
             </label>

@@ -1,11 +1,11 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 
 class InscriptionController {
     public function index() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
         if (isset($_SESSION['is_logged_in'])) {
             header('Location: ' . URL .'/home');
             exit;
@@ -21,19 +21,20 @@ class InscriptionController {
             isset($_POST['password'])
         ) {
 
-            if ($_POST['complement'] != '') { $complement = '\'' . $_POST['complement'] . '\''; } else { $complement = 'NULL'; }
+            $complement = (($_POST['complement'] ?? '') !== '') ? $_POST['complement'] : null;
 
             $sqlModel = new SqlModel();
 
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES ('$_POST[adresse]', $complement, '$_POST[code_postal]', '$_POST[ville]')");
-            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = '$_POST[adresse]' AND code_postal = '$_POST[code_postal]' AND ville = '$_POST[ville]'");
+            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES (?, ?, ?, ?)", [$_POST['adresse'], $complement, $_POST['code_postal'], $_POST['ville']]);
+            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = ? AND code_postal = ? AND ville = ?", [$_POST['adresse'], $_POST['code_postal'], $_POST['ville']]);
+            $adresse_id = [];
             while ($row = $query->fetch_assoc()) {
                 $adresse_id[] = $row;
             }
-            $adresse_id = $adresse_id[0]['id'];
-            $query = $sqlModel->SqlRequest("INSERT INTO entreprises (societe, siret, adresse_id, numero, email, username, password) VALUES ('$_POST[societe]', '$_POST[siret]', $adresse_id, '$_POST[numero]', '$_POST[email]', '$_POST[username]', '$password')");
+            $adresse_id = $adresse_id[0]['id'] ?? null;
+            $query = $sqlModel->SqlRequest("INSERT INTO entreprises (societe, siret, adresse_id, numero, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)", [$_POST['societe'], $_POST['siret'], $adresse_id, $_POST['numero'], $_POST['email'], $_POST['username'], $password]);
         
             header('Location: ' . URL .'/home');
             exit;
@@ -66,6 +67,3 @@ class InscriptionController {
         }
     }
 }
-?>
-
-

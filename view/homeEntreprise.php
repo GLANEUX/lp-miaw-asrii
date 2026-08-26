@@ -4,7 +4,7 @@
 
 <section class="bg-custom-grey p-4 pb-0">
     <div class=" py-2 px-3 rounded bg-white">
-        <h2>Bienvenue - <?= $data['nom'] ?></h2>
+        <h2>Bienvenue - <?= e($data['nom']) ?></h2>
     </div>
 </section>
 <section class="bg-custom-grey px-5 py-3">
@@ -34,16 +34,16 @@
                         <?php foreach ($data['projets'] as $projet) { ?>
                             <tr>
                                 <td>
-                                    <?= $projet['titre'] ?>
+                                    <?= e($projet['titre']) ?>
                                 </td>
                                 <td>
-                                    <pre><?= $projet['description'] ?></pre>
+                                    <pre><?= e($projet['description']) ?></pre>
                                 </td>
 
                                 <td>
-                                    <a href="<?= URL ?>/projets/edit?id=<?= $projet['id'] ?>"
+                                    <a href="<?= URL ?>/projets/edit?id=<?= e($projet['id']) ?>"
                                         class="btn btn-primary btn-sm">Modifier</a>
-                                    <a href="<?= URL ?>/projets/delete?id=<?= $projet['id'] ?>"
+                                    <a href="<?= URL ?>/projets/delete?id=<?= e($projet['id']) ?>"
                                         class="btn btn-danger btn-sm">Supprimer</a>
                                 </td>
                             </tr>
@@ -74,16 +74,16 @@
                         <?php foreach ($data['alternances'] as $alternances) { ?>
                             <tr>
                                 <td>
-                                    <?= $alternances['poste'] ?>
+                                    <?= e($alternances['poste']) ?>
                                 </td>
                                 <td>
-                                    <pre><?= $alternances['description'] ?></pre>
+                                    <pre><?= e($alternances['description']) ?></pre>
                                 </td>
 
                                 <td>
-                                    <a href="<?= URL ?>/offres/edit?id=<?= $alternances['id'] ?>"
+                                    <a href="<?= URL ?>/offres/edit?id=<?= e($alternances['id']) ?>"
                                         class="btn btn-primary btn-sm">Modifier</a>
-                                    <a href="<?= URL ?>/offres/delete?id=<?= $alternances['id'] ?>"
+                                    <a href="<?= URL ?>/offres/delete?id=<?= e($alternances['id']) ?>"
                                     class="btn btn-danger btn-sm">Supprimer</a>
                                 </td>
                             </tr>

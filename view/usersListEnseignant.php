@@ -22,12 +22,12 @@ enseignant</a>
   <tbody>
     <?php foreach ($data['enseignants'] as $enseignants) { ?>
       <tr>
-        <td><?= $enseignants['nom'] ?></td>
-        <td><?= $enseignants['prenom'] ?></td>
-        <td><?= $enseignants['adresse'] . ', '. $enseignants['code_postal'] . ' ' . $enseignants['ville'] ?></td>
-        <td><?= $enseignants['email'] ?></td>
+        <td><?= e($enseignants['nom']) ?></td>
+        <td><?= e($enseignants['prenom']) ?></td>
+        <td><?= e($enseignants['adresse'] . ', '. $enseignants['code_postal'] . ' ' . $enseignants['ville']) ?></td>
+        <td><?= e($enseignants['email']) ?></td>
         <td>
-          <a href="<?= URL ?>/users/list/enseignant?id=<?= $enseignants['id'] ?>" class="btn btn-danger btn-sm">Supprimer</a>
+          <a href="<?= URL ?>/users/list/enseignant?id=<?= e($enseignants['id']) ?>" class="btn btn-danger btn-sm">Supprimer</a>
         </td>
       </tr>
     <?php } ?>

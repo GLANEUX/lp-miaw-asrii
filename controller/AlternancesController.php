@@ -1,13 +1,13 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 class AlternancesController {
 
     // Page de gestion des offres d'alternances
     public function index() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Si connecté en tant qu'entreprise ou administrateur
         if (
@@ -67,7 +67,7 @@ class AlternancesController {
     // Lister les offres d'alternance
     public function list() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Si connecté en tant qu'étudiant, enseignant ou administrateur
         if (
@@ -119,7 +119,7 @@ class AlternancesController {
                 'script' => [
                     'script.js'
                 ],
-                'alternances' => $alternances,
+                'alternances' => $alternances ?? [],
             ];
 
             // Afficher la page
@@ -136,7 +136,7 @@ class AlternancesController {
 
             // Récupérer la liste des offres d'alternance de l'entreprise de la base de données
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("SELECT id, poste, description FROM alternances WHERE entreprise_id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT id, poste, description FROM alternances WHERE entreprise_id = ?", [$_SESSION['userid']]);
 
             // Stocker les offres d'alternance dans une variable
             $alternances = [];
@@ -159,7 +159,7 @@ class AlternancesController {
                 'script' => [
                     'script.js'
                 ],
-                'alternances' => $alternances,
+                'alternances' => $alternances ?? [],
             ];
         
             // Afficher la page
@@ -179,7 +179,7 @@ class AlternancesController {
     // Modifier les offres d'alternance
     public function modifier() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Si l'id de l'offre a été transmise en GET (Formulaire de modification)
         if (isset($_GET['id']) && $_GET['id']) {
@@ -200,13 +200,13 @@ class AlternancesController {
                 // Si connecté en tant qu'entreprise
                 if ($_SESSION['level'] == 'entreprise'){
                     // Récupérer la liste des offres d'alternance de l'entreprise de la base de données
-                    $query = $sqlModel->SqlRequest("SELECT * FROM alternances WHERE entreprise_id = $_SESSION[userid] AND id = $_GET[id]");
+                    $query = $sqlModel->SqlRequest("SELECT * FROM alternances WHERE entreprise_id = ? AND id = ?", [$_SESSION['userid'], $_GET['id']]);
                 } 
 
                 // Si connecté en tant qu'administrateur
                 elseif ($_SESSION['level'] == 'administrateur'){
                     // Récupérer la liste des offres d'alternance de la base de données
-                    $query = $sqlModel->SqlRequest("SELECT * FROM alternances WHERE id = $_GET[id]");
+                    $query = $sqlModel->SqlRequest("SELECT * FROM alternances WHERE id = ?", [$_GET['id']]);
                 } 
                 
                 // Stocker les offres d'alternance dans une variable
@@ -238,7 +238,7 @@ class AlternancesController {
                         'script' => [
                             'script.js'
                         ],
-                        'alternances' => $alternance,
+                        'alternances' => $alternance ?? null,
                     ];
                 
                     // Afficher la page
@@ -294,7 +294,7 @@ class AlternancesController {
                 $sqlModel = new SqlModel();
 
                 // Mettre à jour les données de l'offre d'alternance
-                $query = $sqlModel->SqlRequest("UPDATE alternances SET poste = '$_POST[poste]', description = '$_POST[description]' WHERE id = $_POST[id]");
+                $query = $sqlModel->SqlRequest("UPDATE alternances SET poste = ?, description = ? WHERE id = ?", [$_POST['poste'], $_POST['description'], $_POST['id']]);
 
                 // Rediriger vers les offres d'alternance
                 header('Location: ' . URL .'/offres');
@@ -335,7 +335,7 @@ class AlternancesController {
     // Ajouter une offre
     public function ajouter() {
         
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Si les données de l'offre ont été transmises en POST (Ajout)
         if (isset($_POST['poste']) && isset($_POST['description']) && $_POST['poste'] && $_POST['description']) {
@@ -347,10 +347,7 @@ class AlternancesController {
             ) {
                 $sqlModel = new SqlModel();
                 // Ajouter l'offre d'alternance pour l'entreprise
-                $query = $sqlModel->SqlRequest("
-                    INSERT INTO alternances (entreprise_id, poste, description)
-                    VALUES ($_SESSION[userid], '$_POST[poste]', '$_POST[description]')
-                ");
+                $query = $sqlModel->SqlRequest("INSERT INTO alternances (entreprise_id, poste, description) VALUES (?, ?, ?)", [$_SESSION['userid'], $_POST['poste'], $_POST['description']]);
 
                 // Rediriger vers la gestion des offres d'alternance
                 header('Location: ' . URL .'/offres');
@@ -364,10 +361,7 @@ class AlternancesController {
             ) {
                 $sqlModel = new SqlModel();
                 // Ajouter l'offre d'alternance pour une entreprise
-                $query = $sqlModel->SqlRequest("
-                    INSERT INTO alternances (entreprise_id, poste, description) 
-                    VALUES ($_POST[entreprise_id], '$_POST[poste]', '$_POST[description]')
-                ");
+                $query = $sqlModel->SqlRequest("INSERT INTO alternances (entreprise_id, poste, description) VALUES (?, ?, ?)", [$_POST['entreprise_id'], $_POST['poste'], $_POST['description']]);
 
                 // Rediriger vers la gestion des offres d'alternance
                 header('Location: ' . URL .'/offres');
@@ -436,7 +430,7 @@ class AlternancesController {
                     'script' => [
                         'script.js'
                     ],
-                    'entreprises' => $entreprises ?? null,
+                    'entreprises' => $entreprises ?? [],
                 ];
             
                 // Afficher la page
@@ -473,7 +467,7 @@ class AlternancesController {
     // Supprimer une offre
     public function supprimer() {
         
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Si les données de l'offre ont été transmises en GET (Suppression)
         if (isset($_GET['id'])) {
@@ -485,7 +479,7 @@ class AlternancesController {
             ) {
                 $sqlModel = new SqlModel();
                 // Supprimer l'offre d'alternance de l'entreprise
-                $query = $sqlModel->SqlRequest("DELETE FROM alternances WHERE id = $_GET[id] AND entreprise_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("DELETE FROM alternances WHERE id = ? AND entreprise_id = ?", [$_GET['id'], $_SESSION['userid']]);
 
                 // Rediriger vers la liste des offres d'alternance
                 header('Location: ' . URL .'/offres');
@@ -499,7 +493,7 @@ class AlternancesController {
             ) {
                 $sqlModel = new SqlModel();
                 // Supprimer l'offre d'alternance
-                $query = $sqlModel->SqlRequest("DELETE FROM alternances WHERE id = $_GET[id]");
+                $query = $sqlModel->SqlRequest("DELETE FROM alternances WHERE id = ?", [$_GET['id']]);
 
                 // Rediriger vers la liste des offres d'alternance
                 header('Location: ' . URL .'/offres');

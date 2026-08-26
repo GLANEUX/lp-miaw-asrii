@@ -49,29 +49,29 @@
       <?php foreach ($data['projets'] as $projet) { ?>
         <tr>
           <td>
-            <?= $projet['titre'] ?>
+            <?= e($projet['titre']) ?>
           </td>
           <td>
-            <pre><?= $projet['description'] ?></pre>
+            <pre><?= e($projet['description']) ?></pre>
           </td>
           <?php if ($_SESSION['level'] != 'entreprise') { ?>
             <td>
-              <?= $projet['societe'] ?>
+              <?= e($projet['societe']) ?>
             </td>
             <td>
-              <?= $projet['adresse'] . ', ' . $projet['code_postal'] . ' ' . $projet['ville'] ?>
+              <?= e($projet['adresse'] . ', ' . $projet['code_postal'] . ' ' . $projet['ville']) ?>
             </td>
             <td>
-              <?= $projet['numero'] ?>
+              <?= e($projet['numero']) ?>
             </td>
             <td>
-              <?= $projet['email'] ?>
+              <?= e($projet['email']) ?>
             </td>
           <?php }
           if (($_SESSION['level'] == 'entreprise') || ($_SESSION['level'] == 'administrateur')) { ?>
             <td>
-              <a href="<?= URL ?>/projets/edit?id=<?= $projet['id'] ?>" class="btn btn-primary btn-sm">Modifier</a>
-              <a href="<?= URL ?>/projets/delete?id=<?= $projet['id'] ?>" class="btn btn-danger btn-sm">Supprimer</a>
+              <a href="<?= URL ?>/projets/edit?id=<?= e($projet['id']) ?>" class="btn btn-primary btn-sm">Modifier</a>
+              <a href="<?= URL ?>/projets/delete?id=<?= e($projet['id']) ?>" class="btn btn-danger btn-sm">Supprimer</a>
             </td>
           <?php } ?>
         </tr>

@@ -8,18 +8,18 @@
     <div class="column">
 <form method="post" action="<?= URL ?>/notes/edit">
     <label>Matiere
-        <input type="text" name="matiere" id="matiere" value="<?= $data['note']['matiere']?>">
+        <input type="text" name="matiere" id="matiere" value="<?= e($data['note']['matiere']) ?>">
     </label>
     <label>Libelle
-        <input type="text" name="libelle" id="libelle" value="<?= $data['note']['libelle']?>">
+        <input type="text" name="libelle" id="libelle" value="<?= e($data['note']['libelle']) ?>">
     </label>
     <label>Commentaire
-        <textarea name="commentaire" id="commentaire"><?= $data['note']['commentaire']?></textarea>
+        <textarea name="commentaire" id="commentaire"><?= e($data['note']['commentaire']) ?></textarea>
     </label>
     <label>Note
-        <input type="number" min="0" step="0.01" max="20" name="note" id="note" value="<?= $data['note']['note']?>">
+        <input type="number" min="0" step="0.01" max="20" name="note" id="note" value="<?= e($data['note']['note']) ?>">
     </label>
-    <input type="hidden" name="idnote" id="idnote" value="<?= $data['note']['id']?>" />
+    <input type="hidden" name="idnote" id="idnote" value="<?= e($data['note']['id']) ?>" />
     <input type="submit" value="Envoyer" class="button"> <a href="<?= URL ?>/home" class="retour">Retour</a>
 </form>
 

@@ -1,12 +1,12 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 class UsersController {
 
     public function index() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -42,7 +42,7 @@ class UsersController {
 
     public function ajouter() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -78,7 +78,7 @@ class UsersController {
 
     public function ajouterEtudiant() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -90,19 +90,20 @@ class UsersController {
             )
         ) {
             // Faire la requete sql
-            if ($_POST['complement'] != '') { $complement = '\'' . $_POST['complement'] . '\''; } else { $complement = 'NULL'; }
+            $complement = (($_POST['complement'] ?? '') !== '') ? $_POST['complement'] : null;
 
             $sqlModel = new SqlModel();
 
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES ('$_POST[adresse]', $complement, '$_POST[code_postal]', '$_POST[ville]')");
-            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = '$_POST[adresse]' AND code_postal = '$_POST[code_postal]' AND ville = '$_POST[ville]'");
+            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES (?, ?, ?, ?)", [$_POST['adresse'], $complement, $_POST['code_postal'], $_POST['ville']]);
+            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = ? AND code_postal = ? AND ville = ?", [$_POST['adresse'], $_POST['code_postal'], $_POST['ville']]);
+            $adresse_id = [];
             while ($row = $query->fetch_assoc()) {
                 $adresse_id[] = $row;
             }
-            $adresse_id = $adresse_id[0]['id'];
-            $query = $sqlModel->SqlRequest("INSERT INTO etudiants (nom, prenom, date_de_naissance, adresse_id, email, username, password) VALUES ('$_POST[nom]', '$_POST[prenom]', '$_POST[date_de_naissance]', $adresse_id, '$_POST[email]', '$_POST[username]', '$password')");
+            $adresse_id = $adresse_id[0]['id'] ?? null;
+            $query = $sqlModel->SqlRequest("INSERT INTO etudiants (nom, prenom, date_de_naissance, adresse_id, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)", [$_POST['nom'], $_POST['prenom'], $_POST['date_de_naissance'], $adresse_id, $_POST['email'], $_POST['username'], $password]);
         
             header('Location: ' . URL .'/users/list/etudiant');
             exit;
@@ -139,7 +140,7 @@ class UsersController {
 
     public function ajouterEnseignant() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -151,19 +152,20 @@ class UsersController {
             )
         ) {
             // Faire la requete sql
-            if ($_POST['complement'] != '') { $complement = '\'' . $_POST['complement'] . '\''; } else { $complement = 'NULL'; }
+            $complement = (($_POST['complement'] ?? '') !== '') ? $_POST['complement'] : null;
 
             $sqlModel = new SqlModel();
 
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES ('$_POST[adresse]', $complement, '$_POST[code_postal]', '$_POST[ville]')");
-            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = '$_POST[adresse]' AND code_postal = '$_POST[code_postal]' AND ville = '$_POST[ville]'");
+            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES (?, ?, ?, ?)", [$_POST['adresse'], $complement, $_POST['code_postal'], $_POST['ville']]);
+            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = ? AND code_postal = ? AND ville = ?", [$_POST['adresse'], $_POST['code_postal'], $_POST['ville']]);
+            $adresse_id = [];
             while ($row = $query->fetch_assoc()) {
                 $adresse_id[] = $row;
             }
-            $adresse_id = $adresse_id[0]['id'];
-            $query = $sqlModel->SqlRequest("INSERT INTO enseignants (nom, prenom, adresse_id, email, username, password) VALUES ('$_POST[nom]', '$_POST[prenom]', $adresse_id, '$_POST[email]', '$_POST[username]', '$password')");
+            $adresse_id = $adresse_id[0]['id'] ?? null;
+            $query = $sqlModel->SqlRequest("INSERT INTO enseignants (nom, prenom, adresse_id, email, username, password) VALUES (?, ?, ?, ?, ?, ?)", [$_POST['nom'], $_POST['prenom'], $adresse_id, $_POST['email'], $_POST['username'], $password]);
         
             header('Location: ' . URL .'/users/list/enseignant');
             exit;
@@ -200,7 +202,7 @@ class UsersController {
 
     public function ajouterEntreprise() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -212,19 +214,20 @@ class UsersController {
             )
         ) {
             // Faire la requete sql
-            if ($_POST['complement'] != '') { $complement = '\'' . $_POST['complement'] . '\''; } else { $complement = 'NULL'; }
+            $complement = (($_POST['complement'] ?? '') !== '') ? $_POST['complement'] : null;
 
             $sqlModel = new SqlModel();
 
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES ('$_POST[adresse]', $complement, '$_POST[code_postal]', '$_POST[ville]')");
-            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = '$_POST[adresse]' AND code_postal = '$_POST[code_postal]' AND ville = '$_POST[ville]'");
+            $query = $sqlModel->SqlRequest("INSERT INTO adresses (adresse, complement, code_postal, ville) VALUES (?, ?, ?, ?)", [$_POST['adresse'], $complement, $_POST['code_postal'], $_POST['ville']]);
+            $query = $sqlModel->SqlRequest("SELECT id FROM adresses WHERE adresse = ? AND code_postal = ? AND ville = ?", [$_POST['adresse'], $_POST['code_postal'], $_POST['ville']]);
+            $adresse_id = [];
             while ($row = $query->fetch_assoc()) {
                 $adresse_id[] = $row;
             }
-            $adresse_id = $adresse_id[0]['id'];
-            $query = $sqlModel->SqlRequest("INSERT INTO entreprises (societe, siret, adresse_id, numero, email, username, password, confirme) VALUES ('$_POST[societe]', '$_POST[siret]', $adresse_id, '$_POST[numero]', '$_POST[email]', '$_POST[username]', '$password', 1)");
+            $adresse_id = $adresse_id[0]['id'] ?? null;
+            $query = $sqlModel->SqlRequest("INSERT INTO entreprises (societe, siret, adresse_id, numero, email, username, password, confirme) VALUES (?, ?, ?, ?, ?, ?, ?, 1)", [$_POST['societe'], $_POST['siret'], $adresse_id, $_POST['numero'], $_POST['email'], $_POST['username'], $password]);
         
             header('Location: ' . URL .'/users/list/entreprise');
             exit;
@@ -261,7 +264,7 @@ class UsersController {
 
     public function ajouterAdministrateur() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -275,7 +278,7 @@ class UsersController {
 
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             
-            $query = $sqlModel->SqlRequest("INSERT INTO administrateurs (nom, prenom, email, username, password) VALUES ('$_POST[nom]', '$_POST[prenom]', '$_POST[email]', '$_POST[username]', '$password')");
+            $query = $sqlModel->SqlRequest("INSERT INTO administrateurs (nom, prenom, email, username, password) VALUES (?, ?, ?, ?, ?)", [$_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['username'], $password]);
         
             header('Location: ' . URL .'/users/list/administrateur');
             exit;
@@ -312,7 +315,7 @@ class UsersController {
 
     public function list() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -348,7 +351,7 @@ class UsersController {
 
     public function listEtudiant() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -358,7 +361,7 @@ class UsersController {
             )
         ) {
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("DELETE FROM etudiants WHERE id = $_GET[id]");
+            $query = $sqlModel->SqlRequest("DELETE FROM etudiants WHERE id = ?", [$_GET['id']]);
 
             header('Location: ' . URL .'/users/list/etudiant');
     
@@ -402,7 +405,7 @@ class UsersController {
                 'script' => [
                     'script.js'
                 ],
-                'etudiants' => $etudiants,
+                'etudiants' => $etudiants ?? [],
             ];
 
             // Afficher la page
@@ -418,7 +421,7 @@ class UsersController {
 
     public function listEntreprise() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -428,7 +431,7 @@ class UsersController {
             )
         ) {
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("DELETE FROM entreprises WHERE id = $_GET[id]");
+            $query = $sqlModel->SqlRequest("DELETE FROM entreprises WHERE id = ?", [$_GET['id']]);
 
             header('Location: ' . URL .'/users/list/entreprise');
     
@@ -473,7 +476,7 @@ class UsersController {
                 'script' => [
                     'script.js'
                 ],
-                'entreprises' => $entreprises,
+                'entreprises' => $entreprises ?? [],
             ];
 
             // Afficher la page
@@ -489,7 +492,7 @@ class UsersController {
 
     public function listEnseignant() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -499,7 +502,7 @@ class UsersController {
             )
         ) {
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("DELETE FROM enseignants WHERE id = $_GET[id]");
+            $query = $sqlModel->SqlRequest("DELETE FROM enseignants WHERE id = ?", [$_GET['id']]);
 
             header('Location: ' . URL .'/users/list/enseignant');
     
@@ -542,7 +545,7 @@ class UsersController {
                 'script' => [
                     'script.js'
                 ],
-                'enseignants' => $enseignants,
+                'enseignants' => $enseignants ?? [],
             ];
 
             // Afficher la page
@@ -558,7 +561,7 @@ class UsersController {
 
     public function listAdministrateur() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -568,7 +571,7 @@ class UsersController {
             )
         ) {
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("DELETE FROM administrateurs WHERE id = $_GET[id]");
+            $query = $sqlModel->SqlRequest("DELETE FROM administrateurs WHERE id = ?", [$_GET['id']]);
 
             header('Location: ' . URL .'/users/list/administrateur');
     
@@ -604,7 +607,7 @@ class UsersController {
                 'script' => [
                     'script.js'
                 ],
-                'administrateurs' => $administrateurs,
+                'administrateurs' => $administrateurs ?? [],
             ];
 
             // Afficher la page
@@ -619,7 +622,7 @@ class UsersController {
     }
 
     public function confirmeEntreprise() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -629,7 +632,7 @@ class UsersController {
             )
         ) {
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("UPDATE entreprises SET confirme = 1 WHERE id = $_GET[id]");
+            $query = $sqlModel->SqlRequest("UPDATE entreprises SET confirme = 1 WHERE id = ?", [$_GET['id']]);
 
             header('Location: ' . URL .'/users/list/entreprise');
     

@@ -23,11 +23,11 @@ administrateur</a>
   <tbody>
     <?php foreach ($data['administrateurs'] as $administrateurs) { ?>
       <tr>
-        <td><?= $administrateurs['nom'] ?></td>
-        <td><?= $administrateurs['prenom'] ?></td>
-        <td><?= $administrateurs['email'] ?></td>
+        <td><?= e($administrateurs['nom']) ?></td>
+        <td><?= e($administrateurs['prenom']) ?></td>
+        <td><?= e($administrateurs['email']) ?></td>
         <td>
-          <a href="<?= URL ?>/users/list/administrateur?id=<?= $administrateurs['id'] ?>" class="btn btn-danger btn-sm">Supprimer</a>
+          <a href="<?= URL ?>/users/list/administrateur?id=<?= e($administrateurs['id']) ?>" class="btn btn-danger btn-sm">Supprimer</a>
         </td>
       </tr>
     <?php } ?>

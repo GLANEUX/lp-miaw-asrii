@@ -1,10 +1,10 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 class HomeConnectedController {
     public function index() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
 
 
@@ -24,7 +24,7 @@ class HomeConnectedController {
         ) { 
              // Récupérer les données des projets depuis la base de données
              $sqlModel = new SqlModel();
-             $query = $sqlModel->SqlRequest("SELECT id, titre, description FROM projets WHERE entreprise_id = $_SESSION[userid]");
+             $query = $sqlModel->SqlRequest("SELECT id, titre, description FROM projets WHERE entreprise_id = ?", [$_SESSION['userid']]);
  
              $projets = [];
              foreach ($query as $row) {
@@ -39,7 +39,7 @@ class HomeConnectedController {
              
             // Récupérer la liste des offres d'alternance de l'entreprise de la base de données
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("SELECT id, poste, description FROM alternances WHERE entreprise_id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT id, poste, description FROM alternances WHERE entreprise_id = ?", [$_SESSION['userid']]);
 
             // Stocker les offres d'alternance dans une variable
             $alternances = [];
@@ -51,7 +51,7 @@ class HomeConnectedController {
                 ];
             }
 
-            $query = $sqlModel->SqlRequest("SELECT societe FROM entreprises WHERE id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT societe FROM entreprises WHERE id = ?", [$_SESSION['userid']]);
             foreach ($query as $row) { $nom = $row['societe']; }
                 
  
@@ -66,9 +66,9 @@ class HomeConnectedController {
                 'script' => [
                     'script.js'
                 ],
-                'projets' => $projets,
-                'alternances' => $alternances,
-                'nom' => $nom
+                'projets' => $projets ?? [],
+                'alternances' => $alternances ?? [],
+                'nom' => $nom ?? null,
             ];
 
             // Inclure le fichier d'en-tête
@@ -121,13 +121,14 @@ class HomeConnectedController {
             }
 
             if (isset($_GET['id'])) {
-                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id=' . $_GET['id']);
+                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id= ?', [$_GET['id']]);
+                $supporturl = [];
                 while ($row = $query->fetch_assoc()) {
                     $supporturl[] = $row;
                 }
-                $url_s = $supporturl[0]['url'];
+                $url_s = $supporturl[0]['url'] ?? null;
             } else {
-                $url_s = $supports[0]['url'];
+                $url_s = $supports[0]['url'] ?? null;
             }
 
 
@@ -142,6 +143,7 @@ class HomeConnectedController {
 
             $edt = [];
 
+            $emploisdutemps = [];
             while ($row = $query->fetch_assoc()) {
                 $emploisdutemps[] = $row;
             }
@@ -152,7 +154,7 @@ class HomeConnectedController {
                     'date' => $emploidutemps['date'],
                 ];
             }
-            $url = $emploisdutemps[0]['url'];
+            $url = $emploisdutemps[0]['url'] ?? null;
 
 
 
@@ -160,7 +162,7 @@ class HomeConnectedController {
             $sqlModel = new SqlModel();
 
             if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant') {
-                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = ?", [$_SESSION['userid']]);
             }
 
             $notes = [];
@@ -228,7 +230,7 @@ class HomeConnectedController {
             }
 
             
-            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM etudiants WHERE id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM etudiants WHERE id = ?", [$_SESSION['userid']]);
             foreach ($query as $row) { $nom = $row['prenom'] . ' ' . $row['nom']; }
 
             // Charger les données nécessaires pour la vue
@@ -242,14 +244,14 @@ class HomeConnectedController {
                 'script' => [
                     'script.js'
                 ],
-                'alternances' => $alternances,
-                'projets' => $projets,
-                'notes' => $notes,
-                'edt' => $edt,
-                'url' => $url,
-                'sup' => $sup,
-                'url_s' => $url_s,
-                'nom' => $nom
+                'alternances' => $alternances ?? [],
+                'projets' => $projets ?? [],
+                'notes' => $notes ?? [],
+                'edt' => $edt ?? [],
+                'url' => $url ?? null,
+                'sup' => $sup ?? [],
+                'url_s' => $url_s ?? null,
+                'nom' => $nom ?? null,
 
 
 
@@ -359,6 +361,7 @@ class HomeConnectedController {
 
             $edt = [];
 
+            $emploisdutemps = [];
             while ($row = $query->fetch_assoc()) {
                 $emploisdutemps[] = $row;
             }
@@ -369,7 +372,7 @@ class HomeConnectedController {
                     'date' => $emploidutemps['date'],
                 ];
             }
-            $url = $emploisdutemps[0]['url'];
+            $url = $emploisdutemps[0]['url'] ?? null;
 
 
 
@@ -390,16 +393,17 @@ class HomeConnectedController {
             }
 
             if (isset($_GET['id'])) {
-                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id=' . $_GET['id']);
+                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id= ?', [$_GET['id']]);
+                $supporturl = [];
                 while ($row = $query->fetch_assoc()) {
                     $supporturl[] = $row;
                 }
-                $url_s = $supporturl[0]['url'];
+                $url_s = $supporturl[0]['url'] ?? null;
             } else {
-                $url_s = $supports[0]['url'];
+                $url_s = $supports[0]['url'] ?? null;
             }
 
-            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM enseignants WHERE id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM enseignants WHERE id = ?", [$_SESSION['userid']]);
             foreach ($query as $row) { $nom = $row['prenom'] . ' ' . $row['nom']; }
 
             // Charger les données nécessaires pour la vue
@@ -413,14 +417,14 @@ class HomeConnectedController {
                 'script' => [
                     'script.js'
                 ],
-                'alternances' => $alternances,
-                'projets' => $projets,
-                'etudiants' => $etudiants,
-                'edt' => $edt,
-                'url' => $url,
-                'sup' => $sup,
-                'url_s' => $url_s,
-                'nom' => $nom
+                'alternances' => $alternances ?? [],
+                'projets' => $projets ?? [],
+                'etudiants' => $etudiants ?? [],
+                'edt' => $edt ?? [],
+                'url' => $url ?? null,
+                'sup' => $sup ?? [],
+                'url_s' => $url_s ?? null,
+                'nom' => $nom ?? null,
                 
             ];
 
@@ -525,6 +529,7 @@ class HomeConnectedController {
 
             $edt = [];
 
+            $emploisdutemps = [];
             while ($row = $query->fetch_assoc()) {
                 $emploisdutemps[] = $row;
             }
@@ -535,7 +540,7 @@ class HomeConnectedController {
                     'date' => $emploidutemps['date'],
                 ];
             }
-            $url = $emploisdutemps[0]['url'];
+            $url = $emploisdutemps[0]['url'] ?? null;
 
 
 
@@ -556,17 +561,18 @@ class HomeConnectedController {
             }
 
             if (isset($_GET['id'])) {
-                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id=' . $_GET['id']);
+                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id= ?', [$_GET['id']]);
+                $supporturl = [];
                 while ($row = $query->fetch_assoc()) {
                     $supporturl[] = $row;
                 }
-                $url_s = $supporturl[0]['url'];
+                $url_s = $supporturl[0]['url'] ?? null;
             } else {
-                $url_s = $supports[0]['url'];
+                $url_s = $supports[0]['url'] ?? null;
             }
 
             
-            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM administrateurs WHERE id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT nom, prenom FROM administrateurs WHERE id = ?", [$_SESSION['userid']]);
             foreach ($query as $row) { $nom = $row['prenom'] . ' ' . $row['nom']; }
 
             // Charger les données nécessaires pour la vue
@@ -580,14 +586,14 @@ class HomeConnectedController {
                 'script' => [
                     'script.js'
                 ],
-                'alternances' => $alternances,
-                'projets' => $projets,
-                'etudiants' => $etudiants,
-                'edt' => $edt,
-                'url' => $url,
-                'sup' => $sup,
-                'url_s' => $url_s,
-                'nom' => $nom
+                'alternances' => $alternances ?? [],
+                'projets' => $projets ?? [],
+                'etudiants' => $etudiants ?? [],
+                'edt' => $edt ?? [],
+                'url' => $url ?? null,
+                'sup' => $sup ?? [],
+                'url_s' => $url_s ?? null,
+                'nom' => $nom ?? null,
             ];
 
             // Inclure le fichier d'en-tête

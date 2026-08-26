@@ -1,7 +1,7 @@
 <?php
 class RGPDController {
     public function index() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
         // Charger les données nécessaires pour la vue
         $data = [
             'title' => 'Politique de confidentialité',

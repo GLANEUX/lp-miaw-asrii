@@ -23,15 +23,15 @@ entreprise</a>
   <tbody>
     <?php foreach ($data['entreprises'] as $entreprises) { ?>
       <tr>
-        <td><?= $entreprises['societe'] ?></td>
-        <td><?= $entreprises['siret'] ?></td>
-        <td><?= $entreprises['numero'] ?></td>
-        <td><?= $entreprises['adresse'] . ', '. $entreprises['code_postal'] . ' ' . $entreprises['ville'] ?></td>
-        <td><?= $entreprises['email'] ?></td>
+        <td><?= e($entreprises['societe']) ?></td>
+        <td><?= e($entreprises['siret']) ?></td>
+        <td><?= e($entreprises['numero']) ?></td>
+        <td><?= e($entreprises['adresse'] . ', '. $entreprises['code_postal'] . ' ' . $entreprises['ville']) ?></td>
+        <td><?= e($entreprises['email']) ?></td>
         <td>
-          <a href="<?= URL ?>/users/list/entreprise?id=<?= $entreprises['id'] ?>" class="btn btn-danger btn-sm">Supprimer</a>
+          <a href="<?= URL ?>/users/list/entreprise?id=<?= e($entreprises['id']) ?>" class="btn btn-danger btn-sm">Supprimer</a>
           <?php if ($entreprises['confirme'] == 0){ ?>
-              <a href="<?= URL ?>/users/list/entreprise/confirme?id=<?= $entreprises['id'] ?>" class="btn btn-primary btn-sm">Confirmer</a>
+              <a href="<?= URL ?>/users/list/entreprise/confirme?id=<?= e($entreprises['id']) ?>" class="btn btn-primary btn-sm">Confirmer</a>
           <?php } ?>
         </td>
       </tr>

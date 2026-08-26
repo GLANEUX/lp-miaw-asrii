@@ -4,7 +4,7 @@ class CampusController {
     // Page Campus
     public function index() {
         
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Variables transmises
         $data = [

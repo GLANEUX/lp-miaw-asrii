@@ -6,7 +6,7 @@
 <section class="co">
 <form method="POST" action="" class="login">
     <?php if (isset($error)) { ?>
-        <p><?= $error ?></p>
+        <p><?= e($error) ?></p>
     <?php } ?>
     <h1 class="txt-font">CONNEXION</h1>
 

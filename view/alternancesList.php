@@ -49,17 +49,17 @@
   <tbody>
   <?php foreach ($data['alternances'] as $alternances) { ?>
       <tr>
-        <td><?= $alternances['poste'] ?></td>
-        <td><pre><?= $alternances['description'] ?></pre></td>
+        <td><?= e($alternances['poste']) ?></td>
+        <td><pre><?= e($alternances['description']) ?></pre></td>
         <?php if ($_SESSION['level'] != 'entreprise') {?>
-          <td><?= $alternances['societe'] ?> </td>
-          <td> <?= $alternances['adresse'] . ', '. $alternances['code_postal'] . ' ' . $alternances['ville'] ?></td>
-          <td><?= $alternances['numero'] ?></td>
-          <td><?= $alternances['email'] ?></td>
+          <td><?= e($alternances['societe']) ?> </td>
+          <td> <?= e($alternances['adresse'] . ', '. $alternances['code_postal'] . ' ' . $alternances['ville']) ?></td>
+          <td><?= e($alternances['numero']) ?></td>
+          <td><?= e($alternances['email']) ?></td>
           <?php } if ( ($_SESSION['level'] == 'entreprise') || ($_SESSION['level'] == 'administrateur')) { ?>
           <td>
-            <a href="<?= URL ?>/offres/edit?id=<?=$alternances['id']?>" class="btn btn-primary btn-sm">Modifier</a>
-            <a href="<?= URL ?>/offres/delete?id=<?=$alternances['id']?>" class="btn btn-danger btn-sm">Supprimer</a>
+            <a href="<?= URL ?>/offres/edit?id=<?= e($alternances['id']) ?>" class="btn btn-primary btn-sm">Modifier</a>
+            <a href="<?= URL ?>/offres/delete?id=<?= e($alternances['id']) ?>" class="btn btn-danger btn-sm">Supprimer</a>
           </td>
         <?php } ?>
       </tr>

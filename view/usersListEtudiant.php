@@ -23,13 +23,13 @@ etudiant</a>
   <tbody>
     <?php foreach ($data['etudiants'] as $etudiants) { ?>
       <tr>
-        <td><?= $etudiants['nom'] ?></td>
-        <td><?= $etudiants['prenom'] ?></td>
-        <td><?= $etudiants['date_de_naissance'] ?></td>
-        <td><?= $etudiants['adresse'] . ', '. $etudiants['code_postal'] . ' ' . $etudiants['ville'] ?></td>
-        <td><?= $etudiants['email'] ?></td>
+        <td><?= e($etudiants['nom']) ?></td>
+        <td><?= e($etudiants['prenom']) ?></td>
+        <td><?= e($etudiants['date_de_naissance']) ?></td>
+        <td><?= e($etudiants['adresse'] . ', '. $etudiants['code_postal'] . ' ' . $etudiants['ville']) ?></td>
+        <td><?= e($etudiants['email']) ?></td>
         <td>
-          <a href="<?= URL ?>/users/list/etudiant?id=<?= $etudiants['id'] ?>" class="btn btn-danger btn-sm">Supprimer</a>
+          <a href="<?= URL ?>/users/list/etudiant?id=<?= e($etudiants['id']) ?>" class="btn btn-danger btn-sm">Supprimer</a>
         </td>
       </tr>
     <?php } ?>

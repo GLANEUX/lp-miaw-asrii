@@ -1,14 +1,29 @@
 <?php
 
-// Inclure le fichier de configuration
-require_once 'conf.php';
+// Ne jamais afficher les erreurs PHP au visiteur : elles vont dans le journal du serveur.
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
+// Cookies de session : inaccessibles en JavaScript, limités au site.
+session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax', 'path' => '/']);
+
+// Toujours travailler depuis la racine du projet (les require sont relatifs).
+chdir(__DIR__);
+
+// Configuration : conf.php (copie locale de conf.example.php), sinon conf.docker.php (variables d'environnement).
+require_once file_exists(__DIR__ . '/conf.php') ? __DIR__ . '/conf.php' : __DIR__ . '/conf.docker.php';
+
+/** Échappe une valeur pour l'affichage HTML (protection XSS). Utilisé dans toutes les vues. */
+function e($value): string {
+    return htmlspecialchars((string) ($value ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
 
 // Récupérer l'URL demandée
 $requestUrl = rtrim($_SERVER['REQUEST_URI'], '/');
 
 // Décomposer l'URL pour séparer le chemin et les paramètres
 $parts = parse_url($requestUrl);
-$path = $parts['path'];
+$path = $parts['path'] ?? '';
 
 // Récupérer les paramètres de l'URL
 $params = [];
@@ -19,13 +34,11 @@ if (isset($parts['query'])) {
 // Inclure le fichier des routes
 require_once 'routes.php';
 
-// Vérifier la correspondance de l'URL avec les routes définies
+// Vérifier la correspondance de l'URL avec les routes définies (avec ou sans "/" final)
 $routeFound = false;
 foreach ($routes as $route => $controllerAction) {
-    // Supprimer le "?" et les paramètres de l'URL
-    $cleanRoute = strtok($route, '?');
+    $cleanRoute = rtrim(strtok($route, '?'), '/');
 
-    // Vérifier la correspondance de l'URL avec la route
     if ($cleanRoute === $path) {
         $routeFound = true;
         $controllerName = $controllerAction[0];
@@ -34,25 +47,9 @@ foreach ($routes as $route => $controllerAction) {
     }
 }
 
-// Si aucune correspondance n'est trouvée, vérifier si la route avec "/" à la fin correspond
+// Page d'erreur 404 si l'URL ne correspond à aucune route
 if (!$routeFound) {
-    foreach ($routes as $route => $controllerAction) {
-        // Supprimer le "?" et les paramètres de l'URL
-        $cleanRoute = rtrim(strtok($route, '?'), '/');
-
-        // Vérifier la correspondance de l'URL avec la route avec "/" à la fin
-        if ($cleanRoute === $path) {
-            $routeFound = true;
-            $controllerName = $controllerAction[0];
-            $actionName = $controllerAction[1];
-            break;
-        }
-    }
-}
-
-// Rediriger vers une page d'erreur 404 si l'URL ne correspond à aucune route
-if (!$routeFound) {
-    header('HTTP/1.0 404 Not Found');
+    http_response_code(404);
     echo 'Page not found';
     exit();
 }

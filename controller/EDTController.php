@@ -1,11 +1,11 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 class EDTController {
     public function index() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -31,6 +31,7 @@ class EDTController {
 
             $edt = [];
 
+            $emploisdutemps = [];
             while ($row = $query->fetch_assoc()) {
                 $emploisdutemps[] = $row;
             }
@@ -42,12 +43,13 @@ class EDTController {
                 ];
             }
 
-            $query = $sqlModel->SqlRequest('SELECT url FROM emplois_du_temps WHERE id=' . $_GET['id']);
+            $query = $sqlModel->SqlRequest('SELECT url FROM emplois_du_temps WHERE id= ?', [$_GET['id']]);
+            $edturl = [];
             while ($row = $query->fetch_assoc()) {
                 $edturl[] = $row;
             }
 
-            $url = $edturl[0]['url'];
+            $url = $edturl[0]['url'] ?? null;
         }
         elseif (
             (
@@ -69,6 +71,7 @@ class EDTController {
 
             $edt = [];
 
+            $emploisdutemps = [];
             while ($row = $query->fetch_assoc()) {
                 $emploisdutemps[] = $row;
             }
@@ -79,7 +82,7 @@ class EDTController {
                     'date' => $emploidutemps['date'],
                 ];
             }
-            $url = $emploisdutemps[0]['url'];
+            $url = $emploisdutemps[0]['url'] ?? null;
         }
         else {
             // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
@@ -98,8 +101,8 @@ class EDTController {
             'script' => [
                 'script.js'
             ],
-            'edt' => $edt,
-            'url' => $url,
+            'edt' => $edt ?? [],
+            'url' => $url ?? null,
         ];
 
         // Inclure le fichier d'en-tête
@@ -116,7 +119,7 @@ class EDTController {
 
     public function ajouter() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -129,12 +132,16 @@ class EDTController {
                 isset($_FILES['edt']) && isset($_POST['date'])
             )
         ) {
-            $nomFichier = $_FILES['edt']['name'];
-            move_uploaded_file($_FILES["edt"]["tmp_name"], 'public/emplois_du_temps/' . $nomFichier);
+            $nomFichier = SqlModel::nomFichierSecurise($_FILES['edt'], ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'webp']);
+            if ($nomFichier === null || !move_uploaded_file($_FILES['edt']['tmp_name'], __DIR__ . '/../public/emplois_du_temps/' . $nomFichier)) {
+                http_response_code(400);
+                echo 'Fichier refuse : type non autorise ou trop volumineux (formats acceptes : pdf, png, jpg, jpeg, gif, webp, 20 Mo max).';
+                exit;
+            }
             
             $sqlModel = new SqlModel();
 
-            $query = $sqlModel->SqlRequest("INSERT INTO emplois_du_temps (date, url) VALUES ('$_POST[date]', '/public/emplois_du_temps/$nomFichier')");
+            $query = $sqlModel->SqlRequest("INSERT INTO emplois_du_temps (date, url) VALUES (?, ?)", [$_POST['date'], '/public/emplois_du_temps/' . $nomFichier]);
         
             header('Location: ' . URL .'/emplois-du-temps');
             exit;
@@ -194,7 +201,7 @@ class EDTController {
 
     public function supprimer() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -209,15 +216,16 @@ class EDTController {
         ) {
             $sqlModel = new SqlModel();
 
-            $query = $sqlModel->SqlRequest('SELECT url FROM emplois_du_temps WHERE id=' . $_GET['id']);
+            $query = $sqlModel->SqlRequest('SELECT url FROM emplois_du_temps WHERE id= ?', [$_GET['id']]);
+            $edturl = [];
             while ($row = $query->fetch_assoc()) {
                 $edturl[] = $row;
             }
-            $edt = $edturl[0]['url'];
+            $edt = $edturl[0]['url'] ?? null;
 
             unlink(".$edt");
 
-            $query = $sqlModel->SqlRequest("DELETE FROM emplois_du_temps WHERE id = $_GET[id]");
+            $query = $sqlModel->SqlRequest("DELETE FROM emplois_du_temps WHERE id = ?", [$_GET['id']]);
         
             header('Location: ' . URL .'/emplois-du-temps');
             exit;

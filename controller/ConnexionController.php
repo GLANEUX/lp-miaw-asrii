@@ -1,11 +1,11 @@
 <?php
 
-require_once 'model\ConnexionModel.php';
+require_once 'model/ConnexionModel.php';
 
 
 class ConnexionController {
     public function index() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
         if (isset($_SESSION['is_logged_in'])) {
             header('Location: ' . URL .'/home');
             exit;
@@ -60,6 +60,7 @@ class ConnexionController {
         $user->save();
 
         // Rediriger l'utilisateur vers une page sécurisée après la connexion réussie
+        session_regenerate_id(true);
         $_SESSION['is_logged_in'] = true;
         $_SESSION['userid'] = $user->getId();
         $_SESSION['username'] = $user->getUsername();
@@ -68,6 +69,3 @@ class ConnexionController {
         exit;
     }
 }
-?>
-
-

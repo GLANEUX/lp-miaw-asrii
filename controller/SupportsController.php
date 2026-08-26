@@ -1,11 +1,11 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 class SupportsController {
     public function index() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -33,13 +33,14 @@ class SupportsController {
             }
 
             if (isset($_GET['id'])) {
-                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id=' . $_GET['id']);
+                $query = $sqlModel->SqlRequest('SELECT url FROM supports WHERE id= ?', [$_GET['id']]);
+                $supporturl = [];
                 while ($row = $query->fetch_assoc()) {
                     $supporturl[] = $row;
                 }
-                $url = $supporturl[0]['url'];
+                $url = $supporturl[0]['url'] ?? null;
             } else {
-                $url = $supports[0]['url'];
+                $url = $supports[0]['url'] ?? null;
             }
 
             // Charger les données nécessaires pour la vue
@@ -53,8 +54,8 @@ class SupportsController {
                 'script' => [
                     'script.js'
                 ],
-                'sup' => $sup,
-                'url' => $url,
+                'sup' => $sup ?? [],
+                'url' => $url ?? null,
             ];
 
             // Inclure le fichier d'en-tête
@@ -73,7 +74,7 @@ class SupportsController {
             )
         ) {
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("SELECT * FROM supports WHERE enseignant_id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT * FROM supports WHERE enseignant_id = ?", [$_SESSION['userid']]);
 
             $supports = [];
             while ($row = $query->fetch_assoc()) {
@@ -89,13 +90,14 @@ class SupportsController {
             }
 
             if (isset($_GET['id'])) {
-                $query = $sqlModel->SqlRequest("SELECT url FROM supports WHERE id= $_GET[id] AND enseignant_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("SELECT url FROM supports WHERE id= ? AND enseignant_id = ?", [$_GET['id'], $_SESSION['userid']]);
+                $supporturl = [];
                 while ($row = $query->fetch_assoc()) {
                     $supporturl[] = $row;
                 }
-                $url = $supporturl[0]['url'];
+                $url = $supporturl[0]['url'] ?? null;
             } else {
-                $url = $supports[0]['url'];
+                $url = $supports[0]['url'] ?? null;
             }
 
             // Charger les données nécessaires pour la vue
@@ -109,8 +111,8 @@ class SupportsController {
                 'script' => [
                     'script.js'
                 ],
-                'sup' => $sup,
-                'url' => $url,
+                'sup' => $sup ?? [],
+                'url' => $url ?? null,
             ];
 
             // Inclure le fichier d'en-tête
@@ -132,7 +134,7 @@ class SupportsController {
 
     public function ajouter() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -145,15 +147,19 @@ class SupportsController {
                 isset($_FILES['sup']) && isset($_POST['matiere']) && isset($_POST['titre']) && isset($_POST['enseignant'])
             )
         ) {
-            $nomFichier = $_FILES['sup']['name'];
-            move_uploaded_file($_FILES["sup"]["tmp_name"], 'public/supports_de_cours/' . $nomFichier);
+            $nomFichier = SqlModel::nomFichierSecurise($_FILES['sup'], ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt', 'odp', 'ods', 'txt', 'zip']);
+            if ($nomFichier === null || !move_uploaded_file($_FILES['sup']['tmp_name'], __DIR__ . '/../public/supports_de_cours/' . $nomFichier)) {
+                http_response_code(400);
+                echo 'Fichier refuse : type non autorise ou trop volumineux (formats acceptes : pdf, png, jpg, jpeg, gif, webp, doc, docx, ppt, pptx, xls, xlsx, odt, odp, ods, txt, zip, 20 Mo max).';
+                exit;
+            }
             
             $sqlModel = new SqlModel();
 
             if ($_SESSION['level'] == 'enseignant') {
-                $query = $sqlModel->SqlRequest("INSERT INTO supports (titre, matiere, url, enseignant_id) VALUES ('$_POST[titre]', '$_POST[matiere]', '/public/supports_de_cours/$nomFichier', $_SESSION[userid])");
+                $query = $sqlModel->SqlRequest("INSERT INTO supports (titre, matiere, url, enseignant_id) VALUES (?, ?, ?, ?)", [$_POST['titre'], $_POST['matiere'], '/public/supports_de_cours/' . $nomFichier, $_SESSION['userid']]);
             } elseif ($_SESSION['level'] == 'administrateur') {
-                $query = $sqlModel->SqlRequest("INSERT INTO supports (titre, matiere, url, enseignant_id) VALUES ('$_POST[titre]', '$_POST[matiere]', '/public/supports_de_cours/$nomFichier', $_POST[enseignant])");
+                $query = $sqlModel->SqlRequest("INSERT INTO supports (titre, matiere, url, enseignant_id) VALUES (?, ?, ?, ?)", [$_POST['titre'], $_POST['matiere'], '/public/supports_de_cours/' . $nomFichier, $_POST['enseignant']]);
             }
 
             header('Location: ' . URL .'/supports');
@@ -194,7 +200,7 @@ class SupportsController {
                 'script' => [
                     'script.js'
                 ],
-                'enseignant' => $enseignant ?? null,
+                'enseignant' => $enseignant ?? [],
             ];
 
             // Inclure le fichier d'en-tête
@@ -228,7 +234,7 @@ class SupportsController {
 
     public function supprimer() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -243,21 +249,23 @@ class SupportsController {
         ) {
             $sqlModel = new SqlModel();
             if ($_SESSION['level'] == 'enseignant') {
-                $query = $sqlModel->SqlRequest("SELECT url FROM supports WHERE id= $_GET[id] AND enseignant_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("SELECT url FROM supports WHERE id= ? AND enseignant_id = ?", [$_GET['id'], $_SESSION['userid']]);
+                $supurl = [];
                 while ($row = $query->fetch_assoc()) {
                     $supurl[] = $row;
                 }
-                $sup = $supurl[0]['url'];
+                $sup = $supurl[0]['url'] ?? null;
                 unlink(".$sup");
-                $query = $sqlModel->SqlRequest("DELETE FROM supports WHERE id = $_GET[id] AND enseignant_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("DELETE FROM supports WHERE id = ? AND enseignant_id = ?", [$_GET['id'], $_SESSION['userid']]);
             } elseif ($_SESSION['level'] == 'administrateur') {
-                $query = $sqlModel->SqlRequest("SELECT url FROM supports WHERE id= $_GET[id]");
+                $query = $sqlModel->SqlRequest("SELECT url FROM supports WHERE id= ?", [$_GET['id']]);
+                $supurl = [];
                 while ($row = $query->fetch_assoc()) {
                     $supurl[] = $row;
                 }
-                $sup = $supurl[0]['url'];
+                $sup = $supurl[0]['url'] ?? null;
                 unlink(".$sup");
-                $query = $sqlModel->SqlRequest("DELETE FROM supports WHERE id = $_GET[id]");
+                $query = $sqlModel->SqlRequest("DELETE FROM supports WHERE id = ?", [$_GET['id']]);
             }
         
             header('Location: ' . URL .'/supports');

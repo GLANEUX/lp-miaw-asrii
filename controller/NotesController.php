@@ -1,11 +1,11 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 class NotesController {
     public function index() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Entreprise ou Admin
         if (
@@ -26,13 +26,13 @@ class NotesController {
             $sqlModel = new SqlModel();
 
             if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'etudiant') {
-                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = ?", [$_SESSION['userid']]);
             }
             elseif (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant') {
-                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = $_GET[id] AND enseignant_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = ? AND enseignant_id = ?", [$_GET['id'], $_SESSION['userid']]);
             }
             elseif ( isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true && isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur') {
-                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = $_GET[id]");
+                $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE etudiant_id = ?", [$_GET['id']]);
             } 
             else {
                 header('Location: ' . URL .'/home');
@@ -62,7 +62,7 @@ class NotesController {
                 'script' => [
                     'script.js'
                 ],
-                'notes' => $notes,
+                'notes' => $notes ?? [],
             ];
 
             // Inclure le fichier d'en-tête
@@ -107,7 +107,7 @@ class NotesController {
                 'script' => [
                     'script.js'
                 ],
-                'etudiants' => $etudiants,
+                'etudiants' => $etudiants ?? [],
             ];
 
             // Inclure le fichier d'en-tête
@@ -140,7 +140,7 @@ class NotesController {
 
     public function ajouter() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -179,7 +179,7 @@ class NotesController {
                 'script' => [
                     'script.js'
                 ],
-                'enseignant' => $enseignant ?? null,
+                'enseignant' => $enseignant ?? [],
             ];
 
             // Inclure le fichier d'en-tête
@@ -208,10 +208,10 @@ class NotesController {
             $sqlModel = new SqlModel();
 
             if ($_SESSION['level'] == 'enseignant') {
-                $query = $sqlModel->SqlRequest("INSERT INTO notes (etudiant_id, matiere, libelle, commentaire, note, enseignant_id) VALUES ($_POST[idetudiant], '$_POST[matiere]', '$_POST[libelle]', '$_POST[commentaire]', '$_POST[note]', '$_SESSION[userid]')");
+                $query = $sqlModel->SqlRequest("INSERT INTO notes (etudiant_id, matiere, libelle, commentaire, note, enseignant_id) VALUES (?, ?, ?, ?, ?, ?)", [$_POST['idetudiant'], $_POST['matiere'], $_POST['libelle'], $_POST['commentaire'], $_POST['note'], $_SESSION['userid']]);
             }
             else if ($_SESSION['level'] == 'administrateur') {
-                $query = $sqlModel->SqlRequest("INSERT INTO notes (etudiant_id, matiere, libelle, commentaire, note, enseignant_id) VALUES ($_POST[idetudiant], '$_POST[matiere]', '$_POST[libelle]', '$_POST[commentaire]', '$_POST[note]', '$_POST[enseignant_id]')");
+                $query = $sqlModel->SqlRequest("INSERT INTO notes (etudiant_id, matiere, libelle, commentaire, note, enseignant_id) VALUES (?, ?, ?, ?, ?, ?)", [$_POST['idetudiant'], $_POST['matiere'], $_POST['libelle'], $_POST['commentaire'], $_POST['note'], $_POST['enseignant_id']]);
             } else {
                 header('Location: ' . URL .'/notes');
                 exit;
@@ -249,7 +249,7 @@ class NotesController {
 
     public function modifier() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -265,8 +265,9 @@ class NotesController {
 
             $sqlModel = new SqlModel();
 
-            $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE id =  $_GET[id]");
+            $query = $sqlModel->SqlRequest("SELECT * FROM notes WHERE id =  ?", [$_GET['id']]);
 
+            $note = [];
             while ($row = $query->fetch_assoc()) {
                 $note[] = $row;
             }
@@ -291,7 +292,7 @@ class NotesController {
                 'script' => [
                     'script.js'
                 ],
-                'note' => $note
+                'note' => $note ?? [],
             ];
 
             // Inclure le fichier d'en-tête
@@ -316,11 +317,11 @@ class NotesController {
                 isset($_POST['idnote'])
             )
         ) {
-            if ($_POST['commentaire'] != '') { $commentaire = '\'' . $_POST['commentaire'] . '\''; } else { $commentaire = 'NULL'; }
+            $commentaire = (($_POST['commentaire'] ?? '') !== '') ? $_POST['commentaire'] : null;
 
             $sqlModel = new SqlModel();
 
-            $query = $sqlModel->SqlRequest("UPDATE notes SET matiere = '$_POST[matiere]', libelle = '$_POST[libelle]', commentaire = $commentaire, note = $_POST[note] WHERE id = $_POST[idnote]");
+            $query = $sqlModel->SqlRequest("UPDATE notes SET matiere = ?, libelle = ?, commentaire = ?, note = ? WHERE id = ?", [$_POST['matiere'], $_POST['libelle'], $commentaire, $_POST['note'], $_POST['idnote']]);
 
             header('Location: ' . URL .'/notes');
             exit;
@@ -354,7 +355,7 @@ class NotesController {
     // Supprimer une note
     public function supprimer() {
         
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Si les données de l'offre ont été transmises en GET (Suppression)
         if (isset($_GET['id'])) {
@@ -365,7 +366,7 @@ class NotesController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'enseignant'
             ) {
                 $sqlModel = new SqlModel();
-                $query = $sqlModel->SqlRequest("DELETE FROM notes WHERE id = $_GET[id] AND enseignant_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("DELETE FROM notes WHERE id = ? AND enseignant_id = ?", [$_GET['id'], $_SESSION['userid']]);
 
                 // Rediriger vers la liste des offres d'alternance
                 header('Location: ' . URL .'/notes');
@@ -379,7 +380,7 @@ class NotesController {
             ) {
                 $sqlModel = new SqlModel();
                 // Ajouter l'offre d'alternance pour une entreprise
-                $query = $sqlModel->SqlRequest("DELETE FROM notes WHERE id = $_GET[id]");
+                $query = $sqlModel->SqlRequest("DELETE FROM notes WHERE id = ?", [$_GET['id']]);
 
                 // Rediriger vers la liste des offres d'alternance
                 header('Location: ' . URL .'/notes');

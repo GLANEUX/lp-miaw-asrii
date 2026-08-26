@@ -8,6 +8,14 @@ class User {
     private $password;
     private $lastLogin;
     private $lastLoginIP;
+    private $level;
+
+    private const TABLES = [
+        'etudiant' => 'etudiants',
+        'enseignant' => 'enseignants',
+        'entreprise' => 'entreprises',
+        'administrateur' => 'administrateurs',
+    ];
 
     // Getters et Setters pour les propriétés
     public function getId() {
@@ -66,33 +74,29 @@ class User {
         $this->level = $level;
     }
 
+    /**
+     * Recherche un utilisateur par e-mail ou identifiant dans les quatre tables de comptes.
+     * Une entreprise ne peut se connecter que si son compte a été confirmé par un administrateur.
+     */
     public static function findByEmailOrUsername($emailOrUsername) {
         $sqlModel = new SqlModel();
-        $mysqli = $sqlModel->getMysqli();
-
-        $emailOrUsername = $mysqli->real_escape_string($emailOrUsername);
 
         $query = "SELECT * FROM (
-            SELECT id, username, email, password, 'etudiant' AS level FROM etudiants WHERE email = '$emailOrUsername' OR username = '$emailOrUsername'
+            SELECT id, username, email, password, 'etudiant' AS level FROM etudiants WHERE email = ? OR username = ?
             UNION
-            SELECT id, username, email, password, 'enseignant' AS level FROM enseignants WHERE email = '$emailOrUsername' OR username = '$emailOrUsername'
+            SELECT id, username, email, password, 'enseignant' AS level FROM enseignants WHERE email = ? OR username = ?
             UNION
-            SELECT id, username, email, password, 'entreprise' AS level FROM entreprises WHERE email = '$emailOrUsername' OR username = '$emailOrUsername' AND confirme = 1
+            SELECT id, username, email, password, 'entreprise' AS level FROM entreprises WHERE (email = ? OR username = ?) AND confirme = 1
             UNION
-            SELECT id, username, email, password, 'administrateur' AS level FROM administrateurs WHERE email = '$emailOrUsername' OR username = '$emailOrUsername'
+            SELECT id, username, email, password, 'administrateur' AS level FROM administrateurs WHERE email = ? OR username = ?
         ) AS users LIMIT 1";
 
-        $result = $mysqli->query($query);
-
-        if (!$result) {
-            echo "Erreur lors de l'exécution de la requête: " . $mysqli->error;
-            exit();
-        }
+        $result = $sqlModel->SqlRequest($query, array_fill(0, 8, $emailOrUsername));
 
         $user = null;
         if ($row = $result->fetch_assoc()) {
             $user = new User();
-            $user->setId($row['id']);
+            $user->setId((int) $row['id']);
             $user->setUsername($row['username']);
             $user->setEmail($row['email']);
             $user->setPassword($row['password']);
@@ -104,31 +108,16 @@ class User {
         return $user;
     }
 
+    /** Enregistre la date et l'adresse IP de la dernière connexion. */
     public function save() {
+        $table = self::TABLES[$this->getLevel()] ?? null;
+        if ($table === null) {
+            return;
+        }
         $sqlModel = new SqlModel();
-        $mysqli = $sqlModel->getMysqli();
-
-        $id = $this->getId();
-        $level = $this->getLevel();
-        $lastLogin = $mysqli->real_escape_string($this->getLastLogin());
-        $lastLoginIP = $mysqli->real_escape_string($this->getLastLoginIP());
-
-        if ($level == 'etudiant'){
-            $query = "UPDATE etudiants SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
-        } elseif ($level == 'enseignant'){
-            $query = "UPDATE enseignants SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
-        } elseif ($level == 'entreprise'){
-            $query = "UPDATE entreprises SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
-        } elseif ($level == 'administrateur'){
-            $query = "UPDATE administrateurs SET last_login = '$lastLogin', last_login_ip = '$lastLoginIP' WHERE id = $id";
-        }
-
-        $result = $mysqli->query($query);
-
-        if (!$result) {
-            echo "Erreur lors de l'exécution de la requête: " . $mysqli->error;
-            exit();
-        }
+        $sqlModel->SqlRequest(
+            "UPDATE $table SET last_login = ?, last_login_ip = ? WHERE id = ?",
+            [$this->getLastLogin(), $this->getLastLoginIP(), $this->getId()]
+        );
     }
 }
-?>

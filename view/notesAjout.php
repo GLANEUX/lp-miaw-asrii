@@ -22,12 +22,12 @@
         <label>Enseignant
             <select name="enseignant_id" id="enseignant_id">
                 <?php foreach ($data['enseignant'] as $enseignant) { ?>
-                    <option value="<?= $enseignant['id'] ?>"><?= $enseignant['name'] ?></option>
+                    <option value="<?= e($enseignant['id']) ?>"><?= e($enseignant['name']) ?></option>
                 <?php } ?>
             </select>
         </label>
     <?php } ?>
-    <input type="hidden" name="idetudiant" id="idetudiant" value="<?= $_GET['id'] ?>" />
+    <input type="hidden" name="idetudiant" id="idetudiant" value="<?= e($_GET['id']) ?>" />
     <input type="submit" value="Envoyer" class="button"> <a href="<?= URL ?>/home" class="retour">Retour</a>
 </form>
 </div>

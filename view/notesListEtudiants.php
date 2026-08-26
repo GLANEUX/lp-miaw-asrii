@@ -30,11 +30,11 @@
     <tbody>
     <?php foreach ($data['etudiants'] as $etudiant) { ?>
         <tr>
-        <td><?= $etudiant['nom'] ?></td>
+        <td><?= e($etudiant['nom']) ?></td>
 
-        <td><?= $etudiant['prenom'] ?></td>
-        <td><a href="<?= URL ?>/notes?id=<?= $etudiant['id'] ?>" class="btn btn-primary btn-sm">Consulter les notes</a></td>
-                <td><a href="<?= URL ?>/notes/add?id=<?= $etudiant['id'] ?>" class="btn btn-success btn-sm">Ajouter une note</a></td>
+        <td><?= e($etudiant['prenom']) ?></td>
+        <td><a href="<?= URL ?>/notes?id=<?= e($etudiant['id']) ?>" class="btn btn-primary btn-sm">Consulter les notes</a></td>
+                <td><a href="<?= URL ?>/notes/add?id=<?= e($etudiant['id']) ?>" class="btn btn-success btn-sm">Ajouter une note</a></td>
         </tr>
       <?php } ?>
     </tbody>

@@ -7,12 +7,12 @@
     <div class="column">
 <form method="post" action="<?= URL ?>/offres/edit">
     <label>Poste
-        <input type="text" name="poste" id="poste" value="<?=$data['alternances']['poste']?>">
+        <input type="text" name="poste" id="poste" value="<?= e($data['alternances']['poste']) ?>">
     </label>
     <label>Description
-        <textarea name="description" id="description"><?=$data['alternances']['description']?></textarea>
+        <textarea name="description" id="description"><?= e($data['alternances']['description']) ?></textarea>
     </label>
-    <input type="hidden" name="id" id="id" value="<?=$data['alternances']['id']?>">
+    <input type="hidden" name="id" id="id" value="<?= e($data['alternances']['id']) ?>">
     <input type="submit" value="Envoyer" class="button"> <a href="<?= URL ?>/home" class="retour">Retour</a>
 </form>
 </div></div>

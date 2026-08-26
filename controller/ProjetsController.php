@@ -1,12 +1,12 @@
 <?php
 
-require_once 'model\SqlModel.php';
+require_once 'model/SqlModel.php';
 
 class ProjetsController {
 
     public function index() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Entreprise ou Admin
         if (
@@ -68,7 +68,7 @@ class ProjetsController {
 
     public function list() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (
             (
@@ -119,7 +119,7 @@ class ProjetsController {
                 'script' => [
                     'script.js'
                 ],
-                'projets' => $projets,
+                'projets' => $projets ?? [],
             ];
         
             // Inclure le fichier d'en-tête
@@ -139,7 +139,7 @@ class ProjetsController {
         ) {
             // Récupérer les données des projets depuis la base de données
             $sqlModel = new SqlModel();
-            $query = $sqlModel->SqlRequest("SELECT id, titre, description FROM projets WHERE entreprise_id = $_SESSION[userid]");
+            $query = $sqlModel->SqlRequest("SELECT id, titre, description FROM projets WHERE entreprise_id = ?", [$_SESSION['userid']]);
 
             $projets = [];
             foreach ($query as $row) {
@@ -161,7 +161,7 @@ class ProjetsController {
                 'script' => [
                     'script.js'
                 ],
-                'projets' => $projets,
+                'projets' => $projets ?? [],
             ];
         
             // Inclure le fichier d'en-tête
@@ -184,7 +184,7 @@ class ProjetsController {
 
     public function modifier() {
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (isset($_GET['id']) && $_GET['id']) {
 
@@ -201,9 +201,9 @@ class ProjetsController {
                 // Récupérer les données des projets depuis la base de données
                 $sqlModel = new SqlModel();
                 if ($_SESSION['level'] == 'entreprise'){
-                    $query = $sqlModel->SqlRequest("SELECT * FROM projets WHERE entreprise_id = $_SESSION[userid] AND id = $_GET[id]");
+                    $query = $sqlModel->SqlRequest("SELECT * FROM projets WHERE entreprise_id = ? AND id = ?", [$_SESSION['userid'], $_GET['id']]);
                 } elseif ($_SESSION['level'] == 'administrateur'){
-                    $query = $sqlModel->SqlRequest("SELECT * FROM projets WHERE id = $_GET[id]");
+                    $query = $sqlModel->SqlRequest("SELECT * FROM projets WHERE id = ?", [$_GET['id']]);
                 } else { $query = null; }
 
                 $projets = [];
@@ -234,7 +234,7 @@ class ProjetsController {
                         'script' => [
                             'script.js'
                         ],
-                        'projets' => $projet,
+                        'projets' => $projet ?? null,
                     ];
                 
                     // Inclure le fichier d'en-tête
@@ -285,7 +285,7 @@ class ProjetsController {
 
                 $sqlModel = new SqlModel();
                 // Récupérer les données des projets depuis la base de données
-                $query = $sqlModel->SqlRequest("UPDATE projets SET titre = '$_POST[titre]', description = '$_POST[description]' WHERE id = $_POST[id]");
+                $query = $sqlModel->SqlRequest("UPDATE projets SET titre = ?, description = ? WHERE id = ?", [$_POST['titre'], $_POST['description'], $_POST['id']]);
 
                 header('Location: ' . URL .'/projets/list');
                 exit;
@@ -321,7 +321,7 @@ class ProjetsController {
 
     public function ajouter() {
         
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (isset($_POST['titre']) && isset($_POST['description']) && $_POST['titre'] && $_POST['description']) {
 
@@ -330,10 +330,7 @@ class ProjetsController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'entreprise'
             ) {
                 $sqlModel = new SqlModel();
-                $query = $sqlModel->SqlRequest("
-                    INSERT INTO projets (entreprise_id, titre, description)
-                    VALUES ($_SESSION[userid], '$_POST[titre]', '$_POST[description]')
-                ");
+                $query = $sqlModel->SqlRequest("INSERT INTO projets (entreprise_id, titre, description) VALUES (?, ?, ?)", [$_SESSION['userid'], $_POST['titre'], $_POST['description']]);
                 header('Location: ' . URL .'/projets/list');
                 exit;
             }
@@ -344,10 +341,7 @@ class ProjetsController {
                 isset($_SESSION['level']) && $_SESSION['level'] == 'administrateur'
             ) {
                 $sqlModel = new SqlModel();
-                $query = $sqlModel->SqlRequest("
-                    INSERT INTO projets (entreprise_id, titre, description)
-                    VALUES ($_POST[entreprise_id], '$_POST[titre]', '$_POST[description]')
-                ");
+                $query = $sqlModel->SqlRequest("INSERT INTO projets (entreprise_id, titre, description) VALUES (?, ?, ?)", [$_POST['entreprise_id'], $_POST['titre'], $_POST['description']]);
                 header('Location: ' . URL .'/projets/list');
                 exit;
             }
@@ -409,7 +403,7 @@ class ProjetsController {
                     'script' => [
                         'script.js'
                     ],
-                    'entreprises' => $entreprises ?? null,
+                    'entreprises' => $entreprises ?? [],
                 ];
             
                 // Inclure le fichier d'en-tête
@@ -448,7 +442,7 @@ class ProjetsController {
     // Supprimer un projet
     public function supprimer() {
         
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         // Si les données de l'offre ont été transmises en GET (Suppression)
         if (isset($_GET['id'])) {
@@ -460,7 +454,7 @@ class ProjetsController {
             ) {
                 $sqlModel = new SqlModel();
                 // Ajouter l'offre d'alternance pour l'entreprise
-                $query = $sqlModel->SqlRequest("DELETE FROM projets WHERE id = $_GET[id] AND entreprise_id = $_SESSION[userid]");
+                $query = $sqlModel->SqlRequest("DELETE FROM projets WHERE id = ? AND entreprise_id = ?", [$_GET['id'], $_SESSION['userid']]);
 
                 // Rediriger vers la liste des projets
                 header('Location: ' . URL .'/projets/list');
@@ -474,7 +468,7 @@ class ProjetsController {
             ) {
                 $sqlModel = new SqlModel();
                 // Ajouter l'offre d'alternance pour une entreprise
-                $query = $sqlModel->SqlRequest("DELETE FROM projets WHERE id = $_GET[id]");
+                $query = $sqlModel->SqlRequest("DELETE FROM projets WHERE id = ?", [$_GET['id']]);
 
                 // Rediriger vers la liste des offres d'alternance
                 header('Location: ' . URL .'/projets/list');
